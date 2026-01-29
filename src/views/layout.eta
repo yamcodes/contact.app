@@ -1,11 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><%= it.title || 'Contact App' %></title>
 </head>
+
 <body>
-  <%~ it.body %>
+  <main>
+    <header>
+      <h1>
+        <all-caps>contact.app</all-caps>
+        <sub-title>A Demo Contacts Application</sub-title>
+      </h1>
+    </header>
+    <%~ it.body %>
+  </main>
 </body>
+
 </html>

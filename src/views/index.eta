@@ -1,25 +1,23 @@
 <% layout("layout", { title: "Contacts" }) %>
 
-<h1>Contacts</h1>
-
 <form action="/contacts" method="get">
   <input type="search" name="q" placeholder="Search contacts..." value="<%= it.search || '' %>">
   <button type="submit">Search</button>
 </form>
 
 <% if (it.search) { %>
-  <p>Results for "<%= it.search %>":</p>
+<p>Results for "<%= it.search %>":</p>
 <% } %>
 
 <% if (it.contacts && it.contacts.length > 0) { %>
-  <ul>
-    <% it.contacts.forEach(contact => { %>
-      <li>
-        <strong><%= contact.name %></strong> - <%= contact.email %>
-        <% if (contact.phone) { %> (<%= contact.phone %>)<% } %>
-      </li>
-    <% }) %>
-  </ul>
+<ul>
+  <% it.contacts.forEach(contact => { %>
+  <li>
+    <strong><%= contact.name %></strong> - <%= contact.email %>
+    <% if (contact.phone) { %> (<%= contact.phone %>)<% } %>
+  </li>
+  <% }) %>
+</ul>
 <% } else { %>
-  <p>No contacts found.</p>
+<p>No contacts found.</p>
 <% } %>
