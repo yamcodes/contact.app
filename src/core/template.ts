@@ -3,7 +3,7 @@ import { Eta } from "eta";
 
 // Initialize Eta with views directory
 const eta = new Eta({
-	views: path.join(import.meta.dir, "../views"),
+	views: path.join(import.meta.dir, "../features"),
 	cache: process.env.NODE_ENV === "production", // Cache in production only
 });
 

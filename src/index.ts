@@ -1,8 +1,7 @@
 import { Hono } from "hono";
 
-import { devReload, sseHandler, triggerReload } from "./lib/dev-reload";
-import { render } from "./lib/template";
-import * as Contact from "./models/contact";
+import { devReload, sseHandler, triggerReload } from "./core/dev-reload";
+import contacts from "./features/contacts/routes";
 
 const app = new Hono();
 
@@ -16,15 +15,9 @@ if (import.meta.hot) {
 }
 
 // Redirect / to /contacts
-app.get("/", (c) => {
-	return c.redirect("/contacts");
-});
+app.get("/", (c) => c.redirect("/contacts"));
 
-// /contacts with optional search
-app.get("/contacts", ({ req, html }) => {
-	const search = req.query("q");
-	const contacts = search ? Contact.search(search) : Contact.all();
-	return html(render("index.eta", { contacts, search }));
-});
+// Mount feature routes
+app.route("/contacts", contacts);
 
 export default app;

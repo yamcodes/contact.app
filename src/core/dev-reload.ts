@@ -16,9 +16,9 @@ export function triggerReload() {
   }
 }
 
-// Watch views directory for .eta file changes
-const viewsDir = path.join(import.meta.dir, "../views");
-watch(viewsDir, { recursive: true }, (event, filename) => {
+// Watch features directory for .eta file changes
+const featuresDir = path.join(import.meta.dir, "../features");
+watch(featuresDir, { recursive: true }, (_event, filename) => {
   if (filename?.endsWith(".eta")) {
     console.log(`[dev] Template changed: ${filename}`);
     triggerReload();
