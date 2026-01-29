@@ -1,11 +1,13 @@
 import { Hono } from "hono";
 
 import { devReload, sseHandler, triggerReload } from "./core/dev-reload";
+import { etaRenderer } from "./core/template";
 import contacts from "./features/contacts/routes";
 
 const app = new Hono();
 
-// Dev reload middleware (only affects HTML responses)
+// Middleware
+app.use(etaRenderer());
 app.use(devReload());
 app.get("/__dev/reload", () => sseHandler());
 

@@ -1,5 +1,6 @@
 import path from "node:path";
 import { Eta } from "eta";
+import type { MiddlewareHandler } from "hono";
 
 // Initialize Eta with views directory
 const eta = new Eta({
@@ -7,14 +8,23 @@ const eta = new Eta({
 	cache: process.env.NODE_ENV === "production", // Cache in production only
 });
 
+// Type declaration for the custom render method
+declare module "hono" {
+	interface ContextRenderer {
+		// biome-ignore lint/style/useShorthandFunctionType: required for module augmentation
+		(template: string, data?: Record<string, unknown>): Response;
+	}
+}
+
 /**
- * Render a template with data (Flask-style render_template)
- * @param template - Template filename (e.g., "index.eta" or "contacts/list.eta")
- * @param data - Data to pass to the template
+ * Middleware that adds c.render() for Eta templates
  */
-export function render(
-	template: string,
-	data: Record<string, unknown> = {},
-): string {
-	return eta.render(template, data);
+export function etaRenderer(): MiddlewareHandler {
+	return async (c, next) => {
+		c.setRenderer((template, data) => {
+			const html = eta.render(template, data ?? {});
+			return c.html(html);
+		});
+		await next();
+	};
 }
