@@ -1,5 +1,7 @@
+import { v7 as uuid } from "uuid";
+
 export interface Contact {
-	id: number;
+	id: string;
 	first: string;
 	last: string;
 	email: string;
@@ -9,22 +11,22 @@ export interface Contact {
 // In-memory store (replace with database later)
 const contacts: Contact[] = [
 	{
-		id: 1,
+		id: uuid(),
 		first: "Alice",
 		last: "Smith",
 		email: "alice@example.com",
 		phone: "555-1234",
 	},
 	{
-		id: 2,
+		id: uuid(),
 		first: "Bob",
 		last: "Johnson",
 		email: "bob@example.com",
 		phone: "555-5678",
 	},
-	{ id: 3, first: "Carol", last: "Williams", email: "carol@example.com" },
+	{ id: uuid(), first: "Carol", last: "Williams", email: "carol@example.com" },
 	{
-		id: 4,
+		id: uuid(),
 		first: "David",
 		last: "Brown",
 		email: "david@example.com",
@@ -55,6 +57,19 @@ export function search(query: string): Contact[] {
 /**
  * Find a contact by ID
  */
-export function find(id: number): Contact | undefined {
+export function find(id: string): Contact | undefined {
 	return contacts.find((c) => c.id === id);
 }
+
+/**
+ * Add a new contact
+ */
+export function add(contact: Omit<Contact, "id">): Contact {
+	const newContact: Contact = {
+		id: uuid(),
+		...contact,
+	};
+	contacts.push(newContact);
+	return newContact;
+}
+
