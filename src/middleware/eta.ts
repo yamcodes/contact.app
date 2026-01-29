@@ -3,7 +3,7 @@ import { Eta } from "eta";
 import type { MiddlewareHandler } from "hono";
 
 // Initialize Eta with views directory
-const eta = new Eta({
+const etaInstance = new Eta({
 	views: path.join(import.meta.dir, "../views"),
 	cache: process.env.NODE_ENV === "production",
 });
@@ -19,11 +19,11 @@ declare module "hono" {
 /**
  * Middleware that adds c.render() for Eta templates
  */
-export function etaRenderer(): MiddlewareHandler {
+export function eta(): MiddlewareHandler {
 	return async (c, next) => {
 		c.setRenderer((viewName, data) => {
 			const viewFile = `${viewName}.eta`;
-			const html = eta.render(viewFile, data ?? {});
+			const html = etaInstance.render(viewFile, data ?? {});
 			return c.html(html);
 		});
 		await next();

@@ -3,10 +3,10 @@
 	"tasks": [
 		{
 			"type": "bun",
-			"script": "bun run --hot src/index.ts",
+			"script": "bun dev",
 			"problemMatcher": ["$tsgo-watch"],
 			"label": "bun: dev",
-			"detail": "bun run --hot src/index.ts - package.json",
+			"detail": "bun run --hot src/app.ts - package.json",
 			"isBackground": true
 		}
 	]

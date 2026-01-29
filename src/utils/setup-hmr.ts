@@ -1,12 +1,12 @@
 import { watch } from "node:fs";
 import path from "node:path";
-import type { MiddlewareHandler } from "hono";
+import type { Hono } from "hono";
 
 // Track connected clients
 const clients = new Set<ReadableStreamDefaultController>();
 
 // Notify all clients to reload
-export function triggerReload() {
+function triggerReload() {
 	for (const controller of clients) {
 		try {
 			controller.enqueue("data: reload\n\n");
@@ -26,7 +26,7 @@ watch(viewsDir, { recursive: true }, (_event, filename) => {
 });
 
 // SSE endpoint handler
-export function sseHandler(): Response {
+function sseHandler(): Response {
 	const stream = new ReadableStream({
 		start(controller) {
 			clients.add(controller);
@@ -59,17 +59,30 @@ const reloadScript = `
 </script>
 `;
 
-// Middleware that injects reload script into HTML responses
-export function hmr(): MiddlewareHandler {
-	return async (c, next) => {
+/**
+ * Set up HMR (hot module reload) for development
+ * - Injects reload script into HTML responses
+ * - Watches .eta files for changes
+ * - Sets up SSE endpoint for browser communication
+ */
+export function setupHmr(app: Hono) {
+	// SSE endpoint for browser to connect
+	app.get("/__dev/reload", () => sseHandler());
+
+	// Middleware to inject reload script
+	app.use(async (c, next) => {
 		await next();
 
-		// Only inject into HTML responses in development
 		const contentType = c.res.headers.get("content-type");
 		if (contentType?.includes("text/html")) {
 			const html = await c.res.text();
 			const injected = html.replace("</body>", `${reloadScript}</body>`);
 			c.res = new Response(injected, c.res);
 		}
-	};
+	});
+
+	// Trigger reload on Bun's hot module replacement
+	if (import.meta.hot) {
+		import.meta.hot.accept(() => triggerReload());
+	}
 }
