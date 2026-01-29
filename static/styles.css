@@ -1,0 +1,164 @@
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family:
+		-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+		sans-serif;
+	background: #fafafa;
+	color: #0a0a0a;
+	line-height: 1.5;
+	min-height: 100vh;
+}
+
+main {
+	max-width: 900px;
+	margin: 0 auto;
+	padding: 2rem 1rem;
+}
+
+header {
+	margin-bottom: 2rem;
+	padding-bottom: 1.5rem;
+	border-bottom: 1px solid #e5e5e5;
+}
+
+header h1 {
+	font-size: 1.5rem;
+	font-weight: 600;
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+}
+
+all-caps {
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+}
+
+sub-title {
+	font-size: 0.875rem;
+	font-weight: 400;
+	color: #737373;
+}
+
+/* Form */
+form {
+	display: flex;
+	gap: 0.5rem;
+	margin-bottom: 1.5rem;
+}
+
+label {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+}
+
+input[type="search"] {
+	flex: 1;
+	padding: 0.5rem 0.75rem;
+	font-size: 0.875rem;
+	border: 1px solid #e5e5e5;
+	border-radius: 0.375rem;
+	background: #fff;
+	outline: none;
+	transition:
+		border-color 0.15s,
+		box-shadow 0.15s;
+}
+
+input[type="search"]:focus {
+	border-color: #a3a3a3;
+	box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05);
+}
+
+button {
+	padding: 0.5rem 1rem;
+	font-size: 0.875rem;
+	font-weight: 500;
+	color: #fafafa;
+	background: #171717;
+	border: 1px solid #171717;
+	border-radius: 0.375rem;
+	cursor: pointer;
+	transition: background 0.15s;
+}
+
+button:hover {
+	background: #262626;
+}
+
+/* Table */
+table {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 0.875rem;
+	background: #fff;
+	border: 1px solid #e5e5e5;
+	border-radius: 0.5rem;
+	overflow: hidden;
+}
+
+thead {
+	background: #fafafa;
+	border-bottom: 1px solid #e5e5e5;
+}
+
+th {
+	text-align: left;
+	padding: 0.75rem 1rem;
+	font-weight: 500;
+	color: #737373;
+	font-size: 0.75rem;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+}
+
+td {
+	padding: 0.75rem 1rem;
+	border-bottom: 1px solid #f5f5f5;
+}
+
+tr:last-child td {
+	border-bottom: none;
+}
+
+tr:hover {
+	background: #fafafa;
+}
+
+/* Links */
+a {
+	color: #171717;
+	text-decoration: none;
+	font-weight: 500;
+	padding: 0.25rem 0.5rem;
+	border-radius: 0.25rem;
+	transition: background 0.15s;
+}
+
+a:hover {
+	background: #f5f5f5;
+}
+
+td:last-child {
+	text-align: right;
+}
+
+td:last-child a {
+	font-size: 0.75rem;
+	color: #525252;
+}
+
+/* Results text */
+p {
+	color: #737373;
+	font-size: 0.875rem;
+	margin-bottom: 1rem;
+}
