@@ -1,6 +1,7 @@
 <% layout("layout", { title: "Contacts" }) %>
 
 <form action="/contacts" method="get">
+  <label for="search">Search contacts:</label>
   <input type="search" name="q" placeholder="Search contacts..." value="<%= it.search || '' %>">
   <button type="submit">Search</button>
 </form>
