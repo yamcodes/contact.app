@@ -4,7 +4,7 @@ import { etaRenderer } from "@/core/template";
 
 const contacts = new Hono();
 
-contacts.use(etaRenderer(`${import.meta.dir}/views`));
+contacts.use(etaRenderer("contacts/views"));
 
 // /contacts with optional search
 contacts.get("/", (c) => {
