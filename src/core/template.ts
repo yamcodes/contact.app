@@ -4,7 +4,7 @@ import type { MiddlewareHandler } from "hono";
 
 // Initialize Eta with views directory
 const eta = new Eta({
-	views: path.join(import.meta.dir, "../features"),
+	views: path.join(import.meta.dir, "../views"),
 	cache: process.env.NODE_ENV === "production",
 });
 
@@ -22,8 +22,9 @@ declare module "hono" {
  */
 export function etaRenderer(basePath?: string): MiddlewareHandler {
 	return async (c, next) => {
-		c.setRenderer((template, data) => {
-			const fullPath = basePath ? `${basePath}/${template}` : template;
+		c.setRenderer((viewName, data) => {
+			const viewFile = `${viewName}.eta`;
+			const fullPath = basePath ? `${basePath}/${viewFile}` : viewFile;
 			const html = eta.render(fullPath, data ?? {});
 			return c.html(html);
 		});

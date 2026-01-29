@@ -2,7 +2,7 @@ import { Hono } from "hono";
 
 import { devReload, sseHandler, triggerReload } from "./core/dev-reload";
 import { etaRenderer } from "./core/template";
-import contacts from "./features/contacts/routes";
+import contacts from "./routes";
 
 const app = new Hono();
 
