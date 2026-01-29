@@ -39,3 +39,7 @@
 <% } else { %>
 <p>No contacts found.</p>
 <% } %>
+
+<p>
+  <a href="/contacts/new">Add New Contact</a>
+</p>
