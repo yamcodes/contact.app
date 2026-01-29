@@ -7,10 +7,23 @@
 </head>
 <body>
   <h1>Contacts</h1>
+
+  <form action="/contacts" method="get">
+    <input type="search" name="q" placeholder="Search contacts..." value="<%= it.q || '' %>">
+    <button type="submit">Search</button>
+  </form>
+
+  <% if (it.q) { %>
+    <p>Results for "<%= it.q %>":</p>
+  <% } %>
+
   <% if (it.contacts && it.contacts.length > 0) { %>
     <ul>
       <% it.contacts.forEach(contact => { %>
-        <li><%= contact.name %> - <%= contact.email %></li>
+        <li>
+          <strong><%= contact.name %></strong> - <%= contact.email %>
+          <% if (contact.phone) { %> (<%= contact.phone %>)<% } %>
+        </li>
       <% }) %>
     </ul>
   <% } else { %>

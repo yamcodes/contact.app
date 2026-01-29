@@ -1,5 +1,6 @@
 import { Hono } from "hono";
 import { render } from "./lib/template";
+import * as Contact from "./models/contact";
 
 const app = new Hono();
 
@@ -8,18 +9,11 @@ app.get("/", (c) => {
 	return c.redirect("/contacts");
 });
 
-// /contacts
+// /contacts with optional search
 app.get("/contacts", ({ req, html }) => {
-	const search = req.query('q');
-	if (search) {
-		// In a real application, you would filter contacts based on the search query.
-		return html(`<h1>Search Results for "${search}"</h1><p>No results found.</p>`);
-	}
-	const contacts = [
-		{ name: "Alice", email: "alice@example.com" },
-		{ name: "Bob", email: "bob@example.com" },
-	];
-	return html(render("contacts.eta", { contacts }));
+	const q = req.query("q");
+	const contacts = q ? Contact.search(q) : Contact.all();
+	return html(render("contacts.eta", { contacts, q }));
 });
 
 export default app;
