@@ -1,6 +1,3 @@
 {
-  "recommendations": [
-    "shadowtime2000.eta-vscode",
-    "oven.bun-vscode"
-  ]
+	"recommendations": ["shadowtime2000.eta-vscode", "oven.bun-vscode"]
 }

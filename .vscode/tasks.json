@@ -4,9 +4,7 @@
 		{
 			"type": "bun",
 			"script": "bun run --hot src/index.ts",
-			"problemMatcher": [
-				"$tsgo-watch"
-			],
+			"problemMatcher": ["$tsgo-watch"],
 			"label": "bun: dev",
 			"detail": "bun run --hot src/index.ts - package.json",
 			"isBackground": true
