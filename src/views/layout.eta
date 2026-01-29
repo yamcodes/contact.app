@@ -12,7 +12,9 @@
   <main>
     <header>
       <h1>
-        <all-caps>contact.app</all-caps>
+        <a href="/">
+          <all-caps>contact.app</all-caps>
+        </a>
         <sub-title>A Demo Contacts Application</sub-title>
       </h1>
     </header>
