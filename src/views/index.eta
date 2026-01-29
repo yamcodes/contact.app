@@ -6,7 +6,7 @@
   <title>Contacts</title>
 </head>
 <body>
-  <h1>Contacts</h1>
+  <h1>Contacts!</h1>
 
   <form action="/contacts" method="get">
     <input type="search" name="q" placeholder="Search contacts..." value="<%= it.q || '' %>">

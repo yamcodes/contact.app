@@ -16,11 +16,11 @@ export function triggerReload() {
 	}
 }
 
-// Watch features directory for .eta file changes
-const featuresDir = path.join(import.meta.dir, "../features");
-watch(featuresDir, { recursive: true }, (_event, filename) => {
+// Watch views directory for .eta file changes
+const viewsDir = path.join(import.meta.dir, "../views");
+watch(viewsDir, { recursive: true }, (_event, filename) => {
 	if (filename?.endsWith(".eta")) {
-		console.log(`[dev] Template changed: ${filename}`);
+		console.log(`[hmr] Template changed: ${filename}`);
 		triggerReload();
 	}
 });
@@ -60,7 +60,7 @@ const reloadScript = `
 `;
 
 // Middleware that injects reload script into HTML responses
-export function devReload(): MiddlewareHandler {
+export function hmr(): MiddlewareHandler {
 	return async (c, next) => {
 		await next();
 

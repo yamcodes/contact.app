@@ -18,14 +18,12 @@ declare module "hono" {
 
 /**
  * Middleware that adds c.render() for Eta templates
- * @param basePath - Optional base path to prepend to template paths (e.g., "contacts")
  */
-export function etaRenderer(basePath?: string): MiddlewareHandler {
+export function etaRenderer(): MiddlewareHandler {
 	return async (c, next) => {
 		c.setRenderer((viewName, data) => {
 			const viewFile = `${viewName}.eta`;
-			const fullPath = basePath ? `${basePath}/${viewFile}` : viewFile;
-			const html = eta.render(fullPath, data ?? {});
+			const html = eta.render(viewFile, data ?? {});
 			return c.html(html);
 		});
 		await next();

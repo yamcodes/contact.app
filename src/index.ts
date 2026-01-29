@@ -1,14 +1,14 @@
 import { Hono } from "hono";
 
-import { devReload, sseHandler, triggerReload } from "./core/dev-reload";
-import { etaRenderer } from "./core/template";
+import { etaRenderer } from "./middleware/eta";
+import { hmr, sseHandler, triggerReload } from "./middleware/hmr";
 import contacts from "./routes";
 
 const app = new Hono();
 
 // Middleware
 app.use(etaRenderer());
-app.use(devReload());
+app.use(hmr());
 app.get("/__dev/reload", () => sseHandler());
 
 // Trigger reload when Bun hot-reloads this module
