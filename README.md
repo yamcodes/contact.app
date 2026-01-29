@@ -1,3 +1,5 @@
+# Contact.app
+
 To install dependencies:
 ```sh
 bun install
