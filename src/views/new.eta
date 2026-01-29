@@ -1,4 +1,4 @@
-<% layout("layout", { title: "New contact" }) %>
+<% layout("layout", { title: "New Contact" }) %>
 
 <h2>New Contact</h2>
 
@@ -7,35 +7,34 @@
     <legend>Contact Values</legend>
     <p>
       <label for="email">Email</label>
-      <input name="email" id="email" type="email" placeholder="Email" value="{{ contact.email or '' }}">
-      <span class="error">
-        {{ contact.errors['email'] }}
-      </span>
+      <input name="email" id="email" type="email" placeholder="Email" value="<%= it.contact?.email || '' %>">
+      <% if (it.contact?.errors?.email) { %>
+        <span class="error"><%= it.contact.errors.email %></span>
+      <% } %>
     </p>
     <p>
       <label for="first">First Name</label>
-      <input name="first" id="first" type="text" placeholder="First Name" value="{{ contact.first or '' }}">
-      <span class="error">
-        {{ contact.errors['first'] }}
-      </span>
+      <input name="first" id="first" type="text" placeholder="First Name" value="<%= it.contact?.first || '' %>">
+      <% if (it.contact?.errors?.first) { %>
+        <span class="error"><%= it.contact.errors.first %></span>
+      <% } %>
     </p>
     <p>
       <label for="last">Last Name</label>
-      <input name="last" id="last" type="text" placeholder="Last Name" value="{{ contact.last or '' }}">
-      <span class="error">
-        {{ contact.errors['last'] }}
-      </span>
+      <input name="last" id="last" type="text" placeholder="Last Name" value="<%= it.contact?.last || '' %>">
+      <% if (it.contact?.errors?.last) { %>
+        <span class="error"><%= it.contact.errors.last %></span>
+      <% } %>
     </p>
     <p>
       <label for="phone">Phone</label>
-      <input name="phone" id="phone" type="tel" placeholder="Phone" value="{{ contact.phone or '' }}">
-      <span class="error">
-        {{ contact.errors['phone'] }}
-      </span>
+      <input name="phone" id="phone" type="tel" placeholder="Phone" value="<%= it.contact?.phone || '' %>">
+      <% if (it.contact?.errors?.phone) { %>
+        <span class="error"><%= it.contact.errors.phone %></span>
+      <% } %>
     </p>
   </fieldset>
-  <button>Save</button>
-  </fieldset>
+  <button type="submit">Save</button>
 </form>
 
 <p>
