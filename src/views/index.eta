@@ -11,14 +11,31 @@
 <% } %>
 
 <% if (it.contacts && it.contacts.length > 0) { %>
-<ul>
-  <% it.contacts.forEach(contact => { %>
-  <li>
-    <strong><%= contact.name %></strong> - <%= contact.email %>
-    <% if (contact.phone) { %> (<%= contact.phone %>)<% } %>
-  </li>
-  <% }) %>
-</ul>
+<table>
+  <thead>
+    <tr>
+      <th>First</th>
+      <th>Last</th>
+      <th>Phone</th>
+      <th>Email</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% it.contacts.forEach(contact => { %>
+    <tr>
+      <td><%= contact.first %></td>
+      <td><%= contact.last %></td>
+      <td><%= contact.phone || '' %></td>
+      <td><%= contact.email %></td>
+      <td>
+        <a href="/contacts/<%= contact.id %>/edit">Edit</a>
+        <a href="/contacts/<%= contact.id %>">View</a>
+      </td>
+    </tr>
+    <% }) %>
+  </tbody>
+</table>
 <% } else { %>
 <p>No contacts found.</p>
 <% } %>

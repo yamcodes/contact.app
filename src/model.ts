@@ -1,16 +1,35 @@
 export interface Contact {
 	id: number;
-	name: string;
+	first: string;
+	last: string;
 	email: string;
 	phone?: string;
 }
 
 // In-memory store (replace with database later)
 const contacts: Contact[] = [
-	{ id: 1, name: "Alice Smith", email: "alice@example.com", phone: "555-1234" },
-	{ id: 2, name: "Bob Johnson", email: "bob@example.com", phone: "555-5678" },
-	{ id: 3, name: "Carol Williams", email: "carol@example.com" },
-	{ id: 4, name: "David Brown", email: "david@example.com", phone: "555-9999" },
+	{
+		id: 1,
+		first: "Alice",
+		last: "Smith",
+		email: "alice@example.com",
+		phone: "555-1234",
+	},
+	{
+		id: 2,
+		first: "Bob",
+		last: "Johnson",
+		email: "bob@example.com",
+		phone: "555-5678",
+	},
+	{ id: 3, first: "Carol", last: "Williams", email: "carol@example.com" },
+	{
+		id: 4,
+		first: "David",
+		last: "Brown",
+		email: "david@example.com",
+		phone: "555-9999",
+	},
 ];
 
 /**
@@ -27,7 +46,9 @@ export function search(query: string): Contact[] {
 	const q = query.toLowerCase();
 	return contacts.filter(
 		(c) =>
-			c.name.toLowerCase().includes(q) || c.email.toLowerCase().includes(q),
+			c.first.toLowerCase().includes(q) ||
+			c.last.toLowerCase().includes(q) ||
+			c.email.toLowerCase().includes(q),
 	);
 }
 
