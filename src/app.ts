@@ -1,12 +1,12 @@
 import { Hono } from "hono";
-import { serveStatic } from "hono/bun";
 import { eta } from "./middleware/eta";
 import router from "./router";
 import { setupHmr } from "./utils/setup-hmr";
+import { setupStatic } from "./utils/setup-static";
 
 const app = new Hono();
 
-app.use("/static/*", serveStatic({ root: "./" }));
+setupStatic(app);
 app.use(eta());
 setupHmr(app);
 

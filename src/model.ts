@@ -72,4 +72,3 @@ export function add(contact: Omit<Contact, "id">): Contact {
 	contacts.push(newContact);
 	return newContact;
 }
-
