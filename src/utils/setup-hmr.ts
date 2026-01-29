@@ -25,6 +25,15 @@ watch(viewsDir, { recursive: true }, (_event, filename) => {
 	}
 });
 
+// Watch static directory for .css file changes
+const staticDir = path.join(import.meta.dir, "../../static");
+watch(staticDir, { recursive: true }, (_event, filename) => {
+	if (filename?.endsWith(".css")) {
+		console.log(`[hmr] Stylesheet changed: ${filename}`);
+		triggerReload();
+	}
+});
+
 // SSE endpoint handler
 function sseHandler(): Response {
 	const stream = new ReadableStream({
