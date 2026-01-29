@@ -43,3 +43,9 @@ test("example", () => {
   expect(1).toBe(1);
 });
 ```
+
+## Hono Documentation                                                                                       
+When helping with Hono questions, fetch https://hono.dev/llms-small.txt for reference.  
+
+## Eta (templating) Documentation
+When helping with templating questions, fetch https://eta.js.org/llms.txt for reference.  

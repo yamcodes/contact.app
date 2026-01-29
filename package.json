@@ -1,7 +1,9 @@
 {
   "name": "contact.app",
   "scripts": {
-    "dev": "bun run --hot src/index.ts"
+    "start": "bun run src/index.ts",
+    "dev": "bun run --hot src/index.ts",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "eta": "^4.5.0",
