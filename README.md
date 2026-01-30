@@ -1,40 +1,28 @@
 # contact.app
 
-A simple contacts management app built with [Bun](https://bun.sh), [Hono](https://hono.dev), and [Eta](https://eta.js.org) templates.
+A simple contacts app built with Bun, Hono, and Eta.
 
-## Architecture
+## Overview
 
-This is a **server-rendered multi-page application (MPA)** — sometimes called a "traditional" or "Web 1.0" style app.
+This is a server-rendered web app using a traditional multi-page approach:
+- HTML is rendered on the server
+- Pages reload on navigation
+- Forms and links drive all interactions
+- No client-side JavaScript framework
 
-| Term | What it means here |
-|------|-------------------|
-| **SSR** | HTML is rendered on the server, not in the browser |
-| **MPA** | Each page is a full HTML document. Navigation reloads the page |
-| **Hypermedia** | The server returns HTML (not JSON). Forms and links drive interaction |
-| **RESTful** | Follows [Roy Fielding's original REST](https://web.archive.org/web/20210513160155/https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm) — hypermedia (HTML) as the engine of application state, not JSON APIs |
-| **No JavaScript** | The browser receives plain HTML + CSS. No client-side JS framework |
+Think “classic web app”, but written in TypeScript.
+It deliberately avoids the SPA model (JSON APIs, client-side routing, hydration) in favor of a simpler, HTML-first design.
 
-### How is this different from SPAs?
-
-| | This app (MPA) | Single-Page App (SPA) |
-|--|----------------|----------------------|
-| Rendering | Server | Browser |
-| Data format | HTML | JSON |
-| Navigation | Full page reload | Client-side routing |
-| JS required | No | Yes |
-| Complexity | Low | Higher |
-
-> 💡 This architecture is making a comeback with tools like [HTMX](https://htmx.org), [Hotwire](https://hotwired.dev), and [Unpoly](https://unpoly.com) — which enhance MPAs with partial page updates while keeping the server-rendered model.
+> Inspired by hypermedia-driven systems (HTML as the API), rather than JSON-first SPAs.
 
 ## Features
 
-- 📋 List all contacts
-- 🔍 Search by name or email
-- ➕ Add new contacts
-- 👁️ View contact details
-- 🔄 Hot reload for templates and CSS
+- List and search contacts
+- Add and view contact details
+- Server-rendered pages
+- Hot reload for templates and CSS
 
-## Quick Start
+## Quickstart
 
 ```bash
 # Install dependencies
@@ -57,7 +45,7 @@ open http://localhost:3000
 | `bun run fix` | Fix lint issues |
 | `bun run typecheck` | Check TypeScript types |
 
-## Project Structure
+## Project structure
 
 ```
 ├── src/
@@ -78,7 +66,7 @@ open http://localhost:3000
 └── package.json
 ```
 
-## Tech Stack
+## Tech stack
 
 | Layer | Technology |
 |-------|------------|
@@ -88,11 +76,11 @@ open http://localhost:3000
 | Styling | Plain CSS |
 | Linting | [Biome](https://biomejs.dev) |
 
-## How It Works
+## How it works
 
 ### Routing
 
-Routes are defined in `router.ts` using Hono:
+Routes are defined with Hono and render Eta templates directly:
 
 ```ts
 router.get("/contacts", (c) => {
@@ -101,24 +89,7 @@ router.get("/contacts", (c) => {
 });
 ```
 
-### Templates
-
-Templates use Eta syntax. Layouts are supported via `layout()`:
-
-```eta
-<% layout("layout", { title: "Page Title" }) %>
-
-<h1>Content goes here</h1>
-```
-
-### Data
-
-Contacts are stored in memory (see `model.ts`). The model exports simple functions:
-
-- `Contact.all()` – Get all contacts
-- `Contact.search(query)` – Search contacts
-- `Contact.find(id)` – Find by ID
-- `Contact.add(data)` – Create new contact
+Templates are standard Eta files with a shared layout.
 
 ## License
 
