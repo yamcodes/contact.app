@@ -2,6 +2,13 @@
 
 A simple contacts app built with Bun, Hono, and Eta.
 
+## Branches
+
+| Branch | Description |
+|--------|-------------|
+| `main` | Web 1.0 — full page reloads, classic form submissions |
+| `htmx` | HTMX — partial updates, no full page reloads |
+
 ## Overview
 
 This is a server-rendered web app using a traditional multi-page approach:
