@@ -22,6 +22,8 @@ It deliberately avoids the SPA model (JSON APIs, client-side routing, hydration)
 - Flash messages (cookie-based)
 - Server-rendered pages
 - Hot reload for templates and CSS
+- Templates and partials for views
+- Not found page
 
 ## Quickstart
 

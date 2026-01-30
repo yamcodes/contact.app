@@ -1,4 +1,5 @@
 import { Hono } from "hono";
+import { trimTrailingSlash } from "hono/trailing-slash";
 import { StatusCodes } from "http-status-codes";
 import { eta } from "./middleware/eta";
 import { flash } from "./middleware/flash";
@@ -8,6 +9,7 @@ import { setupStatic } from "./utils/static";
 
 const app = new Hono();
 
+app.use(trimTrailingSlash());
 setupStatic(app);
 app.use(flash());
 app.use(eta());

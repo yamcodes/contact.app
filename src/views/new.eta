@@ -3,37 +3,7 @@
 <h2>New Contact</h2>
 
 <form action="/contacts" method="post">
-  <fieldset>
-    <legend>Contact Values</legend>
-    <p>
-      <label for="email">Email</label>
-      <input name="email" id="email" type="email" placeholder="Email" value="<%= it.contact?.email || '' %>">
-      <% if (it.contact?.errors?.email) { %>
-        <span class="error"><%= it.contact.errors.email %></span>
-      <% } %>
-    </p>
-    <p>
-      <label for="first">First Name</label>
-      <input name="first" id="first" type="text" placeholder="First Name" value="<%= it.contact?.first || '' %>">
-      <% if (it.contact?.errors?.first) { %>
-        <span class="error"><%= it.contact.errors.first %></span>
-      <% } %>
-    </p>
-    <p>
-      <label for="last">Last Name</label>
-      <input name="last" id="last" type="text" placeholder="Last Name" value="<%= it.contact?.last || '' %>">
-      <% if (it.contact?.errors?.last) { %>
-        <span class="error"><%= it.contact.errors.last %></span>
-      <% } %>
-    </p>
-    <p>
-      <label for="phone">Phone</label>
-      <input name="phone" id="phone" type="tel" placeholder="Phone" value="<%= it.contact?.phone || '' %>">
-      <% if (it.contact?.errors?.phone) { %>
-        <span class="error"><%= it.contact.errors.phone %></span>
-      <% } %>
-    </p>
-  </fieldset>
+  <%~ include("partials/contact-fields", it) %>
   <button type="submit">Save</button>
 </form>
 
