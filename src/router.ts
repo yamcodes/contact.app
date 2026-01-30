@@ -54,4 +54,24 @@ router.get("/contacts/:slug/edit", (c) => {
 	return c.render("edit", { contact });
 });
 
+router.post("/contacts/:slug/edit", async (c) => {
+	const slug = c.req.param("slug");
+	const contact = slug && Contact.findBySlug(slug);
+	if (!contact) {
+		c.status(StatusCodes.NOT_FOUND);
+		return c.render("notfound", { message: "Contact not found." });
+	}
+
+	const form = await c.req.formData();
+	const first = form.get("first")?.toString() || "";
+	const last = form.get("last")?.toString() || "";
+	const email = form.get("email")?.toString() || "";
+	const phone = form.get("phone")?.toString() || "";
+	
+	Contact.update(slug, { first, last, email, phone });
+
+	c.flash(`Contact "${first} ${last}" updated successfully.`);
+	return c.redirect(`/contacts/${contact.slug}`);
+});
+
 export default router;

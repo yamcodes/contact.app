@@ -10,6 +10,9 @@ export interface Contact {
 	phone?: string;
 }
 
+type NewContact = Omit<Contact, "id" | "slug">;
+type ContactUpdates = Partial<NewContact>;
+
 /**
  * Generate a unique slug for a contact, appending UUID suffix if needed
  */
@@ -93,7 +96,7 @@ export function findBySlug(slug: string): Contact | undefined {
 /**
  * Add a new contact
  */
-export function add(contact: Omit<Contact, "id" | "slug">): Contact {
+export function add(contact: NewContact): Contact {
 	const id = uuid();
 	const slug = generateUniqueSlug(contact.first, contact.last, id);
 	const newContact: Contact = {
@@ -103,4 +106,24 @@ export function add(contact: Omit<Contact, "id" | "slug">): Contact {
 	};
 	contacts.push(newContact);
 	return newContact;
+}
+
+export function update(
+	slug: string,
+	updates: ContactUpdates,
+): Contact | undefined {
+	const contact = findBySlug(slug);
+	if (!contact) return undefined;
+
+	if (updates.first !== undefined) contact.first = updates.first;
+	if (updates.last !== undefined) contact.last = updates.last;
+	if (updates.email !== undefined) contact.email = updates.email;
+	if (updates.phone !== undefined) contact.phone = updates.phone;
+
+	// Regenerate slug if name changed
+	if (updates.first || updates.last) {
+		contact.slug = generateUniqueSlug(contact.first, contact.last, contact.id);
+	}
+
+	return contact;
 }
