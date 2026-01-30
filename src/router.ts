@@ -37,7 +37,7 @@ router.get("/contacts/:id", (c) => {
 	const id = c.req.param("id");
 	const contact = Contact.find(id);
 	if (!contact) {
-		return c.text("Contact not found", 404);
+		return c.render("notfound", { message: "Contact not found." }, 404);
 	}
 	return c.render("contact", { contact });
 });
