@@ -127,3 +127,10 @@ export function update(
 
 	return contact;
 }
+
+export function remove(slug: string): boolean {
+	const index = contacts.findIndex((c) => c.slug === slug);
+	if (index === -1) return false;
+	contacts.splice(index, 1);
+	return true;
+}

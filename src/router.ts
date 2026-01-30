@@ -74,4 +74,18 @@ router.post("/contacts/:slug/edit", async (c) => {
 	return c.redirect(`/contacts/${contact.slug}`);
 });
 
+router.post("/contacts/:slug/delete", (c) => {
+	const slug = c.req.param("slug");
+	const contact = slug && Contact.findBySlug(slug);
+	if (!contact) {
+		c.status(StatusCodes.NOT_FOUND);
+		return c.render("notfound", { message: "Contact not found." });
+	}
+	
+	Contact.remove(slug);
+
+	c.flash(`Contact "${contact.first} ${contact.last}" deleted successfully.`);
+	return c.redirect("/contacts");
+});
+
 export default router;
