@@ -17,12 +17,10 @@ router.get("/contacts/new", (c) => {
 
 router.post("/contacts", async (c) => {
 	const form = await c.req.formData();
-	const name = form.get("name")?.toString() || "";
+	const first = form.get("first")?.toString() || "";
+	const last = form.get("last")?.toString() || "";
 	const email = form.get("email")?.toString() || "";
 	const phone = form.get("phone")?.toString() || "";
-
-	const [first, ...lastParts] = name.split(" ");
-	const last = lastParts.join(" ");
 
 	Contact.add({ first, last, email, phone });
 
