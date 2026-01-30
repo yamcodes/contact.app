@@ -67,7 +67,7 @@ router.post("/contacts/:slug/edit", async (c) => {
 	const last = form.get("last")?.toString() || "";
 	const email = form.get("email")?.toString() || "";
 	const phone = form.get("phone")?.toString() || "";
-	
+
 	Contact.update(slug, { first, last, email, phone });
 
 	c.flash(`Contact "${first} ${last}" updated successfully.`);

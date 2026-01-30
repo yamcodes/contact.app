@@ -21,7 +21,7 @@ function generateUniqueSlug(first: string, last: string, id: string): string {
 	const existing = contacts.find((c) => c.slug === baseSlug);
 	if (!existing) return baseSlug;
 	// Append short UUID suffix for duplicates
-	return `${baseSlug}-${id.slice(-6)}`;
+	return `${baseSlug}-${id.slice(-4)}`;
 }
 
 // In-memory store (replace with database later)

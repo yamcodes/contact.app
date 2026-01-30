@@ -2,7 +2,7 @@
 
 <h2>Edit Contact</h2>
 
-<form action="/contacts/<%= it.contact.slug %>?_method=PUT" method="post">
+<form action="/contacts/<%= it.contact.slug %>/edit" method="post">
   <%~ include("partials/contact-fields", it) %>
   <button type="submit">Save</button>
 </form>
