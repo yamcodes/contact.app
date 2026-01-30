@@ -17,7 +17,7 @@ declare module "hono" {
 }
 
 /**
- * Middleware that adds c.render() for Eta templates
+ * Middleware that adds `c.render()` for Eta templates
  */
 export function eta(): MiddlewareHandler {
 	return async (c, next) => {

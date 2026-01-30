@@ -70,9 +70,9 @@ const reloadScript = `
 
 /**
  * Set up HMR (hot module reload) for development
- * - Injects reload script into HTML responses
- * - Watches .eta and .css files for changes
- * - Sets up SSE endpoint for browser communication
+ * - Inject reload script into HTML responses
+ * - Watch .eta and .css files for changes
+ * - Set up SSE endpoint for browser communication
  */
 export function setupHmr(app: Hono) {
 	// SSE endpoint for browser to connect

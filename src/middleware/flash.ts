@@ -23,9 +23,9 @@ declare module "hono" {
 
 /**
  * Flash message middleware
- * - Reads flash message from cookie and exposes it via c.get("flash")
- * - Clears the cookie after reading (one-time display)
- * - Use c.flash("message") before redirect to set a flash
+ * - Read flash message from cookie and expose it via `c.get("flash")`
+ * - Clear the cookie after reading (one-time display)
+ * - Use `c.flash("message")` before redirect to set a flash
  */
 export function flash(): MiddlewareHandler {
 	return async (c, next) => {
