@@ -27,10 +27,10 @@ router.post("/contacts", async (c) => {
 	const email = form.get("email")?.toString() || "";
 	const phone = form.get("phone")?.toString() || "";
 
-	const contact = Contact.add({ first, last, email, phone });
+	Contact.add({ first, last, email, phone });
 
 	c.flash(`Contact "${first} ${last}" created successfully.`);
-	return c.redirect(`/contacts/${contact.slug}`);
+	return c.redirect(`/contacts`);
 });
 
 router.get("/contacts/:slug", (c) => {

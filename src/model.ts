@@ -1,4 +1,5 @@
 import { v7 as uuid } from "uuid";
+import { generateSlug } from "./utils/slug";
 
 export interface Contact {
 	id: string;
@@ -10,24 +11,10 @@ export interface Contact {
 }
 
 /**
- * Generate a URL-safe slug from a name
- */
-function generateBaseSlug(first: string, last: string): string {
-	return `${first} ${last}`
-		.toLowerCase()
-		.normalize("NFD")
-		.replace(/[\u0300-\u036f]/g, "") // Remove accents
-		.replace(/[^a-z0-9\s-]/g, "") // Remove special chars
-		.trim()
-		.replace(/\s+/g, "-") // Spaces → hyphens
-		.replace(/-+/g, "-"); // Collapse multiple hyphens
-}
-
-/**
- * Generate a unique slug, appending UUID suffix if needed
+ * Generate a unique slug for a contact, appending UUID suffix if needed
  */
 function generateUniqueSlug(first: string, last: string, id: string): string {
-	const baseSlug = generateBaseSlug(first, last) || "contact";
+	const baseSlug = generateSlug(`${first} ${last}`) || "contact";
 	const existing = contacts.find((c) => c.slug === baseSlug);
 	if (!existing) return baseSlug;
 	// Append short UUID suffix for duplicates
