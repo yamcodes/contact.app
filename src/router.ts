@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import { setFlash } from "./middleware/flash";
+import "./middleware/flash"; // Extends Context with c.flash()
 import * as Contact from "./model";
 
 const router = new Hono();
@@ -25,7 +25,7 @@ router.post("/contacts", async (c) => {
 
 	Contact.add({ first, last, email, phone });
 
-	setFlash(c, `Contact "${first} ${last}" created successfully.`);
+	c.flash(`Contact "${first} ${last}" created successfully.`);
 	return c.redirect("/contacts");
 });
 

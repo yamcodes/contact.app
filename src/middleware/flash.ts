@@ -3,11 +3,29 @@ import { deleteCookie, getCookie, setCookie } from "hono/cookie";
 
 const FLASH_COOKIE = "flash";
 
+// Extend Hono's Context to include c.flash()
+declare module "hono" {
+	interface ContextVariableMap {
+		flash: string | undefined;
+		flash_new: string | undefined;
+	}
+
+	interface Context {
+		/**
+		 * Set a flash message to display on the next request.
+		 * Call before redirecting.
+		 * @param message - The message to display
+		 * @example c.flash("Contact created successfully.");
+		 */
+		flash: (message: string) => void;
+	}
+}
+
 /**
  * Flash message middleware
  * - Reads flash message from cookie and exposes it via c.get("flash")
  * - Clears the cookie after reading (one-time display)
- * - Use c.set("flash", "message") + redirect to set a flash
+ * - Use c.flash("message") before redirect to set a flash
  */
 export function flash(): MiddlewareHandler {
 	return async (c, next) => {
@@ -17,6 +35,11 @@ export function flash(): MiddlewareHandler {
 			c.set("flash", decodeURIComponent(message));
 			deleteCookie(c, FLASH_COOKIE);
 		}
+
+		// Add c.flash() method to context
+		c.flash = (msg: string) => {
+			c.set("flash_new", msg);
+		};
 
 		await next();
 
@@ -30,11 +53,4 @@ export function flash(): MiddlewareHandler {
 			});
 		}
 	};
-}
-
-/**
- * Helper to set a flash message (call before redirect)
- */
-export function setFlash(c: { set: (key: string, value: string) => void }, message: string) {
-	c.set("flash_new", message);
 }
