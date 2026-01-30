@@ -19,6 +19,7 @@ It deliberately avoids the SPA model (JSON APIs, client-side routing, hydration)
 
 - List and search contacts
 - Add and view contact details
+- Flash messages (cookie-based)
 - Server-rendered pages
 - Hot reload for templates and CSS
 

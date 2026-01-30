@@ -23,7 +23,12 @@ export function eta(): MiddlewareHandler {
 	return async (c, next) => {
 		c.setRenderer((viewName, data) => {
 			const viewFile = `${viewName}.eta`;
-			const html = etaInstance.render(viewFile, data ?? {});
+			// Include flash message in template data
+			const templateData = {
+				...data,
+				flash: c.get("flash"),
+			};
+			const html = etaInstance.render(viewFile, templateData);
 			return c.html(html);
 		});
 		await next();

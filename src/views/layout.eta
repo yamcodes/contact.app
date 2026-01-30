@@ -18,6 +18,9 @@
         <sub-title>A Demo Contacts Application</sub-title>
       </h1>
     </header>
+    <% if (it.flash) { %>
+      <div class="flash"><%= it.flash %></div>
+    <% } %>
     <%~ it.body %>
   </main>
 </body>
