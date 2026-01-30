@@ -81,7 +81,7 @@ router.post("/contacts/:slug/delete", (c) => {
 		c.status(StatusCodes.NOT_FOUND);
 		return c.render("notfound", { message: "Contact not found." });
 	}
-	
+
 	Contact.remove(slug);
 
 	c.flash(`Contact "${contact.first} ${contact.last}" deleted successfully.`);
