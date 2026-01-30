@@ -15,4 +15,27 @@ router.get("/contacts/new", (c) => {
 	return c.render("new");
 });
 
+router.post("/contacts", async (c) => {
+	const form = await c.req.formData();
+	const name = form.get("name")?.toString() || "";
+	const email = form.get("email")?.toString() || "";
+	const phone = form.get("phone")?.toString() || "";
+
+	const [first, ...lastParts] = name.split(" ");
+	const last = lastParts.join(" ");
+
+	Contact.add({ first, last, email, phone });
+
+	return c.redirect("/contacts");
+});
+
+router.get("/contacts/:id", (c) => {
+	const id = c.req.param("id");
+	const contact = Contact.find(id);
+	if (!contact) {
+		return c.text("Contact not found", 404);
+	}
+	return c.render("contact", { contact });
+});
+
 export default router;
