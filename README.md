@@ -2,25 +2,32 @@
 
 A simple contacts app built with Bun, Hono, and Eta.
 
+## Branches
+
+| Branch | Description |
+|--------|-------------|
+| `main` | Web 1.0 — full page reloads, classic form submissions |
+| `htmx` | HTMX — partial updates, no full page reloads |
+
 ## Overview
 
-This is a server-rendered web app using a traditional multi-page approach:
+This branch (`htmx`) uses [HTMX](https://htmx.org) for a modern hypermedia-driven experience:
 - HTML is rendered on the server
-- Pages reload on navigation
-- Forms and links drive all interactions
-- No client-side JavaScript framework
+- HTMX handles partial page updates via AJAX
+- No full page reloads for most interactions
+- No client-side JavaScript framework (just HTMX attributes)
 
-Think “classic web app”, but written in TypeScript.
-It deliberately avoids the SPA model (JSON APIs, client-side routing, hydration) in favor of a simpler, HTML-first design.
+Think "Web 1.0 upgraded" — server-rendered HTML with seamless partial updates.
 
-> Inspired by hypermedia-driven systems (HTML as the API), rather than JSON-first SPAs.
+> HTMX extends HTML with attributes like `hx-get`, `hx-post`, and `hx-swap` to enable dynamic behavior without writing JavaScript.
 
 ## Features
 
-- List and search contacts
-- Add and view contact details
+- List and search contacts (with instant filtering via HTMX)
+- Add, edit, and delete contact details
 - Flash messages (cookie-based)
-- Server-rendered pages
+- Server-rendered HTML partials
+- Partial page updates (no full reloads)
 - Hot reload for templates and CSS
 - Templates and partials for views
 - Not found page
@@ -76,6 +83,7 @@ open http://localhost:3000
 | Runtime | [Bun](https://bun.sh) |
 | Web Framework | [Hono](https://hono.dev) |
 | Templating | [Eta](https://eta.js.org) |
+| Hypermedia | [HTMX](https://htmx.org) |
 | Styling | CSS |
 | Linting | [Biome](https://biomejs.dev) |
 
@@ -90,7 +98,16 @@ router.get("/contacts", (c) => {
 });
 ```
 
-Templates are standard Eta files with a shared layout.
+Templates use HTMX attributes for dynamic behavior:
+
+```html
+<form hx-post="/contacts/new" hx-target="#contact-list" hx-swap="beforeend">
+  <input name="name" placeholder="Name" />
+  <button type="submit">Add</button>
+</form>
+```
+
+The server returns HTML partials that HTMX swaps into the page — no JSON, no client-side rendering.
 
 ## License
 
