@@ -73,12 +73,10 @@ open http://localhost:3000
 | Runtime | [Bun](https://bun.sh) |
 | Web Framework | [Hono](https://hono.dev) |
 | Templating | [Eta](https://eta.js.org) |
-| Styling | Plain CSS |
+| Styling | CSS |
 | Linting | [Biome](https://biomejs.dev) |
 
 ## How it works
-
-### Routing
 
 Routes are defined with Hono and render Eta templates directly:
 
