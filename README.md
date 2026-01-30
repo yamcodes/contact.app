@@ -6,8 +6,10 @@ A simple contacts app built with Bun, Hono, and Eta.
 
 | Branch | Description |
 |--------|-------------|
-| `main` | Web 1.0 — full page reloads, classic form submissions |
-| `htmx` | HTMX — partial updates, no full page reloads |
+| [`main`](https://github.com/yamcodes/contact.app/tree/htmx) | Web 1.0 — full page reloads, classic form submissions |
+| [`htmx`](https://github.com/yamcodes/contact.app/tree/htmx) | HTMX — partial updates, no full page reloads |
+
+There are also temporary feature branches but these are the 2 stable branches.
 
 ## Overview
 
