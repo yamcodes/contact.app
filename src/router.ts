@@ -36,7 +36,7 @@ router.post("/contacts", async (c) => {
 
 router.get("/contacts/:slug", (c) => {
 	const slug = c.req.param("slug");
-	const contact = Contact.findBySlug(slug);
+	const contact = slug && Contact.findBySlug(slug);
 	if (!contact) {
 		c.status(StatusCodes.NOT_FOUND);
 		return c.render("notfound", { message: "Contact not found." });
@@ -46,7 +46,7 @@ router.get("/contacts/:slug", (c) => {
 
 router.get("/contacts/:slug/edit", (c) => {
 	const slug = c.req.param("slug");
-	const contact = Contact.findBySlug(slug);
+	const contact = slug && Contact.findBySlug(slug);
 	if (!contact) {
 		c.status(StatusCodes.NOT_FOUND);
 		return c.render("notfound", { message: "Contact not found." });

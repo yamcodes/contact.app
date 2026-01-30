@@ -8,6 +8,13 @@
 			"label": "bun: dev",
 			"detail": "bun run --hot src/app.ts - package.json",
 			"isBackground": true
+		},
+		{
+			"type": "bun",
+			"script": "bun fix",
+			"problemMatcher": ["$tsc"],
+			"label": "bun: fix",
+			"detail": "bun run biome check --write - package.json"
 		}
 	]
 }
