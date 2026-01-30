@@ -1,5 +1,6 @@
 import { Hono } from "hono";
 import "./middleware/flash"; // Extends Context with c.flash()
+import { StatusCodes } from "http-status-codes";
 import * as Contact from "./model";
 
 const router = new Hono();
@@ -37,10 +38,20 @@ router.get("/contacts/:slug", (c) => {
 	const slug = c.req.param("slug");
 	const contact = Contact.findBySlug(slug);
 	if (!contact) {
-		c.status(404);
+		c.status(StatusCodes.NOT_FOUND);
 		return c.render("notfound", { message: "Contact not found." });
 	}
 	return c.render("contact", { contact });
+});
+
+router.get("/contacts/:slug/edit", (c) => {
+	const slug = c.req.param("slug");
+	const contact = Contact.findBySlug(slug);
+	if (!contact) {
+		c.status(StatusCodes.NOT_FOUND);
+		return c.render("notfound", { message: "Contact not found." });
+	}
+	return c.render("edit", { contact });
 });
 
 export default router;
