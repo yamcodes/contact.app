@@ -16,6 +16,10 @@ router.get("/contacts/new", (c) => {
 	return c.render("new");
 });
 
+/**
+ * This handler implements a common strategy in web 1.0-style development called the Post/Redirect/Get or PRG pattern. By issuing an HTTP redirect once a contact has been created and forwarding the browser on to another location, we ensure that the POST does not end up in the browsers request cache.
+ * This means that if the user accidentally (or intentionally) refreshes the page, the browser will not submit another POST, potentially creating another contact. Instead, it will issue the GET that we redirect to, which should be side-effect free.
+ */
 router.post("/contacts", async (c) => {
 	const form = await c.req.formData();
 	const first = form.get("first")?.toString() || "";
