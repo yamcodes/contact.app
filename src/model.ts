@@ -2,16 +2,43 @@ import { v7 as uuid } from "uuid";
 
 export interface Contact {
 	id: string;
+	slug: string;
 	first: string;
 	last: string;
 	email: string;
 	phone?: string;
 }
 
+/**
+ * Generate a URL-safe slug from a name
+ */
+function generateBaseSlug(first: string, last: string): string {
+	return `${first} ${last}`
+		.toLowerCase()
+		.normalize("NFD")
+		.replace(/[\u0300-\u036f]/g, "") // Remove accents
+		.replace(/[^a-z0-9\s-]/g, "") // Remove special chars
+		.trim()
+		.replace(/\s+/g, "-") // Spaces → hyphens
+		.replace(/-+/g, "-"); // Collapse multiple hyphens
+}
+
+/**
+ * Generate a unique slug, appending UUID suffix if needed
+ */
+function generateUniqueSlug(first: string, last: string, id: string): string {
+	const baseSlug = generateBaseSlug(first, last) || "contact";
+	const existing = contacts.find((c) => c.slug === baseSlug);
+	if (!existing) return baseSlug;
+	// Append short UUID suffix for duplicates
+	return `${baseSlug}-${id.slice(-6)}`;
+}
+
 // In-memory store (replace with database later)
 const contacts: Contact[] = [
 	{
 		id: uuid(),
+		slug: "alice-smith",
 		first: "Alice",
 		last: "Smith",
 		email: "alice@example.com",
@@ -19,14 +46,22 @@ const contacts: Contact[] = [
 	},
 	{
 		id: uuid(),
+		slug: "bob-johnson",
 		first: "Bob",
 		last: "Johnson",
 		email: "bob@example.com",
 		phone: "555-5678",
 	},
-	{ id: uuid(), first: "Carol", last: "Williams", email: "carol@example.com" },
 	{
 		id: uuid(),
+		slug: "carol-williams",
+		first: "Carol",
+		last: "Williams",
+		email: "carol@example.com",
+	},
+	{
+		id: uuid(),
+		slug: "david-brown",
 		first: "David",
 		last: "Brown",
 		email: "david@example.com",
@@ -62,11 +97,21 @@ export function find(id: string): Contact | undefined {
 }
 
 /**
+ * Find a contact by slug
+ */
+export function findBySlug(slug: string): Contact | undefined {
+	return contacts.find((c) => c.slug === slug);
+}
+
+/**
  * Add a new contact
  */
-export function add(contact: Omit<Contact, "id">): Contact {
+export function add(contact: Omit<Contact, "id" | "slug">): Contact {
+	const id = uuid();
+	const slug = generateUniqueSlug(contact.first, contact.last, id);
 	const newContact: Contact = {
-		id: uuid(),
+		id,
+		slug,
 		...contact,
 	};
 	contacts.push(newContact);

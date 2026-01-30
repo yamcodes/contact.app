@@ -8,6 +8,6 @@
 </div>
 
 <p>
-  <a href="/contacts/<%= it.contact.id %>/edit">Edit</a>
+  <a href="/contacts/<%= it.contact.slug %>/edit">Edit</a>
   <a href="/contacts">Back</a>
 </p>

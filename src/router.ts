@@ -27,15 +27,15 @@ router.post("/contacts", async (c) => {
 	const email = form.get("email")?.toString() || "";
 	const phone = form.get("phone")?.toString() || "";
 
-	Contact.add({ first, last, email, phone });
+	const contact = Contact.add({ first, last, email, phone });
 
 	c.flash(`Contact "${first} ${last}" created successfully.`);
-	return c.redirect("/contacts");
+	return c.redirect(`/contacts/${contact.slug}`);
 });
 
-router.get("/contacts/:id", (c) => {
-	const id = c.req.param("id");
-	const contact = Contact.find(id);
+router.get("/contacts/:slug", (c) => {
+	const slug = c.req.param("slug");
+	const contact = Contact.findBySlug(slug);
 	if (!contact) {
 		c.status(404);
 		return c.render("notfound", { message: "Contact not found." });

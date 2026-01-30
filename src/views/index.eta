@@ -29,8 +29,8 @@
       <td><%= contact.phone || '' %></td>
       <td><%= contact.email %></td>
       <td>
-        <a href="/contacts/<%= contact.id %>/edit">Edit</a>
-        <a href="/contacts/<%= contact.id %>">View</a>
+        <a href="/contacts/<%= contact.slug %>/edit">Edit</a>
+        <a href="/contacts/<%= contact.slug %>">View</a>
       </td>
     </tr>
     <% }) %>
