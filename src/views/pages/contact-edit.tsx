@@ -19,6 +19,7 @@ export const ContactEdit = ({ contact }: ContactEditProps) => (
 			hx-delete={`/contacts/${contact.slug}`}
 			hx-confirm="Are you sure you want to delete this contact?"
 			hx-target="body"
+			hx-push-url="true"
 		>
 			Delete Contact
 		</button>
