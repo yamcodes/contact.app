@@ -17,7 +17,7 @@ function triggerReload() {
 }
 
 // View file extensions to watch
-const viewExtensions = [".eta", ".tsx", ".jsx"];
+const viewExtensions = [".tsx", ".jsx"];
 
 // Watch views directory for view file changes
 const viewsDir = path.join(import.meta.dir, "../views");
@@ -74,7 +74,7 @@ const reloadScript = `
 /**
  * Set up HMR (hot module reload) for development
  * - Inject reload script into HTML responses
- * - Watch view files (.eta, .tsx, .jsx) and .css for changes
+ * - Watch view files (.tsx, .jsx) and .css for changes
  * - Set up SSE endpoint for browser communication
  */
 export function setupHmr(app: Hono) {
