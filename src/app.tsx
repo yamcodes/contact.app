@@ -3,7 +3,7 @@ import { trimTrailingSlash } from "hono/trailing-slash";
 import { flash } from "./middleware/flash";
 import { htmx } from "./middleware/htmx";
 import { jsx } from "./middleware/jsx";
-import router from "./router";
+import { setupRouter } from "./router";
 import { setupHmr } from "./utils/hmr";
 import { setupNotFound } from "./utils/not-found";
 import { setupStatic } from "./utils/static";
@@ -16,9 +16,7 @@ app.use(flash());
 app.use(htmx());
 app.use(jsx());
 setupHmr(app);
-
-app.route("/", router);
-
+setupRouter(app);
 setupNotFound(app);
 
 export default app;
