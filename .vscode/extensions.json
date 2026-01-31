@@ -4,6 +4,7 @@
 		"oven.bun-vscode",
 		"biomejs.biome",
 		"otovo-oss.htmx-tags",
-		"hono.hono"
+		"hono.hono",
+		"bierner.lit-html"
 	]
 }

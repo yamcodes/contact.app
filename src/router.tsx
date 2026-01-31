@@ -5,7 +5,6 @@ import {
 	ContactList,
 	ContactNew,
 	ContactView,
-	Layout,
 	NotFound,
 } from "./components";
 import "./middleware/flash";
@@ -18,29 +17,13 @@ router.get("/", (c) => c.redirect("/contacts"));
 router.get("/contacts", (c) => {
 	const search = c.req.query("q");
 	const contacts = search ? Contact.search(search) : Contact.all();
-	const content = <ContactList contacts={contacts} search={search} />;
-
-	if (c.get("htmx")) {
-		return c.html(content);
-	}
-	return c.html(
-		<Layout title="Contacts" flash={c.get("flash")}>
-			{content}
-		</Layout>,
-	);
+	return c.render(<ContactList contacts={contacts} search={search} />, {
+		title: "Contacts",
+	});
 });
 
 router.get("/contacts/new", (c) => {
-	const content = <ContactNew />;
-
-	if (c.get("htmx")) {
-		return c.html(content);
-	}
-	return c.html(
-		<Layout title="New Contact" flash={c.get("flash")}>
-			{content}
-		</Layout>,
-	);
+	return c.render(<ContactNew />, { title: "New Contact" });
 });
 
 router.post("/contacts", async (c) => {
@@ -61,26 +44,11 @@ router.get("/contacts/:slug", (c) => {
 	const contact = slug && Contact.findBySlug(slug);
 	if (!contact) {
 		c.status(StatusCodes.NOT_FOUND);
-		const content = <NotFound message="Contact not found." />;
-		if (c.get("htmx")) {
-			return c.html(content);
-		}
-		return c.html(
-			<Layout title="Not Found" flash={c.get("flash")}>
-				{content}
-			</Layout>,
-		);
+		return c.render(<NotFound message="Contact not found." />, {
+			title: "Not Found",
+		});
 	}
-
-	const content = <ContactView contact={contact} />;
-	if (c.get("htmx")) {
-		return c.html(content);
-	}
-	return c.html(
-		<Layout title="Contact" flash={c.get("flash")}>
-			{content}
-		</Layout>,
-	);
+	return c.render(<ContactView contact={contact} />, { title: "Contact" });
 });
 
 router.get("/contacts/:slug/edit", (c) => {
@@ -88,26 +56,11 @@ router.get("/contacts/:slug/edit", (c) => {
 	const contact = slug && Contact.findBySlug(slug);
 	if (!contact) {
 		c.status(StatusCodes.NOT_FOUND);
-		const content = <NotFound message="Contact not found." />;
-		if (c.get("htmx")) {
-			return c.html(content);
-		}
-		return c.html(
-			<Layout title="Not Found" flash={c.get("flash")}>
-				{content}
-			</Layout>,
-		);
+		return c.render(<NotFound message="Contact not found." />, {
+			title: "Not Found",
+		});
 	}
-
-	const content = <ContactEdit contact={contact} />;
-	if (c.get("htmx")) {
-		return c.html(content);
-	}
-	return c.html(
-		<Layout title="Edit Contact" flash={c.get("flash")}>
-			{content}
-		</Layout>,
-	);
+	return c.render(<ContactEdit contact={contact} />, { title: "Edit Contact" });
 });
 
 router.post("/contacts/:slug/edit", async (c) => {
@@ -115,15 +68,9 @@ router.post("/contacts/:slug/edit", async (c) => {
 	const contact = slug && Contact.findBySlug(slug);
 	if (!contact) {
 		c.status(StatusCodes.NOT_FOUND);
-		const content = <NotFound message="Contact not found." />;
-		if (c.get("htmx")) {
-			return c.html(content);
-		}
-		return c.html(
-			<Layout title="Not Found" flash={c.get("flash")}>
-				{content}
-			</Layout>,
-		);
+		return c.render(<NotFound message="Contact not found." />, {
+			title: "Not Found",
+		});
 	}
 
 	const form = await c.req.formData();
@@ -143,15 +90,9 @@ router.post("/contacts/:slug/delete", (c) => {
 	const contact = slug && Contact.findBySlug(slug);
 	if (!contact) {
 		c.status(StatusCodes.NOT_FOUND);
-		const content = <NotFound message="Contact not found." />;
-		if (c.get("htmx")) {
-			return c.html(content);
-		}
-		return c.html(
-			<Layout title="Not Found" flash={c.get("flash")}>
-				{content}
-			</Layout>,
-		);
+		return c.render(<NotFound message="Contact not found." />, {
+			title: "Not Found",
+		});
 	}
 
 	Contact.remove(slug);

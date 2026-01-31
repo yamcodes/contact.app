@@ -1,4 +1,5 @@
 import { Hono } from "hono";
+import { jsxRenderer } from "hono/jsx-renderer";
 import { trimTrailingSlash } from "hono/trailing-slash";
 import { StatusCodes } from "http-status-codes";
 import { Layout, NotFound } from "./components";
@@ -8,6 +9,13 @@ import router from "./router";
 import { setupHmr } from "./utils/hmr";
 import { setupStatic } from "./utils/static";
 
+declare module "hono" {
+	type ContextRenderer = (
+		content: string | Promise<string>,
+		props?: { title?: string },
+	) => Response;
+}
+
 const app = new Hono();
 
 app.use(trimTrailingSlash());
@@ -16,19 +24,30 @@ app.use(flash());
 app.use(htmx());
 setupHmr(app);
 
+app.get(
+	"*",
+	jsxRenderer(
+		({ children, title }, c) => {
+			if (c.get("htmx")) {
+				return <>{children}</>;
+			}
+			return (
+				<Layout title={title} flash={c.get("flash")}>
+					{children}
+				</Layout>
+			);
+		},
+		{ docType: false },
+	),
+);
+
 app.route("/", router);
 
 app.notFound((c) => {
 	c.status(StatusCodes.NOT_FOUND);
-	const content = <NotFound message="Page not found." />;
-	if (c.get("htmx")) {
-		return c.html(content);
-	}
-	return c.html(
-		<Layout title="Not Found" flash={c.get("flash")}>
-			{content}
-		</Layout>,
-	);
+	return c.render(<NotFound message="Page not found." />, {
+		title: "Not Found",
+	});
 });
 
 export default app;
