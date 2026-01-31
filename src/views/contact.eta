@@ -1,0 +1,13 @@
+<% layout("layout", { title: "Contact" }) %>
+
+<h1><%= it.contact.first %> <%= it.contact.last %></h1>
+
+<div>
+  <div>Phone: <%= it.contact.phone || '' %></div>
+  <div>Email: <%= it.contact.email %></div>
+</div>
+
+<p>
+  <a href="/contacts/<%= it.contact.slug %>/edit">Edit</a>
+  <a href="/contacts">Back</a>
+</p>

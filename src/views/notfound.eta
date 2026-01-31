@@ -1,0 +1,9 @@
+<% layout("layout", { title: "Not Found" }) %>
+
+<h1>Not Found</h1>
+
+<p><%= it.message || 'The requested resource could not be found.' %></p>
+
+<p>
+  <a href="/contacts">Back to Contacts</a>
+</p>
