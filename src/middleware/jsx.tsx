@@ -12,15 +12,11 @@ declare module "hono" {
 
 /**
  * Middleware to add `c.render()` for JSX components
- * - Wrap content in <Layout /> for regular requests
- * - Return bare content for HTMX requests
+ * Wraps content in <Layout /> for all requests
  */
 export function jsx(): MiddlewareHandler {
 	return jsxRenderer(
 		({ children, title }, c) => {
-			if (c.get("htmx")) {
-				return <>{children}</>;
-			}
 			return (
 				<Layout title={title} flash={c.get("flash")}>
 					{children}

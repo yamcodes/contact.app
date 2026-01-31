@@ -14,7 +14,6 @@ export const Layout = ({ children, title, flash }: LayoutProps) => html`
 			<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 			<title>${title || "Contact App"}</title>
 			<link rel="stylesheet" href="/static/styles.css" />
-			<script src="/htmx.js"></script>
 		</head>
 		<body>
 			<main>

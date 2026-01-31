@@ -6,8 +6,4 @@ import { serveStatic } from "hono/bun";
  */
 export function setupStatic(app: Hono) {
 	app.use("/static/*", serveStatic({ root: "./" }));
-	app.get(
-		"/htmx.js",
-		serveStatic({ path: "./node_modules/htmx.org/dist/htmx.min.js" }),
-	);
 }

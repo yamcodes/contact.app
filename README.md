@@ -6,8 +6,8 @@ A simple contacts app built with Bun and Hono.
 
 | Branch | Description |
 |--------|-------------|
-| [`main`](https://github.com/yamcodes/contact.app/tree/htmx) | Web 1.0 — full page reloads, classic form submissions |
-| **[`htmx`](https://github.com/yamcodes/contact.app/tree/htmx)** (You're here!) | **HTMX — partial updates, no full page reloads** |
+| **[`main`](https://github.com/yamcodes/contact.app/tree/main)** (You're here!) | **Web 1.0 — full page reloads, classic form submissions** |
+| [`htmx`](https://github.com/yamcodes/contact.app/tree/htmx) | HTMX — partial updates, no full page reloads |
 
 There are also temporary feature branches but these are the 2 stable branches.
 
@@ -15,23 +15,22 @@ There are also temporary feature branches but these are the 2 stable branches.
 
 This app follows the architecture from [Hypermedia Systems](https://hypermedia.systems/part/htmx/) — same ideas, different tech stack (Bun + Hono instead of Python + Flask).
 
-This branch (`htmx`) uses [HTMX](https://htmx.org) for a modern hypermedia-driven experience:
-- HTML is rendered on the server
-- HTMX handles partial page updates via AJAX
-- No full page reloads for most interactions
-- No client-side JavaScript framework (just HTMX attributes)
+This branch (`main`) uses classic Web 1.0 patterns:
+- HTML is rendered on the server using Hono JSX
+- Full page reloads for all navigation
+- Standard HTML form submissions
+- No client-side JavaScript required
 
-Think "Web 1.0 upgraded" — server-rendered HTML with seamless partial updates.
+Think "Web 1.0" — pure server-rendered HTML with traditional request/response cycles.
 
-> HTMX extends HTML with attributes like `hx-get`, `hx-post`, and `hx-swap` to enable dynamic behavior without writing JavaScript.
+> Check out the [`htmx`](https://github.com/yamcodes/contact.app/tree/htmx) branch for the HTMX-enhanced version with partial page updates.
 
 ## Features
 
-- List and search contacts (with instant filtering via HTMX)
+- List and search contacts
 - Add, edit, and delete contact details
 - Flash messages (cookie-based)
-- Server-rendered HTML partials
-- Partial page updates (no full reloads)
+- Server-rendered HTML with Hono JSX
 - Hot reload for templates and CSS
 - Templates and partials for views
 - Not found page
@@ -68,8 +67,7 @@ open http://localhost:3000
 │   ├── model.ts            # Contact data model
 │   ├── middleware/
 │   │   ├── jsx.tsx         # JSX renderer (c.render)
-│   │   ├── flash.ts        # Flash messages
-│   │   └── htmx.ts         # HTMX request detection
+│   │   └── flash.ts        # Flash messages
 │   ├── utils/
 │   │   ├── hmr.ts          # Hot reload setup
 │   │   └── static.ts       # Static file serving
@@ -90,7 +88,6 @@ open http://localhost:3000
 | Runtime | [Bun](https://bun.sh) |
 | Web Framework | [Hono](https://hono.dev) |
 | Templating | [Hono JSX](https://hono.dev/docs/guides/jsx) |
-| Hypermedia | [HTMX](https://htmx.org) |
 | Styling | CSS |
 | Linting | [Biome](https://biomejs.dev) |
 
@@ -105,16 +102,16 @@ router.get("/contacts", (c) => {
 });
 ```
 
-Templates use HTMX attributes for dynamic behavior:
+Templates use standard HTML form elements:
 
 ```html
-<form hx-post="/contacts/new" hx-target="#contact-list" hx-swap="beforeend">
+<form action="/contacts/new" method="POST">
   <input name="name" placeholder="Name" />
   <button type="submit">Add</button>
 </form>
 ```
 
-The server returns HTML partials that HTMX swaps into the page — no JSON, no client-side rendering.
+The server renders full HTML pages — classic request/response, no JavaScript required.
 
 ## License
 

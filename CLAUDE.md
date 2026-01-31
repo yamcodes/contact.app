@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 | Branch | Description |
 |--------|-------------|
-| `main` | Web 1.0 — full page reloads, classic form submissions |
+| `main` | Web 1.0 — full page reloads, classic form submissions (Hono JSX templating) |
 | `htmx` | HTMX — partial updates, no full page reloads |
 
 ## Development Commands
@@ -20,12 +20,11 @@ bun test <file>      # Run a single test file
 
 ## Architecture
 
-This is a **Hono** web application running on **Bun** with **Hono JSX** templating and **HTMX** for hypermedia-driven interactions.
+This is a **Hono** web application running on **Bun** with **Hono JSX** templating.
 
-- **Entry point**: `src/index.ts` - Hono app exported as default (Bun auto-serves on port 3000)
+- **Entry point**: `src/app.ts` - Hono app exported as default (Bun auto-serves on port 3000)
 - **Framework**: Hono (not Express) - lightweight web framework
 - **Templating**: Hono JSX for server-side templates (see `tsconfig.json`)
-- **Hypermedia**: HTMX for partial page updates without writing JavaScript
 
 ## Bun-Specific Guidelines
 
@@ -53,6 +52,3 @@ test("example", () => {
 
 ## Hono Documentation
 When helping with Hono questions, fetch https://hono.dev/llms-small.txt for reference.
-
-## HTMX Documentation
-When helping with HTMX questions, https://htmx.org should be used for reference. The entierty of the docs can be found here: https://raw.githubusercontent.com/bigskysoftware/htmx/refs/heads/master/www/content/docs.md
