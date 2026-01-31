@@ -20,7 +20,7 @@ export const Layout = ({ children, title, flash }: LayoutProps) => html`
 			<main>
 				<header>
 					<h1>
-						<a href="/">
+						<a href="/" hx-boost="true">
 							<all-caps>contact.app</all-caps>
 						</a>
 						<sub-title>A Demo Contacts Application</sub-title>

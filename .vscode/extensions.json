@@ -2,8 +2,8 @@
 	"recommendations": [
 		"oven.bun-vscode",
 		"biomejs.biome",
-		"otovo-oss.htmx-tags",
 		"hono.hono",
-		"bierner.lit-html"
+		"bierner.lit-html",
+		"craigrbroughton.htmx-attributes"
 	]
 }
