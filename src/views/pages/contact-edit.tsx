@@ -9,12 +9,20 @@ export const ContactEdit = ({ contact }: ContactEditProps) => (
 	<>
 		<h2>Edit Contact</h2>
 
-		<form action={`/contacts/${contact.slug}/edit`} method="post">
+		<form
+			action={`/contacts/${contact.slug}/edit`}
+			method="post"
+			hx-boost="true"
+		>
 			<ContactFields contact={contact} />
 			<button type="submit">Save</button>
 		</form>
 
-		<form action={`/contacts/${contact.slug}/delete`} method="post">
+		<form
+			action={`/contacts/${contact.slug}/delete`}
+			method="post"
+			hx-boost="true"
+		>
 			<button
 				type="submit"
 				onclick="return confirm('Are you sure you want to delete this contact?');"

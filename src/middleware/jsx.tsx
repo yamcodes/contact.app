@@ -18,9 +18,9 @@ declare module "hono" {
 export function jsx(): MiddlewareHandler {
 	return jsxRenderer(
 		({ children, title }, c) => {
-			if (c.get("htmx")) {
-				return <>{children}</>;
-			}
+			// if (c.get("htmx")) {
+			// 	return <>{children}</>;
+			// }
 			return (
 				<Layout title={title} flash={c.get("flash")}>
 					{children}

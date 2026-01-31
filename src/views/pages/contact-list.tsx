@@ -7,7 +7,7 @@ type ContactListProps = {
 
 export const ContactList = ({ contacts, search }: ContactListProps) => (
 	<>
-		<form action="/contacts" method="get">
+		<form action="/contacts" method="get" hx-boost="true">
 			<label for="search">Search contacts:</label>
 			<input
 				type="search"

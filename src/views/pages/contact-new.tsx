@@ -4,7 +4,7 @@ export const ContactNew = () => (
 	<>
 		<h2>New Contact</h2>
 
-		<form action="/contacts" method="post">
+		<form action="/contacts" method="post" hx-boost="true">
 			<ContactFields />
 			<button type="submit">Save</button>
 		</form>
