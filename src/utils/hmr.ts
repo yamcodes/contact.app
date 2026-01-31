@@ -16,10 +16,10 @@ function triggerReload() {
 	}
 }
 
-// Watch views directory for .tsx file changes
+// Watch views directory for .eta file changes
 const viewsDir = path.join(import.meta.dir, "../views");
 watch(viewsDir, { recursive: true }, (_event, filename) => {
-	if (filename?.endsWith(".tsx")) {
+	if (filename?.endsWith(".eta")) {
 		console.log(`[hmr] View changed: ${filename}`);
 		triggerReload();
 	}
@@ -71,7 +71,7 @@ const reloadScript = `
 /**
  * Set up HMR (hot module reload) for development
  * - Inject reload script into HTML responses
- * - Watch .tsx and .css files for changes
+ * - Watch .eta and .css files for changes
  * - Set up SSE endpoint for browser communication
  */
 export function setupHmr(app: Hono) {
