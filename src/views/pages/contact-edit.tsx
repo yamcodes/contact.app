@@ -1,6 +1,6 @@
 import type { FC } from "hono/jsx";
 import type { Contact } from "../../model";
-import { ContactFields } from "../contact-fields";
+import { ContactFields } from "../partials/contact-fields";
 
 type ContactEditProps = {
 	contact: Contact;

@@ -1,5 +1,5 @@
 import type { FC } from "hono/jsx";
-import { ContactFields } from "../contact-fields";
+import { ContactFields } from "../partials/contact-fields";
 
 export const ContactNew: FC = () => (
 	<>

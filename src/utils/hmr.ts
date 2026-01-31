@@ -16,11 +16,11 @@ function triggerReload() {
 	}
 }
 
-// Watch components directory for .tsx file changes
-const componentsDir = path.join(import.meta.dir, "../components");
-watch(componentsDir, { recursive: true }, (_event, filename) => {
+// Watch views directory for .tsx file changes
+const viewsDir = path.join(import.meta.dir, "../views");
+watch(viewsDir, { recursive: true }, (_event, filename) => {
 	if (filename?.endsWith(".tsx")) {
-		console.log(`[hmr] Component changed: ${filename}`);
+		console.log(`[hmr] View changed: ${filename}`);
 		triggerReload();
 	}
 });

@@ -1,6 +1,6 @@
 import type { MiddlewareHandler } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
-import { Layout } from "../components";
+import { Layout } from "../views";
 
 // Type declaration for the custom render method
 declare module "hono" {
@@ -12,7 +12,7 @@ declare module "hono" {
 
 /**
  * Middleware to add `c.render()` for JSX components
- * - Wrap content in Layout for regular requests
+ * - Wrap content in <Layout /> for regular requests
  * - Return bare content for HTMX requests
  */
 export function jsx(): MiddlewareHandler {
@@ -21,7 +21,11 @@ export function jsx(): MiddlewareHandler {
 			if (c.get("htmx")) {
 				return <>{children}</>;
 			}
-			return Layout({ title, flash: c.get("flash"), children });
+			return (
+				<Layout title={title} flash={c.get("flash")}>
+					{children}
+				</Layout>
+			);
 		},
 		{ docType: false },
 	);

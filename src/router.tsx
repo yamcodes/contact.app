@@ -6,7 +6,7 @@ import {
 	ContactNew,
 	ContactView,
 	NotFound,
-} from "./components";
+} from "./views";
 import "./middleware/flash";
 import * as Contact from "./model";
 
