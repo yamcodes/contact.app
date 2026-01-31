@@ -13,7 +13,7 @@ declare module "hono" {
 	type ContextRenderer = (
 		content: string | Promise<string>,
 		props?: { title?: string },
-	) => Response;
+	) => Response | Promise<Response>;
 }
 
 const app = new Hono();
@@ -31,11 +31,7 @@ app.get(
 			if (c.get("htmx")) {
 				return <>{children}</>;
 			}
-			return (
-				<Layout title={title} flash={c.get("flash")}>
-					{children}
-				</Layout>
-			);
+			return Layout({ title, flash: c.get("flash"), children });
 		},
 		{ docType: false },
 	),
