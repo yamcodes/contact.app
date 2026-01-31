@@ -1,13 +1,12 @@
 import { Hono } from "hono";
 import { trimTrailingSlash } from "hono/trailing-slash";
-import { StatusCodes } from "http-status-codes";
 import { flash } from "./middleware/flash";
 import { htmx } from "./middleware/htmx";
 import { jsx } from "./middleware/jsx";
 import router from "./router";
 import { setupHmr } from "./utils/hmr";
+import { setupNotFound } from "./utils/not-found";
 import { setupStatic } from "./utils/static";
-import { NotFound } from "./views";
 
 const app = new Hono();
 
@@ -20,11 +19,6 @@ setupHmr(app);
 
 app.route("/", router);
 
-app.notFound((c) => {
-	c.status(StatusCodes.NOT_FOUND);
-	return c.render(<NotFound message="Page not found." />, {
-		title: "Not Found",
-	});
-});
+setupNotFound(app);
 
 export default app;

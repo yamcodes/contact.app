@@ -1,11 +1,10 @@
-import type { FC } from "hono/jsx";
 import type { Contact } from "../../model";
 
 type ContactViewProps = {
 	contact: Contact;
 };
 
-export const ContactView: FC<ContactViewProps> = ({ contact }) => (
+export const ContactView = ({ contact }: ContactViewProps) => (
 	<>
 		<h1>
 			{contact.first} {contact.last}

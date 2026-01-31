@@ -1,10 +1,8 @@
-import type { FC } from "hono/jsx";
-
 type NotFoundProps = {
 	message?: string;
 };
 
-export const NotFound: FC<NotFoundProps> = ({ message }) => (
+export const NotFound = ({ message }: NotFoundProps) => (
 	<>
 		<h1>Not Found</h1>
 

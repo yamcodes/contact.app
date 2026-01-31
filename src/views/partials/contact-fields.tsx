@@ -1,4 +1,3 @@
-import type { FC } from "hono/jsx";
 import type { Contact } from "../../model";
 
 type ContactFieldsProps = {
@@ -12,7 +11,7 @@ type ContactFieldsProps = {
 	};
 };
 
-export const ContactFields: FC<ContactFieldsProps> = ({ contact }) => (
+export const ContactFields = ({ contact }: ContactFieldsProps) => (
 	<fieldset>
 		<legend>Contact Values</legend>
 		<p>

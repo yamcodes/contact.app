@@ -1,4 +1,3 @@
-import type { FC } from "hono/jsx";
 import type { Contact } from "../../model";
 
 type ContactListProps = {
@@ -6,7 +5,7 @@ type ContactListProps = {
 	search?: string;
 };
 
-export const ContactList: FC<ContactListProps> = ({ contacts, search }) => (
+export const ContactList = ({ contacts, search }: ContactListProps) => (
 	<>
 		<form action="/contacts" method="get">
 			<label for="search">Search contacts:</label>
