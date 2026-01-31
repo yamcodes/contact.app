@@ -16,11 +16,11 @@ function triggerReload() {
 	}
 }
 
-// Watch views directory for .eta file changes
-const viewsDir = path.join(import.meta.dir, "../views");
-watch(viewsDir, { recursive: true }, (_event, filename) => {
-	if (filename?.endsWith(".eta")) {
-		console.log(`[hmr] Template changed: ${filename}`);
+// Watch components directory for .tsx file changes
+const componentsDir = path.join(import.meta.dir, "../components");
+watch(componentsDir, { recursive: true }, (_event, filename) => {
+	if (filename?.endsWith(".tsx")) {
+		console.log(`[hmr] Component changed: ${filename}`);
 		triggerReload();
 	}
 });
@@ -71,7 +71,7 @@ const reloadScript = `
 /**
  * Set up HMR (hot module reload) for development
  * - Inject reload script into HTML responses
- * - Watch .eta and .css files for changes
+ * - Watch .tsx and .css files for changes
  * - Set up SSE endpoint for browser communication
  */
 export function setupHmr(app: Hono) {

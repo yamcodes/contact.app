@@ -53,6 +53,7 @@ export const ContactList: FC<ContactListProps> = ({ contacts, search }) => (
 
 		<p>
 			<button
+				type="button"
 				hx-get="/contacts/new"
 				hx-push-url="true"
 				hx-target="main"

@@ -1,11 +1,11 @@
 import { Hono } from "hono";
 import { StatusCodes } from "http-status-codes";
 import {
-	Layout,
-	ContactList,
-	ContactView,
-	ContactNew,
 	ContactEdit,
+	ContactList,
+	ContactNew,
+	ContactView,
+	Layout,
 	NotFound,
 } from "./components";
 import "./middleware/flash";
