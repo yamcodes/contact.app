@@ -1,6 +1,6 @@
 # HTMX Migration Plan
 
-Step-by-step guide from `eta2htmx` (Web 1.0) to full HTMX implementation.
+Step-by-step guide from Web 1.0 to full HTMX implementation.
 
 ## Prerequisites
 
