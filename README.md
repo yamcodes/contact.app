@@ -1,6 +1,6 @@
 # contact.app
 
-A simple contacts app built with Bun, Hono, and Eta.
+A simple contacts app built with Bun and Hono.
 
 ## Branches
 
