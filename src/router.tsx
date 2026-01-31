@@ -1,8 +1,11 @@
 import { Hono } from "hono";
-import "./middleware/flash"; // Extends Context with c.flash()
 import { StatusCodes } from "http-status-codes";
-import * as Contact from "@/model";
-import { ContactList } from "@/views/pages/contact-list";
+import * as Contact from "./model";
+import { ContactEdit } from "./views/pages/contact-edit";
+import { ContactList } from "./views/pages/contact-list";
+import { ContactNew } from "./views/pages/contact-new";
+import { ContactView } from "./views/pages/contact-view";
+import { NotFound } from "./views/pages/not-found";
 
 const router = new Hono();
 
@@ -15,14 +18,11 @@ router.get("/contacts", (c) => {
 		title: "Contacts",
 	});
 });
+
 router.get("/contacts/new", (c) => {
-	return c.render("new");
+	return c.render(<ContactNew />, { title: "New Contact" });
 });
 
-/**
- * This handler implements a common strategy in web 1.0-style development called the Post/Redirect/Get or PRG pattern. By issuing an HTTP redirect once a contact has been created and forwarding the browser on to another location, we ensure that the POST does not end up in the browsers request cache.
- * This means that if the user accidentally (or intentionally) refreshes the page, the browser will not submit another POST, potentially creating another contact. Instead, it will issue the GET that we redirect to, which should be side-effect free.
- */
 router.post("/contacts", async (c) => {
 	const form = await c.req.formData();
 	const first = form.get("first")?.toString() || "";
@@ -33,7 +33,7 @@ router.post("/contacts", async (c) => {
 	Contact.add({ first, last, email, phone });
 
 	c.flash(`Contact "${first} ${last}" created successfully.`);
-	return c.redirect(`/contacts`);
+	return c.redirect("/contacts");
 });
 
 router.get("/contacts/:slug", (c) => {
@@ -41,9 +41,11 @@ router.get("/contacts/:slug", (c) => {
 	const contact = slug && Contact.findBySlug(slug);
 	if (!contact) {
 		c.status(StatusCodes.NOT_FOUND);
-		return c.render("notfound", { message: "Contact not found." });
+		return c.render(<NotFound message="Contact not found." />, {
+			title: "Not Found",
+		});
 	}
-	return c.render("contact", { contact });
+	return c.render(<ContactView contact={contact} />, { title: "Contact" });
 });
 
 router.get("/contacts/:slug/edit", (c) => {
@@ -51,9 +53,11 @@ router.get("/contacts/:slug/edit", (c) => {
 	const contact = slug && Contact.findBySlug(slug);
 	if (!contact) {
 		c.status(StatusCodes.NOT_FOUND);
-		return c.render("notfound", { message: "Contact not found." });
+		return c.render(<NotFound message="Contact not found." />, {
+			title: "Not Found",
+		});
 	}
-	return c.render("edit", { contact });
+	return c.render(<ContactEdit contact={contact} />, { title: "Edit Contact" });
 });
 
 router.post("/contacts/:slug/edit", async (c) => {
@@ -61,7 +65,9 @@ router.post("/contacts/:slug/edit", async (c) => {
 	const contact = slug && Contact.findBySlug(slug);
 	if (!contact) {
 		c.status(StatusCodes.NOT_FOUND);
-		return c.render("notfound", { message: "Contact not found." });
+		return c.render(<NotFound message="Contact not found." />, {
+			title: "Not Found",
+		});
 	}
 
 	const form = await c.req.formData();
@@ -81,7 +87,9 @@ router.post("/contacts/:slug/delete", (c) => {
 	const contact = slug && Contact.findBySlug(slug);
 	if (!contact) {
 		c.status(StatusCodes.NOT_FOUND);
-		return c.render("notfound", { message: "Contact not found." });
+		return c.render(<NotFound message="Contact not found." />, {
+			title: "Not Found",
+		});
 	}
 
 	Contact.remove(slug);
