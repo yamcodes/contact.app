@@ -9,7 +9,9 @@ export const NotFound = ({ message }: NotFoundProps) => (
 		<p>{message || "The requested resource could not be found."}</p>
 
 		<p>
-			<a href="/contacts">Back to Contacts</a>
+			<a href="/contacts" hx-boost="true">
+				Back to Contacts
+			</a>
 		</p>
 	</>
 );

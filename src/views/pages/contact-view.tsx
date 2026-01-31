@@ -16,8 +16,12 @@ export const ContactView = ({ contact }: ContactViewProps) => (
 		</div>
 
 		<p>
-			<a href={`/contacts/${contact.slug}/edit`}>Edit</a>
-			<a href="/contacts">Back</a>
+			<a href={`/contacts/${contact.slug}/edit`} hx-boost="true">
+				Edit
+			</a>
+			<a href="/contacts" hx-boost="true">
+				Back
+			</a>
 		</p>
 	</>
 );

@@ -10,7 +10,9 @@ export const ContactNew = () => (
 		</form>
 
 		<p>
-			<a href="/contacts">Back</a>
+			<a href="/contacts" hx-boost="true">
+				Back
+			</a>
 		</p>
 	</>
 );
