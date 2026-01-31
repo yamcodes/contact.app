@@ -16,11 +16,11 @@ export const Layout = ({ children, title, flash }: LayoutProps) => html`
 			<link rel="stylesheet" href="/static/styles.css" />
 			<script src="/htmx.js"></script>
 		</head>
-		<body>
+		<body hx-boost="true">
 			<main>
 				<header>
 					<h1>
-						<a href="/" hx-boost="true">
+						<a href="/" >
 							<all-caps>contact.app</all-caps>
 						</a>
 						<sub-title>A Demo Contacts Application</sub-title>

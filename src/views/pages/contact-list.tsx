@@ -7,7 +7,7 @@ type ContactListProps = {
 
 export const ContactList = ({ contacts, search }: ContactListProps) => (
 	<>
-		<form action="/contacts" method="get" hx-boost="true">
+		<form action="/contacts" method="get">
 			<label for="search">Search contacts:</label>
 			<input
 				type="search"
@@ -39,12 +39,8 @@ export const ContactList = ({ contacts, search }: ContactListProps) => (
 							<td>{contact.phone || ""}</td>
 							<td>{contact.email}</td>
 							<td>
-								<a href={`/contacts/${contact.slug}/edit`} hx-boost="true">
-									Edit
-								</a>
-								<a href={`/contacts/${contact.slug}`} hx-boost="true">
-									View
-								</a>
+								<a href={`/contacts/${contact.slug}/edit`}>Edit</a>
+								<a href={`/contacts/${contact.slug}`}>View</a>
 							</td>
 						</tr>
 					))}
@@ -54,9 +50,7 @@ export const ContactList = ({ contacts, search }: ContactListProps) => (
 			<p>No contacts found.</p>
 		)}
 		<p>
-			<a href="/contacts/new" hx-boost="true">
-				Add New Contact
-			</a>
+			<a href="/contacts/new">Add New Contact</a>
 		</p>
 	</>
 );
