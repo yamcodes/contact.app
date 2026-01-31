@@ -7,7 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 | Branch | Description |
 |--------|-------------|
 | `main` | Web 1.0 — full page reloads, classic form submissions |
-| `htmx` | HTMX — partial updates, no full page reloads |
+| `htmx` | htmx — partial updates, no full page reloads |
 
 ## Development Commands
 
