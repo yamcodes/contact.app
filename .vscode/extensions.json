@@ -3,6 +3,7 @@
 		"shadowtime2000.eta-vscode",
 		"oven.bun-vscode",
 		"biomejs.biome",
-		"otovo-oss.htmx-tags"
+		"otovo-oss.htmx-tags",
+		"hono.hono"
 	]
 }

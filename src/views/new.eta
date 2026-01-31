@@ -1,3 +1,0 @@
-<% layout("layout", { title: "New Contact" }) %>
-
-<%~ include("partials/new-content", it) %>

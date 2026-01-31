@@ -1,0 +1,17 @@
+import type { FC } from "hono/jsx";
+import { ContactFields } from "../ContactFields";
+
+export const ContactNew: FC = () => (
+	<>
+		<h2>New Contact</h2>
+
+		<form action="/contacts" method="post">
+			<ContactFields />
+			<button type="submit">Save</button>
+		</form>
+
+		<p>
+			<a href="/contacts">Back</a>
+		</p>
+	</>
+);
