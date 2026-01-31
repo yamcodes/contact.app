@@ -20,13 +20,12 @@ bun test <file>      # Run a single test file
 
 ## Architecture
 
-This is a **Hono** web application running on **Bun** with **Eta** templating and **HTMX** for hypermedia-driven interactions.
+This is a **Hono** web application running on **Bun** with **Hono JSX** templating and **HTMX** for hypermedia-driven interactions.
 
 - **Entry point**: `src/index.ts` - Hono app exported as default (Bun auto-serves on port 3000)
 - **Framework**: Hono (not Express) - lightweight web framework
-- **Templating**: Eta for server-side templates
+- **Templating**: Hono JSX for server-side templates (see `tsconfig.json`)
 - **Hypermedia**: HTMX for partial page updates without writing JavaScript
-- **JSX**: Configured to use `hono/jsx` (see `tsconfig.json`)
 
 ## Bun-Specific Guidelines
 
@@ -54,9 +53,6 @@ test("example", () => {
 
 ## Hono Documentation
 When helping with Hono questions, fetch https://hono.dev/llms-small.txt for reference.
-
-## Eta (templating) Documentation
-When helping with templating questions, fetch https://eta.js.org/llms.txt for reference.
 
 ## HTMX Documentation
 When helping with HTMX questions, https://htmx.org should be used for reference. The entierty of the docs can be found here: https://raw.githubusercontent.com/bigskysoftware/htmx/refs/heads/master/www/content/docs.md

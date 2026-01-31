@@ -1,4 +1,4 @@
-import type { Contact } from "../../model";
+import type { Contact } from "@/model";
 import { ContactFields } from "../partials/contact-fields";
 
 type ContactEditProps = {

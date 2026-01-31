@@ -1,6 +1,6 @@
 import type { MiddlewareHandler } from "hono";
 import { jsxRenderer } from "hono/jsx-renderer";
-import { Layout } from "../views";
+import { Layout } from "@/views/layout";
 
 // Type declaration for the custom render method
 declare module "hono" {

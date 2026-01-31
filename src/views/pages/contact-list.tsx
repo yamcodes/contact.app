@@ -49,17 +49,8 @@ export const ContactList = ({ contacts, search }: ContactListProps) => (
 		) : (
 			<p>No contacts found.</p>
 		)}
-
 		<p>
-			<button
-				type="button"
-				hx-get="/contacts/new"
-				hx-push-url="true"
-				hx-target="main"
-				hx-swap="innerHTML"
-			>
-				Add New Contact
-			</button>
+			<a href="/contacts/new">Add New Contact</a>
 		</p>
 	</>
 );

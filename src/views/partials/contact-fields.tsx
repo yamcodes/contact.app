@@ -1,4 +1,4 @@
-import type { Contact } from "../../model";
+import type { Contact } from "@/model";
 
 type ContactFieldsProps = {
 	contact?: Partial<Contact> & {

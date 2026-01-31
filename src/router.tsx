@@ -1,14 +1,11 @@
 import { Hono } from "hono";
 import { StatusCodes } from "http-status-codes";
-import {
-	ContactEdit,
-	ContactList,
-	ContactNew,
-	ContactView,
-	NotFound,
-} from "./views";
-import "./middleware/flash";
 import * as Contact from "./model";
+import { ContactEdit } from "./views/pages/contact-edit";
+import { ContactList } from "./views/pages/contact-list";
+import { ContactNew } from "./views/pages/contact-new";
+import { ContactView } from "./views/pages/contact-view";
+import { NotFound } from "./views/pages/not-found";
 
 const router = new Hono();
 

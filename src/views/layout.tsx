@@ -1,10 +1,10 @@
 import { html } from "hono/html";
+import type { PropsWithChildren } from "hono/jsx";
 
-type LayoutProps = {
+type LayoutProps = PropsWithChildren<{
 	title?: string;
 	flash?: string;
-	children?: unknown;
-};
+}>;
 
 export const Layout = ({ children, title, flash }: LayoutProps) => html`
 	<!doctype html>

@@ -1,6 +1,6 @@
 import type { Hono } from "hono";
 import { StatusCodes } from "http-status-codes";
-import { NotFound } from "../views";
+import { NotFound } from "@/views/pages/not-found";
 
 /**
  * Sets up the 404 Not Found handler for the application.
