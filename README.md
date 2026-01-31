@@ -4,12 +4,13 @@ A simple contacts app built with Bun and Hono.
 
 ## Branches
 
-| Branch | Description |
-|--------|-------------|
-| **[`main`](https://github.com/yamcodes/contact.app/tree/main)** (You're here!) | **Web 1.0 — full page reloads, classic form submissions** |
-| [`htmx`](https://github.com/yamcodes/contact.app/tree/htmx) | HTMX — partial updates, no full page reloads |
+| Branch | Summary | Description |
+|--------|---------|-------------|
+| **[`main`](https://github.com/yamcodes/contact.app/tree/main)** (You're here!) | **Web 1.0** | **Hono JSX templating, full page reloads** |
+| [`htmx`](https://github.com/yamcodes/contact.app/tree/htmx) | HTMX | Partial updates, no full page reloads |
+| [`eta`](https://github.com/yamcodes/contact.app/tree/eta) | Eta | Classic string-based templating |
 
-There are also temporary feature branches but these are the 2 stable branches.
+There are also temporary feature branches but these are the 3 stable branches.
 
 ## Overview
 
