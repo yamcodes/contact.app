@@ -81,6 +81,8 @@ open http://localhost:3000
 └── package.json
 ```
 
+> **Barrel files:** Allowed only in leaf directories that export multiple related modules and are consumed from the outside. Never barrel directories that contain subdirectories or sit in the middle of the dependency graph.
+
 ## Tech stack
 
 | Layer | Technology |
