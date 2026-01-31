@@ -1,15 +1,15 @@
-# HTMX Migration Plan
+# htmx Migration Plan
 
-Step-by-step guide from Web 1.0 to full HTMX implementation.
+Step-by-step guide from Web 1.0 to full htmx implementation.
 
 ## Prerequisites
 
-- HTMX is loaded via `<script src="/htmx.js">` in layout
-- `c.get("htmx")` detects HTMX requests (returns `true` when `HX-Request` header present)
+- htmx is loaded via `<script src="/htmx.js">` in layout
+- `c.get("htmx")` detects htmx requests (returns `true` when `HX-Request` header present)
 
 ---
 
-## Step 1: First HTMX Interaction
+## Step 1: First htmx Interaction
 
 **Goal:** Replace the "Add New Contact" link with a button that loads the form without full page reload.
 
@@ -31,7 +31,7 @@ Step-by-step guide from Web 1.0 to full HTMX implementation.
 
 ## Step 2: Return Partial HTML
 
-**Goal:** When HTMX requests `/contacts/new`, return just the form (no layout).
+**Goal:** When htmx requests `/contacts/new`, return just the form (no layout).
 
 **File:** `router.ts`
 
@@ -66,7 +66,7 @@ router.get("/contacts/new", (c) => {
 >
 ```
 
-**File:** `router.ts` - Return just `<tr>` rows for HTMX requests.
+**File:** `router.ts` - Return just `<tr>` rows for htmx requests.
 
 **Concepts:** `hx-trigger`, debouncing, targeting specific elements
 
@@ -92,7 +92,7 @@ router.get("/contacts/new", (c) => {
 
 ## Step 5: Delete with Confirmation
 
-**Goal:** Delete contact with HTMX, remove row from DOM.
+**Goal:** Delete contact with htmx, remove row from DOM.
 
 **File:** `views/contact.eta` or inline:
 
@@ -107,13 +107,13 @@ router.get("/contacts/new", (c) => {
 </button>
 ```
 
-**File:** `router.ts` - Return empty string on delete for HTMX.
+**File:** `router.ts` - Return empty string on delete for htmx.
 
 **Concepts:** `hx-delete`, `hx-confirm`, removing elements
 
 ---
 
-## Step 6: Form Submission via HTMX
+## Step 6: Form Submission via htmx
 
 **Goal:** Submit new/edit forms without full reload.
 
@@ -133,7 +133,7 @@ router.get("/contacts/new", (c) => {
 
 ## Step 7: (Optional) Migrate to JSX
 
-Once comfortable with HTMX patterns, migrate templates to Hono JSX for type safety and component reuse.
+Once comfortable with htmx patterns, migrate templates to Hono JSX for type safety and component reuse.
 
 1. Create `middleware/jsx.tsx` with `jsxRenderer`
 2. Convert `.eta` files to `.tsx` components
@@ -143,6 +143,6 @@ Once comfortable with HTMX patterns, migrate templates to Hono JSX for type safe
 
 ## Reference
 
-- [HTMX Documentation](https://htmx.org/docs/)
-- [HTMX Examples](https://htmx.org/examples/)
+- [htmx Documentation](https://htmx.org/docs/)
+- [htmx Examples](https://htmx.org/examples/)
 - Fetch docs: `https://htmx.org/llms.txt`

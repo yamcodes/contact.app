@@ -13,7 +13,7 @@ declare module "hono" {
 /**
  * Middleware to add `c.render()` for JSX components
  * - Wrap content in <Layout /> for regular requests
- * - Return bare content for HTMX requests
+ * - Return bare content for htmx requests
  */
 export function jsx(): MiddlewareHandler {
 	return jsxRenderer(

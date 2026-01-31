@@ -7,11 +7,11 @@ declare module "hono" {
 }
 
 /**
- * Middleware that detects HTMX requests and sets a context variable.
+ * Middleware that detects htmx requests and sets a context variable.
  *
  * Sets `c.get("htmx")` to `true` when the request includes the `HX-Request` header,
- * indicating it was made by HTMX. This enables conditional rendering logic—
- * returning partial HTML for HTMX requests vs full page layouts for regular requests.
+ * indicating it was made by htmx. This enables conditional rendering logic—
+ * returning partial HTML for htmx requests vs full page layouts for regular requests.
  *
  * @example
  * ```ts

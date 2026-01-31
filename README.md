@@ -16,19 +16,19 @@ There are also temporary feature branches but these are the 3 stable branches.
 
 This app follows the architecture from [Hypermedia Systems](https://hypermedia.systems/part/htmx/) — same ideas, different tech stack (Bun + Hono instead of Python + Flask).
 
-This branch (`htmx`) uses [HTMX](https://htmx.org) for a modern hypermedia-driven experience:
+This branch (`htmx`) uses [htmx](https://htmx.org) for a modern hypermedia-driven experience:
 - HTML is rendered on the server
-- HTMX handles partial page updates via AJAX
+- htmx handles partial page updates via AJAX
 - No full page reloads for most interactions
-- No client-side JavaScript framework (just HTMX attributes)
+- No client-side JavaScript framework (just htmx attributes)
 
 Think "Web 1.0 upgraded" — server-rendered HTML with seamless partial updates.
 
-> HTMX extends HTML with attributes like `hx-get`, `hx-post`, and `hx-swap` to enable dynamic behavior without writing JavaScript.
+> htmx extends HTML with attributes like `hx-get`, `hx-post`, and `hx-swap` to enable dynamic behavior without writing JavaScript.
 
 ## Features
 
-- List and search contacts (with instant filtering via HTMX)
+- List and search contacts (with instant filtering via htmx)
 - Add, edit, and delete contact details
 - Flash messages (cookie-based)
 - Server-rendered HTML partials
@@ -70,7 +70,7 @@ open http://localhost:3000
 │   ├── middleware/
 │   │   ├── jsx.tsx         # JSX renderer (c.render)
 │   │   ├── flash.ts        # Flash messages
-│   │   └── htmx.ts         # HTMX request detection
+│   │   └── htmx.ts         # htmx request detection
 │   ├── utils/
 │   │   ├── hmr.ts          # Hot reload setup
 │   │   └── static.ts       # Static file serving
@@ -91,7 +91,7 @@ open http://localhost:3000
 | Runtime | [Bun](https://bun.sh) |
 | Web Framework | [Hono](https://hono.dev) |
 | Templating | [Hono JSX](https://hono.dev/docs/guides/jsx) |
-| Hypermedia | [HTMX](https://htmx.org) |
+| Hypermedia | [htmx](https://htmx.org) |
 | Styling | CSS |
 | Linting | [Biome](https://biomejs.dev) |
 
@@ -106,7 +106,7 @@ router.get("/contacts", (c) => {
 });
 ```
 
-Templates use HTMX attributes for dynamic behavior:
+Templates use htmx attributes for dynamic behavior:
 
 ```html
 <form hx-post="/contacts/new" hx-target="#contact-list" hx-swap="beforeend">
@@ -115,7 +115,7 @@ Templates use HTMX attributes for dynamic behavior:
 </form>
 ```
 
-The server returns HTML partials that HTMX swaps into the page — no JSON, no client-side rendering.
+The server returns HTML partials that htmx swaps into the page — no JSON, no client-side rendering.
 
 ## License
 
