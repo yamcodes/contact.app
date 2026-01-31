@@ -1,5 +1,5 @@
 import { v7 as uuid } from "uuid";
-import { generateSlug } from "./utils/slug";
+import { generateSlug } from "./utils";
 
 export interface Contact {
 	id: string;
