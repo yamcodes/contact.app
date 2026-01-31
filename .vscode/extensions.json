@@ -2,6 +2,7 @@
 	"recommendations": [
 		"shadowtime2000.eta-vscode",
 		"oven.bun-vscode",
-		"biomejs.biome"
+		"biomejs.biome",
+		"otovo-oss.htmx-tags"
 	]
 }
