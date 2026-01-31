@@ -24,7 +24,7 @@ This branch (`main`) uses classic Web 1.0 patterns:
 
 Think "Web 1.0" — pure server-rendered HTML with traditional request/response cycles.
 
-> Check out the [`htmx`](https://github.com/yamcodes/contact.app/tree/htmx) branch for the HTMX-enhanced version with partial page updates.
+> Check out the [`htmx`](https://github.com/yamcodes/contact.app/tree/htmx) branch for the htmx-enhanced version with partial page updates.
 
 ## Features
 
