@@ -6,9 +6,9 @@ A simple contacts app built with Bun, Hono, and Eta.
 
 | Branch | Summary | Description |
 |--------|---------|-------------|
-| [`main`](https://github.com/yamcodes/contact.app/tree/main) | Web 1.0 via JSX | Hono JSX templating, full page reloads |
-| [`htmx`](https://github.com/yamcodes/contact.app/tree/htmx) | htmx | Partial updates, no full page reloads |
-| **[`eta`](https://github.com/yamcodes/contact.app/tree/eta)** (You're here!) | **Web 1.0 via Eta** | **Classic string-based templating** |
+| [`main`](https://github.com/yamcodes/contact.app/tree/main) | Hypermedia-Driven Application | Server-rendered HTML using links and forms. Full page reloads. Pure hypermedia, no client-side JS. |
+| [`htmx`](https://github.com/yamcodes/contact.app/tree/htmx) | HDA + HTMX | Same architecture as `main`, enhanced with HTMX for partial updates without JSON or client-side state. |
+| **[`eta`](https://github.com/yamcodes/contact.app/tree/eta)** (You're here!) | **HDA (Eta templates)** | **Same architecture as `main`, using string-based Eta templates instead of JSX.** |
 
 There are also temporary feature branches but these are the 3 stable branches.
 
