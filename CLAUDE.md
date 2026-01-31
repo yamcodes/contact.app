@@ -59,4 +59,4 @@ When helping with Hono questions, fetch https://hono.dev/llms-small.txt for refe
 When helping with templating questions, fetch https://eta.js.org/llms.txt for reference.
 
 ## HTMX Documentation
-When helping with HTMX questions, fetch https://htmx.org/llms.txt for reference.
+When helping with HTMX questions, https://htmx.org should be used for reference. The entierty of the docs can be found here: https://raw.githubusercontent.com/bigskysoftware/htmx/refs/heads/master/www/content/docs.md
