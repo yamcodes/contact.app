@@ -41,5 +41,5 @@
 <% } %>
 
 <p>
-  <a href="/contacts/new">Add New Contact</a>
+  <button hx-get="/contacts/new" hx-push-url="true" hx-target="main" hx-swap="innerHTML">Add New Contact</button>
 </p>

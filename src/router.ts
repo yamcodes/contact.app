@@ -14,6 +14,9 @@ router.get("/contacts", (c) => {
 });
 
 router.get("/contacts/new", (c) => {
+	if (c.req.header("HX-Request")) {
+		return c.render("partials/new-content");
+	}
 	return c.render("new");
 });
 
