@@ -84,7 +84,7 @@ router.post("/contacts/:slug/edit", async (c) => {
 	return c.redirect(`/contacts/${contact.slug}`);
 });
 
-router.post("/contacts/:slug/delete", (c) => {
+router.delete("/contacts/:slug", (c) => {
 	const slug = c.req.param("slug");
 	const contact = slug && Contact.findBySlug(slug);
 	if (!contact) {
@@ -97,7 +97,9 @@ router.post("/contacts/:slug/delete", (c) => {
 	Contact.remove(slug);
 
 	c.flash(`Contact "${contact.first} ${contact.last}" deleted successfully.`);
-	return c.redirect("/contacts");
+	// We use "See Other" to ensure redirection with GET method, not DELETE.
+	// This is to stay true to a Delete/Redirect/Get pattern.
+	return c.redirect("/contacts", StatusCodes.SEE_OTHER);
 });
 
 export const setupRouter = (app: Hono) => {

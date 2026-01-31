@@ -14,14 +14,14 @@ export const ContactEdit = ({ contact }: ContactEditProps) => (
 			<button type="submit">Save</button>
 		</form>
 
-		<form action={`/contacts/${contact.slug}/delete`} method="post">
-			<button
-				type="submit"
-				onclick="return confirm('Are you sure you want to delete this contact?');"
-			>
-				Delete Contact
-			</button>
-		</form>
+		<button
+			type="submit"
+			hx-delete={`/contacts/${contact.slug}`}
+			hx-confirm="Are you sure you want to delete this contact?"
+			hx-target="body"
+		>
+			Delete Contact
+		</button>
 
 		<p>
 			<a href="/contacts/">Back</a>
