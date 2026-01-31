@@ -88,4 +88,8 @@ router.post("/contacts/:slug/delete", (c) => {
 	return c.redirect("/contacts");
 });
 
+export const setupRouter = (app: Hono) => {
+	app.route("/", router);
+};
+
 export default router;
