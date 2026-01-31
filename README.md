@@ -13,6 +13,8 @@ There are also temporary feature branches but these are the 2 stable branches.
 
 ## Overview
 
+This app follows the architecture from [Hypermedia Systems](https://hypermedia.systems/part/htmx/) — same ideas, different tech stack (Bun + Hono instead of Python + Flask).
+
 This branch (`htmx`) uses [HTMX](https://htmx.org) for a modern hypermedia-driven experience:
 - HTML is rendered on the server
 - HTMX handles partial page updates via AJAX
