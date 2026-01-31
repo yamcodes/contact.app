@@ -1,7 +1,8 @@
 import { Hono } from "hono";
 import "./middleware/flash"; // Extends Context with c.flash()
 import { StatusCodes } from "http-status-codes";
-import * as Contact from "./model";
+import * as Contact from "@/model";
+import { ContactList } from "@/views/pages/contact-list";
 
 const router = new Hono();
 
@@ -9,10 +10,11 @@ router.get("/", (c) => c.redirect("/contacts"));
 
 router.get("/contacts", (c) => {
 	const search = c.req.query("q");
-	const contactList = search ? Contact.search(search) : Contact.all();
-	return c.render("index", { contacts: contactList, search });
+	const contacts = search ? Contact.search(search) : Contact.all();
+	return c.render(<ContactList contacts={contacts} search={search} />, {
+		title: "Contacts",
+	});
 });
-
 router.get("/contacts/new", (c) => {
 	return c.render("new");
 });
