@@ -15,7 +15,7 @@ app.use(trimTrailingSlash());
 setupStatic(app);
 app.use(flash());
 app.use(htmx());
-app.get("*", jsx());
+app.use(jsx());
 setupHmr(app);
 
 app.route("/", router);

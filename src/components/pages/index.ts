@@ -1,5 +1,5 @@
-export { ContactEdit } from "./ContactEdit";
-export { ContactList } from "./ContactList";
-export { ContactNew } from "./ContactNew";
-export { ContactView } from "./ContactView";
-export { NotFound } from "./NotFound";
+export { ContactEdit } from "./contact-edit";
+export { ContactList } from "./contact-list";
+export { ContactNew } from "./contact-new";
+export { ContactView } from "./contact-view";
+export { NotFound } from "./not-found";

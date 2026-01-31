@@ -1,3 +1,3 @@
-export { ContactFields } from "./ContactFields";
-export { Layout } from "./Layout";
+export { ContactFields } from "./contact-fields";
+export { Layout } from "./layout";
 export * from "./pages";
