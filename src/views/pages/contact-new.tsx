@@ -1,4 +1,4 @@
-import { ContactFields } from "../partials";
+import { ContactFields } from "../partials/contact-fields";
 
 export const ContactNew = () => (
 	<>

@@ -2,7 +2,9 @@ import { Hono } from "hono";
 import { trimTrailingSlash } from "hono/trailing-slash";
 import { flash, htmx, jsx } from "./middleware";
 import { setupRouter } from "./router";
-import { setupHmr, setupNotFound, setupStatic } from "./utils";
+import { setupHmr } from "./utils/hmr";
+import { setupNotFound } from "./utils/not-found";
+import { setupStatic } from "./utils/static";
 
 const app = new Hono();
 
