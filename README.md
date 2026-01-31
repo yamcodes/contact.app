@@ -1,6 +1,6 @@
 # contact.app
 
-A simple contacts app built with Bun, Hono, and Eta.
+A simple contacts app built with Bun and Hono.
 
 ## Branches
 
@@ -67,14 +67,15 @@ open http://localhost:3000
 │   ├── router.ts           # Route definitions
 │   ├── model.ts            # Contact data model
 │   ├── middleware/
-│   │   └── eta.ts          # Template rendering (c.render)
+│   │   ├── jsx.tsx         # JSX renderer (c.render)
+│   │   ├── flash.ts        # Flash messages
+│   │   └── htmx.ts         # HTMX request detection
 │   ├── utils/
-│   │   ├── setup-hmr.ts    # Hot reload setup
-│   │   └── setup-static.ts # Static file serving
+│   │   ├── hmr.ts          # Hot reload setup
+│   │   └── static.ts       # Static file serving
 │   └── views/
-│       ├── layout.eta      # Base layout
-│       ├── index.eta       # Contact list page
-│       └── new.eta         # New contact form
+│       ├── layout.tsx      # Base layout
+│       └── pages/          # Page components
 ├── static/
 │   └── styles.css          # Stylesheet
 └── package.json
@@ -86,19 +87,19 @@ open http://localhost:3000
 |-------|------------|
 | Runtime | [Bun](https://bun.sh) |
 | Web Framework | [Hono](https://hono.dev) |
-| Templating | [Eta](https://eta.js.org) |
+| Templating | [Hono JSX](https://hono.dev/docs/guides/jsx) |
 | Hypermedia | [HTMX](https://htmx.org) |
 | Styling | CSS |
 | Linting | [Biome](https://biomejs.dev) |
 
 ## How it works
 
-Routes are defined with Hono and render Eta templates directly:
+Routes are defined with Hono and render JSX components:
 
-```ts
+```tsx
 router.get("/contacts", (c) => {
   const contacts = Contact.all();
-  return c.render("index", { contacts });
+  return c.render(<ContactList contacts={contacts} />);
 });
 ```
 
