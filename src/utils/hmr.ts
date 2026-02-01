@@ -66,7 +66,7 @@ const reloadScript = `
   es.onmessage = (e) => {
     if (e.data === 'reload') location.reload();
   };
-  es.onerror = () => setTimeout(() => location.reload(), 1000);
+  // EventSource auto-reconnects on error, no need to reload the page
 })();
 </script>
 `;
