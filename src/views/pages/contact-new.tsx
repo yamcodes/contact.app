@@ -1,11 +1,16 @@
+import type { ContactData } from "@/model";
 import { ContactFields } from "../partials/contact-fields";
 
-export const ContactNew = () => (
+type ContactNewProps = {
+	contact?: ContactData;
+};
+
+export const ContactNew = ({ contact }: ContactNewProps) => (
 	<>
 		<h2>New Contact</h2>
 
 		<form action="/contacts" method="post">
-			<ContactFields />
+			<ContactFields contact={contact} />
 			<button type="submit">Save</button>
 		</form>
 

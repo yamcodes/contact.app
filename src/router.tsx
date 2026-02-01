@@ -27,14 +27,18 @@ router.get("/contacts/new", (c) => {
 
 router.post("/contacts", async (c) => {
 	const form = await c.req.formData();
-	const first = form.get("first")?.toString() || "";
-	const last = form.get("last")?.toString() || "";
-	const email = form.get("email")?.toString() || "";
-	const phone = form.get("phone")?.toString() || "";
+	const contact = {
+		first: form.get("first")?.toString() || "",
+		last: form.get("last")?.toString() || "",
+		email: form.get("email")?.toString() || "",
+		phone: form.get("phone")?.toString() || "",
+	};
 
-	Contact.add({ first, last, email, phone });
+	if (!Contact.add(contact)) {
+		return c.render(<ContactNew contact={contact} />, { title: "New Contact" });
+	}
 
-	c.flash(`Contact "${first} ${last}" created successfully.`);
+	c.flash(`Contact "${contact.first} ${contact.last}" created successfully.`);
 	return c.redirect("/contacts");
 });
 
@@ -59,13 +63,15 @@ router.get("/contacts/:slug/edit", (c) => {
 			title: "Not Found",
 		});
 	}
-	return c.render(<ContactEdit contact={contact} />, { title: "Edit Contact" });
+	return c.render(<ContactEdit contact={contact} slug={slug} />, {
+		title: "Edit Contact",
+	});
 });
 
 router.post("/contacts/:slug/edit", async (c) => {
 	const slug = c.req.param("slug");
-	const contact = slug && Contact.findBySlug(slug);
-	if (!contact) {
+	const existing = slug && Contact.findBySlug(slug);
+	if (!existing) {
 		c.status(StatusCodes.NOT_FOUND);
 		return c.render(<NotFound message="Contact not found." />, {
 			title: "Not Found",
@@ -73,15 +79,23 @@ router.post("/contacts/:slug/edit", async (c) => {
 	}
 
 	const form = await c.req.formData();
-	const first = form.get("first")?.toString() || "";
-	const last = form.get("last")?.toString() || "";
-	const email = form.get("email")?.toString() || "";
-	const phone = form.get("phone")?.toString() || "";
+	const contact = {
+		first: form.get("first")?.toString() || "",
+		last: form.get("last")?.toString() || "",
+		email: form.get("email")?.toString() || "",
+		phone: form.get("phone")?.toString() || "",
+	};
 
-	Contact.update(slug, { first, last, email, phone });
+	if (!Contact.update(slug, contact)) {
+		return c.render(<ContactEdit contact={contact} slug={slug} />, {
+			title: "Edit Contact",
+		});
+	}
 
-	c.flash(`Contact "${first} ${last}" updated successfully.`);
-	return c.redirect(`/contacts/${contact.slug}`);
+	c.flash(`Contact "${contact.first} ${contact.last}" updated successfully.`);
+	// Re-fetch to get the potentially updated slug
+	const updated = Contact.findBySlug(slug) || Contact.find(existing.id);
+	return c.redirect(`/contacts/${updated?.slug || slug}`);
 });
 
 router.delete("/contacts/:slug", (c) => {
