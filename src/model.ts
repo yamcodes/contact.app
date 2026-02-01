@@ -11,7 +11,54 @@ export interface Contact {
 }
 
 type NewContact = Omit<Contact, "id" | "slug">;
-type ContactUpdates = Partial<NewContact>;
+
+export type ContactErrors = {
+	email?: string;
+	first?: string;
+	last?: string;
+	phone?: string;
+};
+
+/** Contact data with mutable errors for form handling */
+export type ContactData = Partial<NewContact> & { errors?: ContactErrors };
+
+/**
+ * Validate contact data, returns errors object (empty if valid)
+ */
+function validate(data: Partial<NewContact>, excludeSlug?: string): ContactErrors {
+	const errors: ContactErrors = {};
+
+	if (!data.email?.trim()) {
+		errors.email = "Email is required";
+	} else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
+		errors.email = "Invalid email format";
+	} else {
+		// Check for duplicate email
+		const existing = contacts.find(
+			(c) => c.email === data.email && c.slug !== excludeSlug,
+		);
+		if (existing) {
+			errors.email = "Email already in use";
+		}
+	}
+
+	if (!data.first?.trim()) {
+		errors.first = "First name is required";
+	}
+
+	if (!data.last?.trim()) {
+		errors.last = "Last name is required";
+	}
+
+	return errors;
+}
+
+/**
+ * Check if errors object has any errors
+ */
+function hasErrors(errors: ContactErrors): boolean {
+	return Object.keys(errors).length > 0;
+}
 
 /**
  * Generate a unique slug for a contact, appending UUID suffix if needed
@@ -94,26 +141,44 @@ export function findBySlug(slug: string): Contact | undefined {
 }
 
 /**
- * Add a new contact
+ * Add a new contact. Returns true on success, false if validation fails.
+ * On failure, populates contact.errors with validation messages.
  */
-export function add(contact: NewContact): Contact {
+export function add(contact: ContactData): boolean {
+	const errors = validate(contact);
+	if (hasErrors(errors)) {
+		contact.errors = errors;
+		return false;
+	}
+
 	const id = uuid();
-	const slug = generateUniqueSlug(contact.first, contact.last, id);
+	const slug = generateUniqueSlug(contact.first!, contact.last!, id);
 	const newContact: Contact = {
 		id,
 		slug,
-		...contact,
+		first: contact.first!,
+		last: contact.last!,
+		email: contact.email!,
+		phone: contact.phone,
 	};
 	contacts.push(newContact);
-	return newContact;
+	return true;
 }
 
-export function update(
-	slug: string,
-	updates: ContactUpdates,
-): Contact | undefined {
+/**
+ * Update a contact. Returns true on success, false if validation fails.
+ * On failure, populates updates.errors with validation messages.
+ * Returns undefined if contact not found.
+ */
+export function update(slug: string, updates: ContactData): boolean | undefined {
 	const contact = findBySlug(slug);
 	if (!contact) return undefined;
+
+	const errors = validate(updates, slug);
+	if (hasErrors(errors)) {
+		updates.errors = errors;
+		return false;
+	}
 
 	if (updates.first !== undefined) contact.first = updates.first;
 	if (updates.last !== undefined) contact.last = updates.last;
@@ -125,7 +190,7 @@ export function update(
 		contact.slug = generateUniqueSlug(contact.first, contact.last, contact.id);
 	}
 
-	return contact;
+	return true;
 }
 
 export function remove(slug: string): boolean {
