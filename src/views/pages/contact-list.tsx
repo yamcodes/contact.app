@@ -3,9 +3,10 @@ import type { Contact } from "@/model";
 type ContactListProps = {
 	contacts: Contact[];
 	search?: string;
+	page: number;
 };
 
-export const ContactList = ({ contacts, search }: ContactListProps) => (
+export const ContactList = ({ contacts, search, page }: ContactListProps) => (
 	<>
 		<form action="/contacts" method="get">
 			<label for="search">Search contacts:</label>
@@ -49,6 +50,18 @@ export const ContactList = ({ contacts, search }: ContactListProps) => (
 		) : (
 			<p>No contacts found.</p>
 		)}
+
+		<div>
+			<span style="float: right">
+				{page > 1 && (
+					<a href={`/contacts?page=${page - 1}`}>Previous</a>
+				)}{" "}
+				{contacts.length === 10 && (
+					<a href={`/contacts?page=${page + 1}`}>Next</a>
+				)}
+			</span>
+		</div>
+
 		<p>
 			<a href="/contacts/new">Add New Contact</a>
 		</p>

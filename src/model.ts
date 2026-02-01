@@ -1,3 +1,4 @@
+import { faker } from "@faker-js/faker";
 import { v7 as uuid } from "uuid";
 import { generateSlug } from "./utils/slug";
 
@@ -75,39 +76,22 @@ function generateUniqueSlug(first: string, last: string, id: string): string {
 }
 
 // In-memory store (replace with database later)
-const contacts: Contact[] = [
-	{
-		id: uuid(),
-		slug: "alice-smith",
-		first: "Alice",
-		last: "Smith",
-		email: "alice@example.com",
-		phone: "555-1234",
-	},
-	{
-		id: uuid(),
-		slug: "bob-johnson",
-		first: "Bob",
-		last: "Johnson",
-		email: "bob@example.com",
-		phone: "555-5678",
-	},
-	{
-		id: uuid(),
-		slug: "carol-williams",
-		first: "Carol",
-		last: "Williams",
-		email: "carol@example.com",
-	},
-	{
-		id: uuid(),
-		slug: "david-brown",
-		first: "David",
-		last: "Brown",
-		email: "david@example.com",
-		phone: "555-9999",
-	},
-];
+faker.seed(42); // Consistent data across restarts
+const contacts: Contact[] = Array.from({ length: 15 }, () => {
+	const first = faker.person.firstName();
+	const last = faker.person.lastName();
+	const id = uuid();
+	return {
+		id,
+		slug: generateSlug(`${first} ${last}`) || `contact-${id.slice(-4)}`,
+		first,
+		last,
+		email: faker.internet.email({ firstName: first, lastName: last }),
+		phone: faker.helpers.maybe(() => faker.phone.number(), {
+			probability: 0.7,
+		}),
+	};
+});
 
 /**
  * Get all contacts
@@ -154,16 +138,15 @@ export function add(contact: ContactData): boolean {
 		return false;
 	}
 
+	// After validation, these fields are guaranteed to exist
+	const { first, last, email, phone } = contact as Required<
+		Pick<ContactData, "first" | "last" | "email">
+	> &
+		ContactData;
+
 	const id = uuid();
-	const slug = generateUniqueSlug(contact.first!, contact.last!, id);
-	const newContact: Contact = {
-		id,
-		slug,
-		first: contact.first!,
-		last: contact.last!,
-		email: contact.email!,
-		phone: contact.phone,
-	};
+	const slug = generateUniqueSlug(first, last, id);
+	const newContact: Contact = { id, slug, first, last, email, phone };
 	contacts.push(newContact);
 	return true;
 }
@@ -173,7 +156,10 @@ export function add(contact: ContactData): boolean {
  * On failure, populates updates.errors with validation messages.
  * Returns undefined if contact not found.
  */
-export function update(slug: string, updates: ContactData): boolean | undefined {
+export function update(
+	slug: string,
+	updates: ContactData,
+): boolean | undefined {
 	const contact = findBySlug(slug);
 	if (!contact) return undefined;
 
