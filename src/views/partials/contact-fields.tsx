@@ -22,10 +22,11 @@ export const ContactFields = ({ contact }: ContactFieldsProps) => (
 				type="email"
 				placeholder="Email"
 				value={contact?.email || ""}
+				hx-get={`/contacts/${contact?.slug}/email`}
+				hx-target="next .error"
+				hx-trigger="change, keyup delay:200ms changed"
 			/>
-			{contact?.errors?.email && (
-				<span class="error">{contact.errors.email}</span>
-			)}
+			<span class="error">{contact?.errors?.email}</span>
 		</p>
 		<p>
 			<label for="first">First Name</label>

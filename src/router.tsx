@@ -116,6 +116,20 @@ router.delete("/contacts/:slug", (c) => {
 	return c.redirect("/contacts", StatusCodes.SEE_OTHER);
 });
 
+/**
+ * htmx routes
+ */
+
+/**
+ * Validate email (htmx inline validation)
+ */
+router.get("/contacts/:slug/email", (c) => {
+	const slug = c.req.param("slug");
+	const email = c.req.query("email") || "";
+	const errors = Contact.validate({ email }, slug);
+	return c.text(errors.email || "");
+});
+
 export const setupRouter = (app: Hono) => {
 	app.route("/", router);
 };
