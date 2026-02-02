@@ -8,20 +8,26 @@ import {
 	ContactView,
 	NotFound,
 } from "./views/pages";
+import { ContactListRows } from "./views/partials";
 
 const router = new Hono();
 
 router.get("/", (c) => c.redirect("/contacts"));
 
-router.get("/contacts", (c) => {
-	const search = c.req.query("q");
-	const page = Math.max(1, Number.parseInt(c.req.query("page") || "1", 10));
+router.get("/contacts", ({ req, render, html }) => {
+	const search = req.query("q") || "";
+	const page = Math.max(1, Number.parseInt(req.query("page") || "1", 10));
 	const pageSize = 10;
 
 	const allContacts = search ? Contact.search(search) : Contact.all();
 	const contacts = allContacts.slice((page - 1) * pageSize, page * pageSize);
 
-	return c.render(
+	// htmx request - return just the rows
+	if (req.header("HX-Request")) {
+		return html(<ContactListRows contacts={contacts} page={page} />);
+	}
+
+	return render(
 		<ContactList contacts={contacts} search={search} page={page} />,
 		{ title: "Contacts" },
 	);

@@ -1,20 +1,37 @@
 import type { Contact } from "@/model";
+import { ContactListRows } from "../partials/contact-list-rows";
 
+/**
+ * Props for ContactList component
+ */
 type ContactListProps = {
+	/**
+	 * Contacts to display
+	 */
 	contacts: Contact[];
+	/**
+	 * Current search term, if any
+	 */
 	search?: string;
+	/**
+	 * Current page number for pagination
+	 */
 	page: number;
 };
 
 export const ContactList = ({ contacts, search, page }: ContactListProps) => (
 	<>
-		<form action="/contacts" method="get">
-			<label for="search">Search contacts:</label>
+		<form action="/contacts" method="get" class="tool-bar">
+			<label for="search">Search Term</label>
 			<input
+				id="search"
 				type="search"
 				name="q"
 				placeholder="Search contacts..."
 				value={search || ""}
+				hx-get="/contacts"
+				hx-trigger="search, keyup changed delay:200ms"
+				hx-target="tbody"
 			/>
 			<button type="submit">Search</button>
 		</form>
@@ -33,33 +50,7 @@ export const ContactList = ({ contacts, search, page }: ContactListProps) => (
 					</tr>
 				</thead>
 				<tbody>
-					{contacts.map((contact) => (
-						<tr key={contact.id}>
-							<td>{contact.first}</td>
-							<td>{contact.last}</td>
-							<td>{contact.phone || ""}</td>
-							<td>{contact.email}</td>
-							<td>
-								<a href={`/contacts/${contact.slug}/edit`}>Edit</a>
-								<a href={`/contacts/${contact.slug}`}>View</a>
-							</td>
-						</tr>
-					))}
-					{contacts.length >= 10 && (
-						<tr>
-							<td colspan={5} style="text-align: center">
-								<span
-									hx-target="closest tr"
-									hx-trigger="revealed"
-									hx-swap="outerHTML"
-									hx-select="tbody > tr"
-									hx-get={`/contacts?page=${page + 1}`}
-								>
-									Loading More...
-								</span>
-							</td>
-						</tr>
-					)}
+					<ContactListRows contacts={contacts} page={page} />
 				</tbody>
 			</table>
 		) : (
