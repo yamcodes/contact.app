@@ -45,6 +45,21 @@ export const ContactList = ({ contacts, search, page }: ContactListProps) => (
 							</td>
 						</tr>
 					))}
+					{contacts.length === 10 && (
+						<tr>
+							<td colspan={5} style="text-align: center">
+								<button
+									type="button"
+									hx-target="closest tr"
+									hx-swap="outerHTML"
+									hx-select="tbody > tr"
+									hx-get={`/contacts?page=${page + 1}`}
+								>
+									Load More
+								</button>
+							</td>
+						</tr>
+					)}
 				</tbody>
 			</table>
 		) : (
@@ -53,9 +68,7 @@ export const ContactList = ({ contacts, search, page }: ContactListProps) => (
 
 		<div>
 			<span style="float: right">
-				{page > 1 && (
-					<a href={`/contacts?page=${page - 1}`}>Previous</a>
-				)}{" "}
+				{page > 1 && <a href={`/contacts?page=${page - 1}`}>Previous</a>}{" "}
 				{contacts.length === 10 && (
 					<a href={`/contacts?page=${page + 1}`}>Next</a>
 				)}
