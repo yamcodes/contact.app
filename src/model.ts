@@ -1,5 +1,6 @@
 import { faker } from "@faker-js/faker";
 import { v7 as uuid } from "uuid";
+import { MOCK_CONTACTS_SEED, MOCK_CONTACTS_SIZE } from "./constants";
 import { generateSlug } from "./utils/slug";
 
 export interface Contact {
@@ -76,8 +77,8 @@ function generateUniqueSlug(first: string, last: string, id: string): string {
 }
 
 // In-memory store (replace with database later)
-faker.seed(42); // Consistent data across restarts
-const contacts: Contact[] = Array.from({ length: 15 }, () => {
+faker.seed(MOCK_CONTACTS_SEED);
+const contacts: Contact[] = Array.from({ length: MOCK_CONTACTS_SIZE }, () => {
 	const first = faker.person.firstName();
 	const last = faker.person.lastName();
 	const id = uuid();

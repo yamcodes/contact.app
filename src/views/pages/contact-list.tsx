@@ -45,18 +45,18 @@ export const ContactList = ({ contacts, search, page }: ContactListProps) => (
 							</td>
 						</tr>
 					))}
-					{contacts.length === 10 && (
+					{contacts.length >= 10 && (
 						<tr>
 							<td colspan={5} style="text-align: center">
-								<button
-									type="button"
+								<span
 									hx-target="closest tr"
+									hx-trigger="revealed"
 									hx-swap="outerHTML"
 									hx-select="tbody > tr"
 									hx-get={`/contacts?page=${page + 1}`}
 								>
-									Load More
-								</button>
+									Loading More...
+								</span>
 							</td>
 						</tr>
 					)}
@@ -65,16 +65,6 @@ export const ContactList = ({ contacts, search, page }: ContactListProps) => (
 		) : (
 			<p>No contacts found.</p>
 		)}
-
-		<div>
-			<span style="float: right">
-				{page > 1 && <a href={`/contacts?page=${page - 1}`}>Previous</a>}{" "}
-				{contacts.length === 10 && (
-					<a href={`/contacts?page=${page + 1}`}>Next</a>
-				)}
-			</span>
-		</div>
-
 		<p>
 			<a href="/contacts/new">Add New Contact</a>
 		</p>
