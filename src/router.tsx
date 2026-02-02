@@ -14,20 +14,20 @@ const router = new Hono();
 
 router.get("/", (c) => c.redirect("/contacts"));
 
-router.get("/contacts", ({ req, render, html }) => {
-	const search = req.query("q") || "";
-	const page = Math.max(1, Number.parseInt(req.query("page") || "1", 10));
+router.get("/contacts", (c) => {
+	const search = c.req.query("q") || "";
+	const page = Math.max(1, Number.parseInt(c.req.query("page") || "1", 10));
 	const pageSize = 10;
 
 	const allContacts = search ? Contact.search(search) : Contact.all();
 	const contacts = allContacts.slice((page - 1) * pageSize, page * pageSize);
 
-	// htmx request - return just the rows
-	if (req.header("HX-Request")) {
-		return html(<ContactListRows contacts={contacts} page={page} />);
+	// Handle GET initiated by htmx search
+	if (c.req.header("HX-Trigger") === "search") {
+		return c.html(<ContactListRows contacts={contacts} page={page} />);
 	}
 
-	return render(
+	return c.render(
 		<ContactList contacts={contacts} search={search} page={page} />,
 		{ title: "Contacts" },
 	);
