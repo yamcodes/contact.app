@@ -1,6 +1,6 @@
 import { Hono } from "hono";
 import { trimTrailingSlash } from "hono/trailing-slash";
-import { flash, htmx, jsx } from "./middleware";
+import { flash, htmx, jsx, latency } from "./middleware";
 import { setupRouter } from "./router";
 import { setupHmr } from "./utils/hmr";
 import { setupNotFound } from "./utils/not-found";
@@ -10,6 +10,7 @@ const app = new Hono();
 
 app.use(trimTrailingSlash());
 setupStatic(app);
+app.use(latency());
 app.use(flash());
 app.use(htmx());
 app.use(jsx());

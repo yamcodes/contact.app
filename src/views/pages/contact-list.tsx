@@ -32,6 +32,14 @@ export const ContactList = ({ contacts, search, page }: ContactListProps) => (
 				hx-get="/contacts"
 				hx-trigger="search, keyup changed delay:200ms"
 				hx-target="tbody"
+				hx-push-url="true"
+				hx-indicator="#spinner"
+			/>
+			<img
+				id="spinner"
+				class="htmx-indicator"
+				src="/static/img/spinning-circles.svg"
+				alt="Request In Flight..."
 			/>
 			<button type="submit">Search</button>
 		</form>
