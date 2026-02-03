@@ -21,6 +21,7 @@ export const ContactListRows = ({
 				<td>
 					<a href={`/contacts/${contact.slug}/edit`}>Edit</a>
 					<a href={`/contacts/${contact.slug}`}>View</a>
+					<a href
 				</td>
 			</tr>
 		))}

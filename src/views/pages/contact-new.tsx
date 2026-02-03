@@ -1,5 +1,5 @@
 import type { ContactData } from "@/model";
-import { ContactFields } from "../partials/contact-fields";
+import { ContactFields } from "../components";
 
 type ContactNewProps = {
 	contact?: ContactData;
