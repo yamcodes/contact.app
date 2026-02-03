@@ -141,12 +141,7 @@ router.delete("/contacts", (c) => {
 	}
 
 	c.flash("Deleted Contacts!");
-
-	const page = 1;
-	const contacts = Contact.list(page);
-	return c.render(<ContactList contacts={contacts} page={page} />, {
-		title: "Contacts",
-	});
+	return c.redirect("/contacts", StatusCodes.SEE_OTHER);
 });
 
 /**

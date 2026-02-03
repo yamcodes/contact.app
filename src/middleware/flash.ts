@@ -33,24 +33,19 @@ export function flash(): MiddlewareHandler {
 		const message = getCookie(c, FLASH_COOKIE);
 		if (message) {
 			c.set("flash", decodeURIComponent(message));
-			deleteCookie(c, FLASH_COOKIE);
+			deleteCookie(c, FLASH_COOKIE, { path: "/" });
 		}
 
 		// Add c.flash() method to context
 		c.flash = (msg: string) => {
-			c.set("flash", msg);
 			c.set("flash_new", msg);
 		};
 
 		await next();
 
-		// If flash was set during request and response is a redirect,
-		// write it to cookie so the next request can read it.
-		// For non-redirects, the flash is already on the context and
-		// was rendered directly in the response.
+		// If flash was set during request, write it to cookie for next request
 		const newFlash = c.get("flash_new");
-		const isRedirect = c.res.status >= 300 && c.res.status < 400;
-		if (newFlash && isRedirect) {
+		if (newFlash) {
 			setCookie(c, FLASH_COOKIE, encodeURIComponent(newFlash), {
 				path: "/",
 				maxAge: 60, // 1 minute max
