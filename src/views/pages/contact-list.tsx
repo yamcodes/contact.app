@@ -1,4 +1,5 @@
 import type { Contact } from "@/model";
+import { Spinner } from "../components";
 import { ContactListRows } from "../partials/contact-list-rows";
 
 /**
@@ -44,12 +45,7 @@ export const ContactList = ({
 				hx-push-url="true"
 				hx-indicator="#spinner"
 			/>
-			<img
-				id="spinner"
-				class="htmx-indicator"
-				src="/static/img/spinning-circles.svg"
-				alt="Request In Flight..."
-			/>
+			<Spinner />
 			<button type="submit">Search</button>
 		</form>
 
@@ -78,7 +74,9 @@ export const ContactList = ({
 			{count !== undefined ? (
 				<span>({count} total Contacts)</span>
 			) : (
-				<span hx-get="/contacts/count" hx-trigger="load"></span>
+				<span hx-get="/contacts/count" hx-trigger="revealed">
+					<Spinner />
+				</span>
 			)}
 		</p>
 	</>
