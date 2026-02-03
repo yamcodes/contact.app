@@ -237,6 +237,12 @@ td:last-child a {
 	color: #525252;
 }
 
+/* htmx swap-out animation */
+tr.htmx-swapping {
+	opacity: 0;
+	transition: opacity 1s ease-out;
+}
+
 /* Results text */
 p {
 	color: #737373;

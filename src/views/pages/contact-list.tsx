@@ -56,20 +56,31 @@ export const ContactList = ({
 		{search && <p>Results for "{search}":</p>}
 
 		{contacts.length > 0 ? (
-			<table>
-				<thead>
-					<tr>
-						<th>First</th>
-						<th>Last</th>
-						<th>Phone</th>
-						<th>Email</th>
-						<th />
-					</tr>
-				</thead>
-				<tbody>
-					<ContactListRows contacts={contacts} page={page} />
-				</tbody>
-			</table>
+			<form>
+				<table>
+					<thead>
+						<tr>
+							<th></th>
+							<th>First</th>
+							<th>Last</th>
+							<th>Phone</th>
+							<th>Email</th>
+							<th />
+						</tr>
+					</thead>
+					<tbody>
+						<ContactListRows contacts={contacts} page={page} />
+					</tbody>
+				</table>
+				<button
+					type="button"
+					hx-delete="/contacts"
+					hx-confirm="Are you sure you want to delete these contacts?"
+					hx-target="body"
+				>
+					Delete Selected Contacts
+				</button>
+			</form>
 		) : (
 			<p>No contacts found.</p>
 		)}

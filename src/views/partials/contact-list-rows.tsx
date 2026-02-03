@@ -9,6 +9,13 @@ export const ContactListRows = ({ contacts, page }: ContactListRowsProps) => (
 	<>
 		{contacts.map((contact) => (
 			<tr key={contact.id}>
+				<td>
+					<input
+						type="checkbox"
+						name="selected_contact_ids"
+						value={contact.id}
+					/>
+				</td>
 				<td>{contact.first}</td>
 				<td>{contact.last}</td>
 				<td>{contact.phone || ""}</td>
@@ -20,7 +27,7 @@ export const ContactListRows = ({ contacts, page }: ContactListRowsProps) => (
 						// biome-ignore lint/a11y/useValidAnchor: As shown in the book
 						href="#"
 						hx-delete={`/contacts/${contact.slug}`}
-						hx-swap="outerHTML"
+						hx-swap="outerHTML swap:1s"
 						hx-confirm="Are you sure you want to delete this contact?"
 						hx-target="closest tr"
 					>
