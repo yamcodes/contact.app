@@ -3,14 +3,9 @@ import type { Contact } from "@/model";
 type ContactListRowsProps = {
 	contacts: Contact[];
 	page: number;
-	count?: number;
 };
 
-export const ContactListRows = ({
-	contacts,
-	page,
-	count,
-}: ContactListRowsProps) => (
+export const ContactListRows = ({ contacts, page }: ContactListRowsProps) => (
 	<>
 		{contacts.map((contact) => (
 			<tr key={contact.id}>
