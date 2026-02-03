@@ -1,6 +1,10 @@
 import { faker } from "@faker-js/faker";
 import { v7 as uuid } from "uuid";
-import { MOCK_CONTACTS_SEED, MOCK_CONTACTS_SIZE } from "./constants";
+import {
+	MOCK_CONTACTS_SEED,
+	MOCK_CONTACTS_SIZE,
+	PAGE_SIZE,
+} from "./constants";
 import { generateSlug } from "./utils/slug";
 
 export interface Contact {
@@ -112,6 +116,18 @@ export function search(query: string): Contact[] {
 			c.last.toLowerCase().includes(q) ||
 			c.email.toLowerCase().includes(q),
 	);
+}
+
+/**
+ * Get a paginated list of contacts, optionally filtered by search query.
+ */
+export function list(
+	page: number,
+	query?: string,
+): Contact[] {
+	const all = query ? search(query) : contacts;
+	const start = (page - 1) * PAGE_SIZE;
+	return all.slice(start, start + PAGE_SIZE);
 }
 
 /**

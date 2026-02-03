@@ -15,12 +15,9 @@ const router = new Hono();
 router.get("/", (c) => c.redirect("/contacts"));
 
 router.get("/contacts", (c) => {
-	const search = c.req.query("q") || "";
+	const search = c.req.query("q");
 	const page = Math.max(1, Number.parseInt(c.req.query("page") || "1", 10));
-	const pageSize = 10;
-
-	const allContacts = search ? Contact.search(search) : Contact.all();
-	const contacts = allContacts.slice((page - 1) * pageSize, page * pageSize);
+	const contacts = Contact.list(page, search);
 
 	// Handle GET initiated by htmx search
 	if (c.req.header("HX-Trigger") === "search") {
