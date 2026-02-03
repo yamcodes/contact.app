@@ -1,10 +1,6 @@
 import { faker } from "@faker-js/faker";
 import { v7 as uuid } from "uuid";
-import {
-	MOCK_CONTACTS_SEED,
-	MOCK_CONTACTS_SIZE,
-	PAGE_SIZE,
-} from "./constants";
+import { MOCK_CONTACTS_SEED, MOCK_CONTACTS_SIZE, PAGE_SIZE } from "./constants";
 import { generateSlug } from "./utils/slug";
 
 export interface Contact {
@@ -121,10 +117,7 @@ export function search(query: string): Contact[] {
 /**
  * Get a paginated list of contacts, optionally filtered by search query.
  */
-export function list(
-	page: number,
-	query?: string,
-): Contact[] {
+export function list(page: number, query?: string): Contact[] {
 	const all = query ? search(query) : contacts;
 	const start = (page - 1) * PAGE_SIZE;
 	return all.slice(start, start + PAGE_SIZE);
@@ -204,4 +197,10 @@ export function remove(slug: string): boolean {
 	if (index === -1) return false;
 	contacts.splice(index, 1);
 	return true;
+}
+
+export async function count(): Promise<number> {
+	// Wait 5 seconds to simulate a slow database query
+	await new Promise((resolve) => setTimeout(resolve, 5000));
+	return contacts.length;
 }

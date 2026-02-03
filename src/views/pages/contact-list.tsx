@@ -17,9 +17,18 @@ type ContactListProps = {
 	 * Current page number for pagination
 	 */
 	page: number;
+	/**
+	 * Total count of contacts, if available
+	 */
+	count?: number;
 };
 
-export const ContactList = ({ contacts, search, page }: ContactListProps) => (
+export const ContactList = ({
+	contacts,
+	search,
+	page,
+	count,
+}: ContactListProps) => (
 	<>
 		<form action="/contacts" method="get" class="tool-bar">
 			<label for="search">Search Term</label>
@@ -66,6 +75,11 @@ export const ContactList = ({ contacts, search, page }: ContactListProps) => (
 		)}
 		<p>
 			<a href="/contacts/new">Add New Contact</a>
+			{count !== undefined ? (
+				<span>({count} total Contacts)</span>
+			) : (
+				<span hx-get="/contacts/count" hx-trigger="load"></span>
+			)}
 		</p>
 	</>
 );

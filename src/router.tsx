@@ -30,6 +30,11 @@ router.get("/contacts", (c) => {
 	);
 });
 
+router.get("/contacts/count", async (c) => {
+	const count = await Contact.count();
+	return c.text(`(${count} total Contacts)`);
+});
+
 router.get("/contacts/new", (c) => {
 	return c.render(<ContactNew />, { title: "New Contact" });
 });
