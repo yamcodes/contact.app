@@ -12,8 +12,8 @@ export const ContactListRows = ({ contacts, page }: ContactListRowsProps) => (
 				<td>
 					<input
 						type="checkbox"
-						name="selected_contact_ids"
-						value={contact.id}
+						name="selected_contact_slugs"
+						value={contact.slug}
 					/>
 				</td>
 				<td>{contact.first}</td>

@@ -133,6 +133,22 @@ router.delete("/contacts/:slug", (c) => {
 	return c.text("");
 });
 
+router.delete("/contacts", (c) => {
+	const slugs = c.req.queries("selected_contact_slugs") || [];
+
+	for (const slug of slugs) {
+		Contact.remove(slug);
+	}
+
+	c.flash("Deleted Contacts!");
+
+	const page = 1;
+	const contacts = Contact.list(page);
+	return c.render(<ContactList contacts={contacts} page={page} />, {
+		title: "Contacts",
+	});
+});
+
 /**
  * htmx routes
  */
