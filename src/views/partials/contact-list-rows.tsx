@@ -1,4 +1,5 @@
 import type { Contact } from "@/model";
+import { DeleteContactButton } from "../components";
 
 type ContactListRowsProps = {
 	contacts: Contact[];
@@ -21,7 +22,7 @@ export const ContactListRows = ({
 				<td>
 					<a href={`/contacts/${contact.slug}/edit`}>Edit</a>
 					<a href={`/contacts/${contact.slug}`}>View</a>
-					<a href
+					<DeleteContactButton slug={contact.slug} as="a" />
 				</td>
 			</tr>
 		))}
