@@ -1,5 +1,4 @@
 import type { Contact } from "@/model";
-import { DeleteContactButton } from "../components";
 
 type ContactListRowsProps = {
 	contacts: Contact[];
@@ -22,7 +21,15 @@ export const ContactListRows = ({
 				<td>
 					<a href={`/contacts/${contact.slug}/edit`}>Edit</a>
 					<a href={`/contacts/${contact.slug}`}>View</a>
-					<DeleteContactButton slug={contact.slug} as="a" />
+					<a
+						// biome-ignore lint/a11y/useValidAnchor: As shown in the book
+						href="#"
+						hx-delete={`/contacts/${contact.slug}`}
+						hx-confirm="Are you sure you want to delete this contact?"
+						hx-target="body"
+					>
+						Delete
+					</a>
 				</td>
 			</tr>
 		))}

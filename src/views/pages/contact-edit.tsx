@@ -1,5 +1,5 @@
 import type { ContactData } from "@/model";
-import { ContactFields, DeleteContactButton } from "../components";
+import { ContactFields } from "../components";
 
 type ContactEditProps = {
 	contact: ContactData;
@@ -15,7 +15,14 @@ export const ContactEdit = ({ contact, slug }: ContactEditProps) => (
 			<button type="submit">Save</button>
 		</form>
 
-		<DeleteContactButton slug={slug} />
+		<button
+			hx-delete={`/contacts/${slug}`}
+			hx-confirm="Are you sure you want to delete this contact?"
+			hx-target="body"
+			hx-push-url="true"
+		>
+			Delete Contact
+		</button>
 
 		<p>
 			<a href="/contacts/">Back</a>
