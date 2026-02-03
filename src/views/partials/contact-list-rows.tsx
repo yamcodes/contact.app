@@ -20,8 +20,9 @@ export const ContactListRows = ({ contacts, page }: ContactListRowsProps) => (
 						// biome-ignore lint/a11y/useValidAnchor: As shown in the book
 						href="#"
 						hx-delete={`/contacts/${contact.slug}`}
+						hx-swap="outerHTML"
 						hx-confirm="Are you sure you want to delete this contact?"
-						hx-target="body"
+						hx-target="closest tr"
 					>
 						Delete
 					</a>

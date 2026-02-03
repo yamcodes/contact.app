@@ -16,6 +16,8 @@ export const ContactEdit = ({ contact, slug }: ContactEditProps) => (
 		</form>
 
 		<button
+			id="delete-btn"
+			type="button"
 			hx-delete={`/contacts/${slug}`}
 			hx-confirm="Are you sure you want to delete this contact?"
 			hx-target="body"

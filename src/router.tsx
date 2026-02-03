@@ -124,10 +124,13 @@ router.delete("/contacts/:slug", (c) => {
 
 	Contact.remove(slug);
 
-	c.flash(`Contact "${contact.first} ${contact.last}" deleted successfully.`);
-	// We use "See Other" to ensure redirection with GET method, not DELETE.
-	// This is to stay true to a Delete/Redirect/Get pattern.
-	return c.redirect("/contacts", StatusCodes.SEE_OTHER);
+	if (c.req.header("HX-Trigger") === "delete-btn") {
+		c.flash(`Contact "${contact.first} ${contact.last}" deleted successfully.`);
+		// We use "See Other" to ensure redirection with GET method, not DELETE.
+		// This is to stay true to a Delete/Redirect/Get pattern.
+		return c.redirect("/contacts", StatusCodes.SEE_OTHER);
+	}
+	return c.text("");
 });
 
 /**
