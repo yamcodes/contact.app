@@ -158,6 +158,16 @@ router.get("/contacts/:slug/email", (c) => {
 	return c.text(errors.email || "");
 });
 
+/**
+ * Archiving enpdoint
+ */
+router.post("/contacts/archive", (c) => {
+	// In a real app, you'd generate the archive and return it here.
+	// For this demo, we'll just return a success message.
+	c.flash("Contact archive generated successfully!");
+	return c.redirect("/contacts");
+});
+
 export const setupRouter = (app: Hono) => {
 	app.route("/", router);
 };

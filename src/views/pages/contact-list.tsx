@@ -1,5 +1,6 @@
 import type { Contact } from "@/model";
 import { ContactListRows } from "../partials/contact-list-rows";
+import { ArchiveUi } from "../partials/archive-ui";
 
 /**
  * Props for ContactList component
@@ -30,6 +31,7 @@ export const ContactList = ({
 	count,
 }: ContactListProps) => (
 	<>
+		<ArchiveUi />
 		<form action="/contacts" method="get" class="tool-bar">
 			<label for="search">Search Term</label>
 			<input

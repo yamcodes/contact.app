@@ -23,6 +23,12 @@
 						"filenameCases": ["kebab-case"]
 					}
 				}
+			},
+			"a11y": {
+				"useButtonType": "warn" // the book doesn't use it
+			},
+			"correctness": {
+				"noEmptyPattern": "warn"
 			}
 		}
 	},
