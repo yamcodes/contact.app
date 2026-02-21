@@ -1,4 +1,4 @@
-import type { Contact } from "@/model";
+import type { Contact } from "@/models/contact";
 
 type ContactViewProps = {
 	contact: Contact;

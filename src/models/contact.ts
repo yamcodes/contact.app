@@ -1,7 +1,11 @@
 import { faker } from "@faker-js/faker";
 import { v7 as uuid } from "uuid";
-import { MOCK_CONTACTS_SEED, MOCK_CONTACTS_SIZE, PAGE_SIZE } from "./constants";
-import { generateSlug } from "./utils/slug";
+import {
+	MOCK_CONTACTS_SEED,
+	MOCK_CONTACTS_SIZE,
+	PAGE_SIZE,
+} from "../constants";
+import { generateSlug } from "../utils/slug";
 
 export interface Contact {
 	id: string;

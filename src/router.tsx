@@ -1,6 +1,6 @@
 import { Hono } from "hono";
 import { StatusCodes } from "http-status-codes";
-import * as Contact from "./model";
+import * as Contact from "./models/contact";
 import {
 	ContactEdit,
 	ContactList,

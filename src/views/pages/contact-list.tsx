@@ -1,6 +1,6 @@
-import type { Contact } from "@/model";
-import { ContactListRows } from "../partials/contact-list-rows";
+import type { Contact } from "@/models/contact";
 import { ArchiveUi } from "../partials/archive-ui";
+import { ContactListRows } from "../partials/contact-list-rows";
 
 /**
  * Props for ContactList component
