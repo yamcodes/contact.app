@@ -165,7 +165,6 @@ router.get("/contacts/:slug/email", (c) => {
  */
 router.post("/contacts/archive", (c) => {
 	Archiver.run();
-	c.flash("Contact archive generated successfully!");
 	return c.html(<ArchiveUi />);
 });
 
