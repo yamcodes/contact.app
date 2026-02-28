@@ -1,6 +1,7 @@
 import { Hono } from "hono";
 import { StatusCodes } from "http-status-codes";
 import * as Contact from "./models/contact";
+import * as Archiver from "./models/archiver";
 import {
 	ContactEdit,
 	ContactList,
@@ -9,6 +10,7 @@ import {
 	NotFound,
 } from "./views/pages";
 import { ContactListRows } from "./views/partials";
+import { ArchiveUi } from "./views/partials/archive-ui";
 
 const router = new Hono();
 
@@ -162,10 +164,9 @@ router.get("/contacts/:slug/email", (c) => {
  * Archiving enpdoint
  */
 router.post("/contacts/archive", (c) => {
-	// In a real app, you'd generate the archive and return it here.
-	// For this demo, we'll just return a success message.
+	Archiver.run();
 	c.flash("Contact archive generated successfully!");
-	return c.redirect("/contacts");
+	return c.render(<ArchiveUi />);
 });
 
 export const setupRouter = (app: Hono) => {

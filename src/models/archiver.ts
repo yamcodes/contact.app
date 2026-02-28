@@ -36,6 +36,6 @@ export function run(): void {
 	if (archiveStatus === "Waiting") {
 		archiveStatus = "Running";
 		archiveProgress = 0;
-		runImpl(); // fire-and-forget, mirrors Python's Thread
+		void runImpl(); // fire-and-forget, mirrors Python's Thread
 	}
 }
