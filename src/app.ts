@@ -18,4 +18,8 @@ setupHmr(app);
 setupRouter(app);
 setupNotFound(app);
 
-export default app;
+const portArgIndex = process.argv.indexOf("--port");
+const port =
+	portArgIndex !== -1 ? Number(process.argv[portArgIndex + 1]) : 3000;
+
+export default { port, fetch: app.fetch };
