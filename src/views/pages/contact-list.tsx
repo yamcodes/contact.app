@@ -1,4 +1,5 @@
 import type { Contact } from "@/models/contact";
+import type { ArchiveStatus } from "@/models/archiver";
 import { ArchiveUi } from "../partials/archive-ui";
 import { ContactListRows } from "../partials/contact-list-rows";
 
@@ -22,6 +23,10 @@ type ContactListProps = {
 	 * Total count of contacts, if available
 	 */
 	count?: number;
+	/**
+	 * Current archive status
+	 */
+	archiveStatus: ArchiveStatus;
 };
 
 export const ContactList = ({
@@ -29,9 +34,10 @@ export const ContactList = ({
 	search,
 	page,
 	count,
+	archiveStatus,
 }: ContactListProps) => (
 	<>
-		<ArchiveUi />
+		<ArchiveUi status={archiveStatus} />
 		<form action="/contacts" method="get" class="tool-bar">
 			<label for="search">Search Term</label>
 			<input

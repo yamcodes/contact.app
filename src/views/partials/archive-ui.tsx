@@ -1,11 +1,18 @@
-type ArchiveUiProps = {};
+import type { ArchiveStatus } from "@/models/archiver";
 
-export const ArchiveUi = ({}: ArchiveUiProps) => {
+type ArchiveUiProps = {
+	status: ArchiveStatus;
+};
+
+export const ArchiveUi = ({ status }: ArchiveUiProps) => {
 	return (
 		<div id="archive-ui" hx-target="this" hx-swap="outerHTML">
-			<button type="button" hx-post="/contacts/archive">
-				Download Contact Archive
-			</button>
+			{status === "Waiting" && (
+				<button type="button" hx-post="/contacts/archive">
+					Download Contact Archive
+				</button>
+			)}
+			{status === "Running" && <div>Running...</div>}
 		</div>
 	);
 };

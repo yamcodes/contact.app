@@ -27,7 +27,7 @@ router.get("/contacts", (c) => {
 	}
 
 	return c.render(
-		<ContactList contacts={contacts} search={search} page={page} />,
+		<ContactList contacts={contacts} search={search} page={page} archiveStatus={Archiver.status()} />,
 		{ title: "Contacts" },
 	);
 });
@@ -165,7 +165,7 @@ router.get("/contacts/:slug/email", (c) => {
  */
 router.post("/contacts/archive", (c) => {
 	Archiver.run();
-	return c.html(<ArchiveUi />);
+	return c.html(<ArchiveUi status={Archiver.status()} />);
 });
 
 export const setupRouter = (app: Hono) => {
