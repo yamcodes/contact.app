@@ -1,7 +1,7 @@
 import { Hono } from "hono";
 import { StatusCodes } from "http-status-codes";
-import * as Contact from "./models/contact";
 import * as Archiver from "./models/archiver";
+import * as Contact from "./models/contact";
 import {
 	ContactEdit,
 	ContactList,
@@ -27,7 +27,13 @@ router.get("/contacts", (c) => {
 	}
 
 	return c.render(
-		<ContactList contacts={contacts} search={search} page={page} archiveStatus={Archiver.status()} />,
+		<ContactList
+			contacts={contacts}
+			search={search}
+			page={page}
+			archiveStatus={Archiver.status()}
+			archiveProgress={Archiver.progress()}
+		/>,
 		{ title: "Contacts" },
 	);
 });
@@ -163,9 +169,17 @@ router.get("/contacts/:slug/email", (c) => {
 /**
  * Archiving endpoint
  */
+router.get("/contacts/archive", (c) => {
+	return c.html(
+		<ArchiveUi status={Archiver.status()} progress={Archiver.progress()} />,
+	);
+});
+
 router.post("/contacts/archive", (c) => {
 	Archiver.run();
-	return c.html(<ArchiveUi status={Archiver.status()} />);
+	return c.html(
+		<ArchiveUi status={Archiver.status()} progress={Archiver.progress()} />,
+	);
 });
 
 export const setupRouter = (app: Hono) => {
