@@ -161,7 +161,7 @@ router.get("/contacts/:slug/email", (c) => {
 });
 
 /**
- * Archiving enpdoint
+ * Archiving endpoint
  */
 router.post("/contacts/archive", (c) => {
 	Archiver.run();
