@@ -1,3 +1,5 @@
+import { all as allContacts } from "./contact";
+
 export type ArchiveStatus = "Waiting" | "Running" | "Complete";
 
 // Module-level state (mirrors Python's static class vars)
@@ -29,6 +31,7 @@ async function runImpl(): Promise<void> {
 	}
 	await new Promise((resolve) => setTimeout(resolve, 1000));
 	if (archiveStatus !== "Running") return;
+	await Bun.write(archiveFile(), JSON.stringify(allContacts(), null, 2));
 	archiveStatus = "Complete";
 }
 
