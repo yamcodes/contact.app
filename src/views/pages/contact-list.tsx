@@ -4,7 +4,7 @@ import { ContactListRows } from "@/views/partials";
 import { ArchiveUi } from "../partials/archive-ui";
 
 /**
- * Props for ContactList component
+ * Props for the ContactList component
  */
 type ContactListProps = {
 	/**

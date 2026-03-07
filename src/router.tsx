@@ -64,6 +64,22 @@ router.post("/contacts", async (c) => {
 	return c.redirect("/contacts");
 });
 
+/**
+ * Archiving endpoint
+ */
+router.get("/contacts/archive", (c) => {
+	return c.html(
+		<ArchiveUi status={Archiver.status()} progress={Archiver.progress()} />,
+	);
+});
+
+router.post("/contacts/archive", (c) => {
+	Archiver.run();
+	return c.html(
+		<ArchiveUi status={Archiver.status()} progress={Archiver.progress()} />,
+	);
+});
+
 router.get("/contacts/:slug", (c) => {
 	const slug = c.req.param("slug");
 	const contact = slug && Contact.findBySlug(slug);
@@ -164,22 +180,6 @@ router.get("/contacts/:slug/email", (c) => {
 	const email = c.req.query("email") || "";
 	const errors = Contact.validate({ email }, slug);
 	return c.text(errors.email || "");
-});
-
-/**
- * Archiving endpoint
- */
-router.get("/contacts/archive", (c) => {
-	return c.html(
-		<ArchiveUi status={Archiver.status()} progress={Archiver.progress()} />,
-	);
-});
-
-router.post("/contacts/archive", (c) => {
-	Archiver.run();
-	return c.html(
-		<ArchiveUi status={Archiver.status()} progress={Archiver.progress()} />,
-	);
 });
 
 export const setupRouter = (app: Hono) => {
