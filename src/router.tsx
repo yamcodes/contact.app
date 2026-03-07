@@ -182,6 +182,11 @@ router.get("/contacts/:slug/email", (c) => {
 	return c.text(errors.email || "");
 });
 
+router.get("/contacts/archive/file", async (c) => {
+	const file = Archiver.archiveFile();
+	return c.sendFile(file, "archive.json", { asAttachment: true });
+});
+
 export const setupRouter = (app: Hono) => {
 	app.route("/", router);
 };

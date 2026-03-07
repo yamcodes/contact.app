@@ -1,6 +1,6 @@
 import { Hono } from "hono";
 import { trimTrailingSlash } from "hono/trailing-slash";
-import { flash, htmx, jsx, latency } from "./middleware";
+import { flash, htmx, jsx, latency, sendFile } from "./middleware";
 import { setupRouter } from "./router";
 import { setupHmr } from "./utils/hmr";
 import { setupNotFound } from "./utils/not-found";
@@ -14,6 +14,7 @@ app.use(latency());
 app.use(flash());
 app.use(htmx());
 app.use(jsx());
+app.use(sendFile());
 setupHmr(app);
 setupRouter(app);
 setupNotFound(app);
