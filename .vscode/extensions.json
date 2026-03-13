@@ -1,9 +1,8 @@
 {
 	"recommendations": [
-		"oven.bun-vscode",
-		"biomejs.biome",
-		"hono.hono",
-		"bierner.lit-html",
+		"vscjava.vscode-java-pack",
+		"vmware.vscode-boot-dev-pack",
+		"vscjava.vscode-lombok",
 		"craigrbroughton.htmx-attributes"
 	]
 }

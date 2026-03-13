@@ -2,19 +2,26 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
-			"type": "bun",
-			"script": "bun dev",
-			"problemMatcher": ["$tsgo-watch"],
-			"label": "bun: dev",
-			"detail": "bun run --hot src/app.ts - package.json",
+			"label": "Run",
+			"type": "shell",
+			"command": "./mvnw spring-boot:run",
+			"group": "build",
+			"problemMatcher": "$java",
 			"isBackground": true
 		},
 		{
-			"type": "bun",
-			"script": "bun fix",
-			"problemMatcher": ["$tsc"],
-			"label": "bun: fix",
-			"detail": "bun run biome check --write - package.json"
+			"label": "Test",
+			"type": "shell",
+			"command": "./mvnw test",
+			"group": "test",
+			"problemMatcher": "$java"
+		},
+		{
+			"label": "Package",
+			"type": "shell",
+			"command": "./mvnw package",
+			"group": "build",
+			"problemMatcher": "$java"
 		}
 	]
 }
