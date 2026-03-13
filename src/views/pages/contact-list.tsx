@@ -1,8 +1,10 @@
-import type { Contact } from "@/model";
-import { ContactListRows } from "../partials/contact-list-rows";
+import type { ArchiveStatus } from "@/models/archiver";
+import type { Contact } from "@/models/contact";
+import { ContactListRows } from "@/views/partials";
+import { ArchiveUi } from "../partials/archive-ui";
 
 /**
- * Props for ContactList component
+ * Props for the ContactList component
  */
 type ContactListProps = {
 	/**
@@ -21,6 +23,14 @@ type ContactListProps = {
 	 * Total count of contacts, if available
 	 */
 	count?: number;
+	/**
+	 * Current archive status
+	 */
+	archiveStatus: ArchiveStatus;
+	/**
+	 * Current archive progress (0–1)
+	 */
+	archiveProgress: number;
 };
 
 export const ContactList = ({
@@ -28,8 +38,11 @@ export const ContactList = ({
 	search,
 	page,
 	count,
+	archiveStatus,
+	archiveProgress,
 }: ContactListProps) => (
 	<>
+		<ArchiveUi status={archiveStatus} progress={archiveProgress} />
 		<form action="/contacts" method="get" class="tool-bar">
 			<label for="search">Search Term</label>
 			<input

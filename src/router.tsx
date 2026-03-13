@@ -1,6 +1,7 @@
 import { Hono } from "hono";
 import { StatusCodes } from "http-status-codes";
-import * as Contact from "./model";
+import * as Archiver from "./models/archiver";
+import * as Contact from "./models/contact";
 import {
 	ContactEdit,
 	ContactList,
@@ -9,6 +10,7 @@ import {
 	NotFound,
 } from "./views/pages";
 import { ContactListRows } from "./views/partials";
+import { ArchiveUi } from "./views/partials/archive-ui";
 
 const router = new Hono();
 
@@ -25,7 +27,13 @@ router.get("/contacts", (c) => {
 	}
 
 	return c.render(
-		<ContactList contacts={contacts} search={search} page={page} />,
+		<ContactList
+			contacts={contacts}
+			search={search}
+			page={page}
+			archiveStatus={Archiver.status()}
+			archiveProgress={Archiver.progress()}
+		/>,
 		{ title: "Contacts" },
 	);
 });
@@ -54,6 +62,42 @@ router.post("/contacts", async (c) => {
 
 	c.flash(`Contact "${contact.first} ${contact.last}" created successfully.`);
 	return c.redirect("/contacts");
+});
+
+/**
+ * Archiving endpoint
+ */
+router.get("/contacts/archive", (c) => {
+	return c.html(
+		<ArchiveUi status={Archiver.status()} progress={Archiver.progress()} />,
+	);
+});
+
+router.post("/contacts/archive", (c) => {
+	Archiver.run();
+	const currentStatus = Archiver.status();
+	c.status(
+		currentStatus === "Running" ? StatusCodes.ACCEPTED : StatusCodes.CONFLICT,
+	);
+	return c.html(
+		<ArchiveUi status={currentStatus} progress={Archiver.progress()} />,
+	);
+});
+
+router.delete("/contacts/archive", (c) => {
+	Archiver.reset();
+	return c.html(
+		<ArchiveUi status={Archiver.status()} progress={Archiver.progress()} />,
+	);
+});
+
+router.get("/contacts/archive/file", async (c) => {
+	if (Archiver.status() !== "Complete") {
+		return c.notFound();
+	}
+	return c.sendFile(Archiver.archiveFile(), "archive.json", {
+		asAttachment: true,
+	});
 });
 
 router.get("/contacts/:slug", (c) => {
@@ -126,7 +170,7 @@ router.delete("/contacts/:slug", (c) => {
 
 	if (c.req.header("HX-Trigger") === "delete-btn") {
 		c.flash(`Contact "${contact.first} ${contact.last}" deleted successfully.`);
-		// We use "See Other" to ensure redirection with GET method, not DELETE.
+		// We use "See Other" to ensure redirection with the GET method, not DELETE.
 		// This is to stay true to a Delete/Redirect/Get pattern.
 		return c.redirect("/contacts", StatusCodes.SEE_OTHER);
 	}

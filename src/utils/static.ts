@@ -10,4 +10,8 @@ export function setupStatic(app: Hono) {
 		"/htmx.js",
 		serveStatic({ path: "./node_modules/htmx.org/dist/htmx.min.js" }),
 	);
+	app.get(
+		"/alpine.js",
+		serveStatic({ path: "./node_modules/alpinejs/dist/cdn.min.js" }),
+	);
 }

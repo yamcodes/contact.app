@@ -1,4 +1,4 @@
-import type { ContactData } from "@/model";
+import type { ContactData } from "@/models/contact";
 import { ContactFields } from "../partials";
 
 type ContactNewProps = {
