@@ -80,6 +80,13 @@ router.post("/contacts/archive", (c) => {
 	);
 });
 
+router.delete("/contacts/archive", async (c) => {
+	Archiver.reset();
+	return c.html(
+		<ArchiveUi status={Archiver.status()} progress={Archiver.progress()} />,
+	);
+});
+
 router.get("/contacts/:slug", (c) => {
 	const slug = c.req.param("slug");
 	const contact = slug && Contact.findBySlug(slug);
@@ -150,7 +157,7 @@ router.delete("/contacts/:slug", (c) => {
 
 	if (c.req.header("HX-Trigger") === "delete-btn") {
 		c.flash(`Contact "${contact.first} ${contact.last}" deleted successfully.`);
-		// We use "See Other" to ensure redirection with GET method, not DELETE.
+		// We use "See Other" to ensure redirection with the GET method, not DELETE.
 		// This is to stay true to a Delete/Redirect/Get pattern.
 		return c.redirect("/contacts", StatusCodes.SEE_OTHER);
 	}
@@ -186,7 +193,9 @@ router.get("/contacts/archive/file", async (c) => {
 	if (Archiver.status() !== "Complete") {
 		return c.notFound();
 	}
-	return c.sendFile(Archiver.archiveFile(), "archive.json", { asAttachment: true });
+	return c.sendFile(Archiver.archiveFile(), "archive.json", {
+		asAttachment: true,
+	});
 });
 
 export const setupRouter = (app: Hono) => {

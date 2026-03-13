@@ -29,9 +29,14 @@ export const ArchiveUi = ({ status, progress }: ArchiveUiProps) => {
 				</div>
 			)}
 			{status === "Complete" && (
-				<a href="/contacts/archive/file" hx-boost="false">
-					Archive Ready! Click here to download. &downarrow;
-				</a>
+				<>
+					<a href="/contacts/archive/file" hx-boost="false">
+						Archive Ready! Click here to download. &downarrow;
+					</a>
+					<button type="button" hx-delete="/contacts/archive">
+						Clear Download
+					</button>
+				</>
 			)}
 		</div>
 	);
