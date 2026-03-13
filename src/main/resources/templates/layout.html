@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <!--/*@thymesVar id="title" type="java.lang.String"*/-->
+    <title th:text="${title} ?: 'Contacts'">Contacts</title>
+    <link href="/static/styles.css" rel="stylesheet"/>
+</head>
+<body>
+<main>
+    <header>
+        <h1>
+            <a href="/">
+                <span class="all-caps">contact.app</span>
+            </a>
+            <span class="sub-title">A Demo Contacts Application</span>
+        </h1>
+    </header>
+    <!--/*@thymesVar id="flash" type="java.lang.String"*/-->
+    <div class="flash" th:if="${flash}" th:text="${flash}"></div>
+    <div th:replace="~{::content}"></div>
+</main>
+</body>
+</html>
