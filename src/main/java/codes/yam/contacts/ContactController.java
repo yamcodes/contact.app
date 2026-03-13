@@ -1,8 +1,10 @@
 package codes.yam.contacts;
 
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -28,5 +30,12 @@ public class ContactController {
     if (contact == null) throw new ContactNotFoundException();
     model.addAttribute("contact", contact);
     return "contacts/view";
+  }
+
+  @ExceptionHandler(ContactNotFoundException.class)
+  public String handleNotFound(ContactNotFoundException ex, Model model, HttpServletResponse response) {
+    response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+    model.addAttribute("message", ex.getMessage());
+    return "error/404";
   }
 }
