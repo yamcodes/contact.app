@@ -29,14 +29,26 @@ export function sendFile(): MiddlewareHandler {
 			downloadName: string,
 			{ asAttachment = false }: SendFileOptions = {},
 		) => {
+			const safeName =
+				downloadName.replace(/[\r\n]/g, "").replace(/"/g, "'") || "download";
 			const file = Bun.file(filePath);
+			let buffer: ArrayBuffer;
+			try {
+				if (!(await file.exists())) {
+					return c.body("Not Found", 404);
+				}
+				buffer = await file.arrayBuffer();
+			} catch (err) {
+				console.error("sendFile: failed to read file", filePath, err);
+				return c.body("Internal Server Error", 500);
+			}
 			const disposition = asAttachment ? "attachment" : "inline";
 			c.header(
 				"Content-Disposition",
-				`${disposition}; filename="${downloadName}"`,
+				`${disposition}; filename="${safeName}"`,
 			);
 			c.header("Content-Type", "application/octet-stream");
-			return c.body(await file.arrayBuffer());
+			return c.body(buffer);
 		};
 
 		await next();
