@@ -20,7 +20,11 @@ setupRouter(app);
 setupNotFound(app);
 
 const portArgIndex = process.argv.indexOf("--port");
-const portArgValue = portArgIndex !== -1 ? process.argv[portArgIndex + 1] : undefined;
-const port = portArgValue && /^\d+$/.test(portArgValue) ? parseInt(portArgValue, 10) : 3000;
+const portArgValue =
+	portArgIndex !== -1 ? process.argv[portArgIndex + 1] : undefined;
+const port =
+	portArgValue && /^\d+$/.test(portArgValue)
+		? parseInt(portArgValue, 10)
+		: 3000;
 
 export default { port, fetch: app.fetch };

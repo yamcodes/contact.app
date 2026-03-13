@@ -43,10 +43,7 @@ export function sendFile(): MiddlewareHandler {
 				return c.body("Internal Server Error", 500);
 			}
 			const disposition = asAttachment ? "attachment" : "inline";
-			c.header(
-				"Content-Disposition",
-				`${disposition}; filename="${safeName}"`,
-			);
+			c.header("Content-Disposition", `${disposition}; filename="${safeName}"`);
 			c.header("Content-Type", "application/octet-stream");
 			return c.body(buffer);
 		};

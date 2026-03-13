@@ -76,7 +76,9 @@ router.get("/contacts/archive", (c) => {
 router.post("/contacts/archive", (c) => {
 	Archiver.run();
 	const currentStatus = Archiver.status();
-	c.status(currentStatus === "Running" ? StatusCodes.ACCEPTED : StatusCodes.CONFLICT);
+	c.status(
+		currentStatus === "Running" ? StatusCodes.ACCEPTED : StatusCodes.CONFLICT,
+	);
 	return c.html(
 		<ArchiveUi status={currentStatus} progress={Archiver.progress()} />,
 	);
