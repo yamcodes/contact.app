@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="~{layout}"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<body>
+<!--/*@thymesVar id="contact" type="codes.yam.contacts.Contact"*/-->
+<div layout:fragment="content">
+    <h1 th:text="${contact.first} + ' ' + ${contact.last}"></h1>
+    <div>
+        <p>Phone: <span th:text="${contact.phone}"></span></p>
+        <p>Email: <span th:text="${contact.email}"></span></p>
+    </div>
+    <p>
+        <a th:href="@{/contacts}">Back</a>
+        <a th:href="@{/contacts/{slug}/edit(slug=${contact.slug})}">Edit</a>
+    </p>
+</div>
+</body>
+</html>
