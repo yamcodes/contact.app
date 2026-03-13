@@ -1,3 +1,5 @@
 spring:
   application:
-    name: Contacts App
+    name: Contacts
+  thymeleaf:
+    cache: false
