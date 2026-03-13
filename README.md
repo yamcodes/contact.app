@@ -1,4 +1,4 @@
-# contact.app
+# Contacts
 
 A simple contacts app built with Spring Boot and Thymeleaf.
 
