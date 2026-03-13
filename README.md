@@ -81,7 +81,7 @@ open http://localhost:8080
 src/
 ├── main/
 │   ├── java/codes/yam/contacts/
-│   │   ├── ContactsAppApplication.java  # Entry point
+│   │   ├── ContactsApplication.java     # Entry point
 │   │   ├── ContactController.java       # All /contacts routes
 │   │   ├── Contact.java                 # JPA entity (id, slug, first, last, email, phone)
 │   │   ├── ContactRepository.java       # Spring Data JPA (search, pagination)

@@ -1,7 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Contacts" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
     <module name="contacts" />
-    <option name="SPRING_BOOT_MAIN_CLASS" value="codes.yam.contacts.ContactsAppApplication" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="codes.yam.contacts.ContactsApplication" />
     <method v="2">
       <option name="Make" enabled="true" />
     </method>
