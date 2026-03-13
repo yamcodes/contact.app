@@ -1,16 +1,23 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <body>
-<div th:fragment="contact-fields(contact)">
+<div th:fragment="contact-fields" th:object="${contact}">
     <!--/*@thymesVar id="contact" type="codes.yam.contacts.Contact"*/-->
     <label for="first">First</label>
-    <input id="first" name="first" th:value="${contact?.first}" type="text"/>
+    <input id="first" name="first" th:value="${contact.first}" type="text"/>
+    <span th:if="${#fields.hasErrors('first')}" th:text="${#fields.errors('first')[0]}"></span>
+
     <label for="last">Last</label>
-    <input id="last" name="last" th:value="${contact?.last}" type="text"/>
+    <input id="last" name="last" th:value="${contact.last}" type="text"/>
+    <span th:if="${#fields.hasErrors('last')}" th:text="${#fields.errors('last')[0]}"></span>
+
     <label for="phone">Phone</label>
-    <input id="phone" name="phone" th:value="${contact?.phone}" type="text"/>
+    <input id="phone" name="phone" th:value="${contact.phone}" type="text"/>
+    <span th:if="${#fields.hasErrors('phone')}" th:text="${#fields.errors('phone')[0]}"></span>
+
     <label for="email">Email</label>
-    <input id="email" name="email" th:value="${contact?.email}" type="email"/>
+    <input id="email" name="email" th:value="${contact.email}" type="email"/>
+    <span th:if="${#fields.hasErrors('email')}" th:text="${#fields.errors('email')[0]}"></span>
 </div>
 </body>
 </html>
