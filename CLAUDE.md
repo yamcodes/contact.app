@@ -2,57 +2,50 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Branches
+## Project
 
-| Branch | Description |
-|--------|-------------|
-| `main` | Web 1.0 — full page reloads, classic form submissions |
-| `htmx` | htmx — partial updates, no full page reloads |
+A Contact Management hypermedia app built with Spring Boot, Thymeleaf, and htmx.
+
+- **Group:** `codes.yam`
+- **Artifact:** `contacts`
+- **Java:** 25
+- **Spring Boot:** 4.0.3
+
+## Stack
+
+| Layer | Technology |
+|-------|------------|
+| Framework | Spring Boot (Web MVC) |
+| Templates | Thymeleaf |
+| Hypermedia | htmx (`htmx-spring-boot-thymeleaf` 5.0.0) |
+| Database | H2 (in-memory) + Spring Data JPA |
+| Utilities | Lombok |
 
 ## Development Commands
 
 ```bash
-bun install          # Install dependencies
-bun run dev          # Start dev server with hot reload (http://localhost:3000)
-bun test             # Run tests
-bun test <file>      # Run a single test file
+./mvnw spring-boot:run   # Start dev server (http://localhost:8080)
+./mvnw test              # Run tests
+./mvnw package           # Build jar
 ```
 
-## Architecture
+## Project Structure
 
-This is a **Hono** web application running on **Bun** with **Hono JSX** templating and **htmx** for hypermedia-driven interactions.
-
-- **Entry point**: `src/index.ts` - Hono app exported as default (Bun auto-serves on port 3000)
-- **Framework**: Hono (not Express) - lightweight web framework
-- **Templating**: Hono JSX for server-side templates (see `tsconfig.json`)
-- **Hypermedia**: htmx for partial page updates without writing JavaScript
-
-## Bun-Specific Guidelines
-
-**Always use Bun instead of Node.js tooling:**
-- `bun <file>` not `node` or `ts-node`
-- `bun test` not `jest` or `vitest`
-- `bun install` not `npm/yarn/pnpm install`
-- Bun auto-loads `.env` files - don't use `dotenv`
-
-**Prefer Bun built-ins over npm packages:**
-- `Bun.serve()` for HTTP servers (supports WebSockets, routes)
-- `bun:sqlite` not `better-sqlite3`
-- `Bun.file()` over `node:fs` readFile/writeFile
-- Built-in `WebSocket` not `ws` package
-
-## Testing
-
-```ts
-import { test, expect } from "bun:test";
-
-test("example", () => {
-  expect(1).toBe(1);
-});
+```
+src/
+  main/
+    java/codes/yam/contacts/   # Application code
+    resources/
+      templates/               # Thymeleaf templates (.html)
+      static/                  # Static assets (CSS, JS)
+      application.yaml         # App configuration
+  test/
+    java/codes/yam/contacts/   # Tests
 ```
 
-## Hono Documentation
-When helping with Hono questions, fetch https://hono.dev/llms-small.txt for reference.
+## htmx Integration
 
-## htmx Documentation
-When helping with htmx questions, https://htmx.org should be used for reference. The entierty of the docs can be found here: https://raw.githubusercontent.com/bigskysoftware/htmx/refs/heads/master/www/content/docs.md
+The `htmx-spring-boot-thymeleaf` library provides:
+- `HtmxRequest` injectable in controllers to detect htmx requests
+- Thymeleaf dialect for htmx attributes (`hx-get`, `hx-post`, etc.)
+- `HtmxResponse` for setting response headers (`HX-Redirect`, `HX-Trigger`, etc.)
