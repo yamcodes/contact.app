@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 <html layout:decorate="~{layout}" lang="en"
-      xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>New Contact</title>
+</head>
 <body>
 <div layout:fragment="content">
     <h2>New Contact</h2>
     <form action="/contacts" method="post">
-        <ContactFields contact={contact}/>
-            <button type="submit">Save</button>
+        <label for="first">First</label>
+        <input id="first" name="first" type="text"/>
+        <label for="last">Last</label>
+        <input id="last" name="last" type="text"/>
+        <label for="phone">Phone</label>
+        <input id="phone" name="phone" type="text"/>
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email"/>
+        <button type="submit">Save</button>
     </form>
     <p>
         <a href="/contacts">Back</a>
