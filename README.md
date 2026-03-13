@@ -80,14 +80,55 @@ open http://localhost:8080
 ```
 src/
 ├── main/
-│   ├── java/codes/yam/contacts/   # Application code
+│   ├── java/codes/yam/contacts/
+│   │   ├── ContactsAppApplication.java   # Entry point
+│   │   ├── controller/
+│   │   │   └── ContactController.java    # All /contacts routes
+│   │   ├── model/
+│   │   │   └── Contact.java             # JPA entity (id, slug, first, last, email, phone)
+│   │   ├── repository/
+│   │   │   └── ContactRepository.java   # Spring Data JPA (search, pagination)
+│   │   └── service/
+│   │       └── ContactService.java      # Validation, slug generation, business logic
 │   └── resources/
-│       ├── templates/              # Thymeleaf templates (.html)
-│       ├── static/                 # Static assets (CSS, JS)
-│       └── application.yaml        # App configuration
+│       ├── templates/
+│       │   ├── layout.html              # Base layout (Thymeleaf fragment)
+│       │   ├── contacts/
+│       │   │   ├── list.html            # GET /contacts
+│       │   │   ├── view.html            # GET /contacts/{slug}
+│       │   │   ├── new.html             # GET /contacts/new
+│       │   │   └── edit.html            # GET /contacts/{slug}/edit
+│       │   └── fragments/
+│       │       ├── contact-fields.html  # Reusable form fields (htmx partial)
+│       │       └── contact-rows.html    # Table rows (htmx partial for search/pagination)
+│       ├── static/
+│       │   ├── styles.css
+│       │   └── img/
+│       │       └── spinning-circles.svg # Loading spinner
+│       └── application.yaml
 └── test/
-    └── java/codes/yam/contacts/   # Tests
+    └── java/codes/yam/contacts/
+        ├── controller/
+        │   └── ContactControllerTest.java
+        └── service/
+            └── ContactServiceTest.java
 ```
+
+### Routes
+
+| Method | Path | Description |
+|--------|------|-------------|
+| `GET` | `/` | Redirect to `/contacts` |
+| `GET` | `/contacts` | List contacts (search + pagination) |
+| `GET` | `/contacts/new` | New contact form |
+| `POST` | `/contacts` | Create contact |
+| `GET` | `/contacts/{slug}` | View contact |
+| `GET` | `/contacts/{slug}/edit` | Edit contact form |
+| `POST` | `/contacts/{slug}/edit` | Update contact |
+| `DELETE` | `/contacts/{slug}` | Delete contact |
+| `DELETE` | `/contacts` | Bulk delete contacts |
+| `GET` | `/contacts/{slug}/email` | Inline email validation (htmx) |
+| `GET` | `/contacts/count` | Async contact count (htmx) |
 
 ## Tech stack
 
