@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 @RequiredArgsConstructor
@@ -19,5 +20,13 @@ public class ContactController {
   public String contacts(Model model) {
     model.addAttribute("contacts", contactRepository.findAll());
     return "contacts/list";
+  }
+
+  @GetMapping("/contacts/{slug}")
+  public String viewContact(@PathVariable String slug, Model model) {
+    var contact = contactRepository.findBySlug(slug);
+    if (contact == null) throw new ContactNotFoundException();
+    model.addAttribute("contact", contact);
+    return "contacts/view";
   }
 }
