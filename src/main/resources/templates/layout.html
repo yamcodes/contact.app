@@ -19,7 +19,7 @@
     </header>
     <!--/*@thymesVar id="flash" type="java.lang.String"*/-->
     <div class="flash" th:if="${flash}" th:text="${flash}"></div>
-    <div th:replace="~{::content}"></div>
+    <div th:replace="${content}"></div>
 </main>
 </body>
 </html>
