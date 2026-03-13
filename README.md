@@ -4,18 +4,18 @@ A simple contacts app built with Spring Boot and Thymeleaf.
 
 ## Branches
 
-| Branch | Summary | Description |
-|--------|---------|-------------|
-| [`main`](https://github.com/yamcodes/contact.app/tree/main) | Hypermedia-Driven Application | Server-rendered HTML using links and forms. Full page reloads. Pure hypermedia, no client-side JS. |
-| [`htmx`](https://github.com/yamcodes/contact.app/tree/htmx) | HDA + HTMX | Same architecture as `main`, enhanced with HTMX for partial updates without JSON or client-side state. |
-| [`eta`](https://github.com/yamcodes/contact.app/tree/eta) | HDA (Eta templates) | Same architecture as `main`, using string-based Eta templates instead of JSX. |
-| **[`spring`](https://github.com/yamcodes/contact.app/tree/spring)** (You're here!) | **HDA + Spring Boot** | **Same architecture, rewritten in Java with Spring Boot, Thymeleaf, and htmx-spring-boot.** |
+| Branch                                                                             | Summary                       | Description                                                                                            |
+|------------------------------------------------------------------------------------|-------------------------------|--------------------------------------------------------------------------------------------------------|
+| [`main`](https://github.com/yamcodes/contact.app/tree/main)                        | Hypermedia-Driven Application | Server-rendered HTML using links and forms. Full page reloads. Pure hypermedia, no client-side JS.     |
+| [`htmx`](https://github.com/yamcodes/contact.app/tree/htmx)                        | HDA + HTMX                    | Same architecture as `main`, enhanced with HTMX for partial updates without JSON or client-side state. |
+| [`eta`](https://github.com/yamcodes/contact.app/tree/eta)                          | HDA (Eta templates)           | Same architecture as `main`, using string-based Eta templates instead of JSX.                          |
+| **[`spring`](https://github.com/yamcodes/contact.app/tree/spring)** (You're here!) | **HDA + Spring Boot**         | **Same architecture, rewritten in Java with Spring Boot, Thymeleaf, and htmx-spring-boot.**            |
 
-There are also temporary feature branches but these are the stable branches.
+There are also temporary feature branches, but these are the stable branches.
 
 ## Overview
 
-This app follows the architecture from [Hypermedia Systems](https://hypermedia.systems/part/htmx/) — same ideas, different tech stack (Spring Boot + Thymeleaf instead of Python + Flask).
+This app follows the architecture from [Hypermedia Systems](https://hypermedia.systems/part/htmx/) — same ideas, different tech stack (Spring Boot + Thymeleaf instead of Python and Flask).
 
 This branch (`spring`) uses [Spring Boot](https://spring.io/projects/spring-boot) with [Thymeleaf](https://www.thymeleaf.org) and [htmx](https://htmx.org):
 - HTML is rendered on the server with Thymeleaf templates
@@ -46,7 +46,7 @@ open http://localhost:8080
 ## VS Code
 
 1. **Install extensions** — open the Extensions panel, search `@recommended`, and install all workspace recommendations (Java Extension Pack, Spring Boot Extension Pack, Lombok, htmx attributes)
-2. **Java 25 SDK** — VS Code will prompt to download a JDK if none is found; select Java 25 (if you have multiple JDKs, point `java.jdt.ls.java.home` in user settings to your Java 25 install)
+2. **Java 25 SDK** — VS Code will prompt to download a JDK if none is found; select Java 25 (if you have multiple JDKs, point `java.jdt.ls.java.home` in user settings to your Java 25 installation)
 3. **Run** — use the **Run** task via `Ctrl+Shift+P → Tasks: Run Task → Run`, or press `Ctrl+Shift+P → Spring Boot Dashboard: Run` from the Spring Boot extension
 
 **Tips:**
@@ -69,11 +69,11 @@ open http://localhost:8080
 
 ## Scripts
 
-| Command | Description |
-|---------|-------------|
+| Command                  | Description      |
+|--------------------------|------------------|
 | `./mvnw spring-boot:run` | Start dev server |
-| `./mvnw test` | Run tests |
-| `./mvnw package` | Build jar |
+| `./mvnw test`            | Run tests        |
+| `./mvnw package`         | Build jar        |
 
 ## Project structure
 
@@ -81,15 +81,11 @@ open http://localhost:8080
 src/
 ├── main/
 │   ├── java/codes/yam/contacts/
-│   │   ├── ContactsAppApplication.java   # Entry point
-│   │   ├── controller/
-│   │   │   └── ContactController.java    # All /contacts routes
-│   │   ├── model/
-│   │   │   └── Contact.java             # JPA entity (id, slug, first, last, email, phone)
-│   │   ├── repository/
-│   │   │   └── ContactRepository.java   # Spring Data JPA (search, pagination)
-│   │   └── service/
-│   │       └── ContactService.java      # Validation, slug generation, business logic
+│   │   ├── ContactsAppApplication.java  # Entry point
+│   │   ├── ContactController.java       # All /contacts routes
+│   │   ├── Contact.java                 # JPA entity (id, slug, first, last, email, phone)
+│   │   ├── ContactRepository.java       # Spring Data JPA (search, pagination)
+│   │   └── ContactService.java          # Validation, slug generation, business logic
 │   └── resources/
 │       ├── templates/
 │       │   ├── layout.html              # Base layout (Thymeleaf fragment)
@@ -116,30 +112,30 @@ src/
 
 ### Routes
 
-| Method | Path | Description |
-|--------|------|-------------|
-| `GET` | `/` | Redirect to `/contacts` |
-| `GET` | `/contacts` | List contacts (search + pagination) |
-| `GET` | `/contacts/new` | New contact form |
-| `POST` | `/contacts` | Create contact |
-| `GET` | `/contacts/{slug}` | View contact |
-| `GET` | `/contacts/{slug}/edit` | Edit contact form |
-| `POST` | `/contacts/{slug}/edit` | Update contact |
-| `DELETE` | `/contacts/{slug}` | Delete contact |
-| `DELETE` | `/contacts` | Bulk delete contacts |
-| `GET` | `/contacts/{slug}/email` | Inline email validation (htmx) |
-| `GET` | `/contacts/count` | Async contact count (htmx) |
+| Method   | Path                     | Description                         |
+|----------|--------------------------|-------------------------------------|
+| `GET`    | `/`                      | Redirect to `/contacts`             |
+| `GET`    | `/contacts`              | List contacts (search + pagination) |
+| `GET`    | `/contacts/new`          | New contact form                    |
+| `POST`   | `/contacts`              | Create contact                      |
+| `GET`    | `/contacts/{slug}`       | View contact                        |
+| `GET`    | `/contacts/{slug}/edit`  | Edit contact form                   |
+| `POST`   | `/contacts/{slug}/edit`  | Update contact                      |
+| `DELETE` | `/contacts/{slug}`       | Delete contact                      |
+| `DELETE` | `/contacts`              | Bulk delete contacts                |
+| `GET`    | `/contacts/{slug}/email` | Inline email validation (htmx)      |
+| `GET`    | `/contacts/count`        | Async contact count (htmx)          |
 
 ## Tech stack
 
-| Layer | Technology |
-|-------|------------|
-| Language | Java 25 |
-| Framework | [Spring Boot](https://spring.io/projects/spring-boot) 4.0.3 |
-| Templating | [Thymeleaf](https://www.thymeleaf.org) |
+| Layer      | Technology                                                                                               |
+|------------|----------------------------------------------------------------------------------------------------------|
+| Language   | Java 25                                                                                                  |
+| Framework  | [Spring Boot](https://spring.io/projects/spring-boot) 4.0.3                                              |
+| Templating | [Thymeleaf](https://www.thymeleaf.org)                                                                   |
 | Hypermedia | [htmx](https://htmx.org) + [htmx-spring-boot-thymeleaf](https://github.com/wimdeblauwe/htmx-spring-boot) |
-| Database | H2 (in-memory) + Spring Data JPA |
-| Build | Maven |
+| Database   | H2 (in-memory) + Spring Data JPA                                                                         |
+| Build      | Maven                                                                                                    |
 
 ## License
 
