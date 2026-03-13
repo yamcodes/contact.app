@@ -22,6 +22,8 @@ export const ArchiveUi = ({ status, progress }: ArchiveUiProps) => {
 							id={"archive-progress"}
 							class="progress-bar"
 							role="progressbar"
+							aria-valuemin={0}
+							aria-valuemax={100}
 							aria-valuenow={pct}
 							style={`width:${pct}%`}
 						></div>
