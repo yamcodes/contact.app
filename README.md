@@ -94,6 +94,8 @@ src/
 │       │   │   ├── view.html            # GET /contacts/{slug}
 │       │   │   ├── new.html             # GET /contacts/new
 │       │   │   └── edit.html            # GET /contacts/{slug}/edit
+│       │   ├── error/
+│       │   │   └── 404.html             # 404 not found page
 │       │   └── fragments/
 │       │       ├── contact-fields.html  # Reusable form fields (htmx partial)
 │       │       └── contact-rows.html    # Table rows (htmx partial for search/pagination)
