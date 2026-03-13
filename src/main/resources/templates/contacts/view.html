@@ -1,13 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" layout:decorate="~{layout}"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title th:text="${contact.first} + ' ' + ${contact.last}"></title>
-</head>
+<html th:replace="~{layout :: layout(~{::content})}" lang="en" xmlns:th="http://www.thymeleaf.org">
 <body>
 <!--/*@thymesVar id="contact" type="codes.yam.contacts.Contact"*/-->
-<div layout:fragment="content">
+<div th:fragment="content">
     <h1 th:text="${contact.first} + ' ' + ${contact.last}"></h1>
     <div>
         <p>Phone: <span th:text="${contact.phone}"></span></p>
