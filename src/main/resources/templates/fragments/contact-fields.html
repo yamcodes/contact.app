@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="contact-fields(contact)">
+    <!--/*@thymesVar id="contact" type="codes.yam.contacts.Contact"*/-->
+    <label for="first">First</label>
+    <input id="first" name="first" th:value="${contact?.first}" type="text"/>
+    <label for="last">Last</label>
+    <input id="last" name="last" th:value="${contact?.last}" type="text"/>
+    <label for="phone">Phone</label>
+    <input id="phone" name="phone" th:value="${contact?.phone}" type="text"/>
+    <label for="email">Email</label>
+    <input id="email" name="email" th:value="${contact?.email}" type="email"/>
+</div>
+</body>
+</html>
