@@ -3,3 +3,6 @@ spring:
     name: Contacts
   thymeleaf:
     cache: false
+  devtools:
+    livereload:
+      enabled: true
