@@ -46,7 +46,7 @@ open http://localhost:8080
 ## VS Code
 
 1. **Install extensions** — open the Extensions panel, search `@recommended`, and install all workspace recommendations (Java Extension Pack, Spring Boot Extension Pack, Lombok, htmx attributes)
-2. **Java 25 SDK** — VS Code will prompt to download a JDK if none is found; select Java 25, or set `java.jdt.ls.java.home` in settings to an existing Java 25 installation
+2. **Java 25 SDK** — VS Code will prompt to download a JDK if none is found; select Java 25 (if you have multiple JDKs, point `java.jdt.ls.java.home` in user settings to your Java 25 install)
 3. **Run** — use the **Run** task via `Ctrl+Shift+P → Tasks: Run Task → Run`, or press `Ctrl+Shift+P → Spring Boot Dashboard: Run` from the Spring Boot extension
 
 **Tips:**

@@ -9,4 +9,9 @@ public class ContactController {
     public String index() {
         return "redirect:/contacts";
     }
+
+    @GetMapping("/contacts")
+    public String contacts() {
+        return "contacts";
+    }
 }
