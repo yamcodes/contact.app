@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 @RequiredArgsConstructor
@@ -32,8 +33,20 @@ public class ContactController {
     return "contacts/view";
   }
 
+  @GetMapping("/contacts/new")
+  public String newContact() {
+    return "contacts/new";
+  }
+
+  @PostMapping("/contacts")
+  public String createContact(Contact contact) {
+    contactRepository.save(contact);
+    return "redirect:/contacts";
+  }
+
   @ExceptionHandler(ContactNotFoundException.class)
-  public String handleNotFound(ContactNotFoundException ex, Model model, HttpServletResponse response) {
+  public String handleNotFound(
+      ContactNotFoundException ex, Model model, HttpServletResponse response) {
     response.setStatus(HttpServletResponse.SC_NOT_FOUND);
     model.addAttribute("message", ex.getMessage());
     return "error/404";
