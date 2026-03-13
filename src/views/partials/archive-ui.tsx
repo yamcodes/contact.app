@@ -30,7 +30,11 @@ export const ArchiveUi = ({ status, progress }: ArchiveUiProps) => {
 			)}
 			{status === "Complete" && (
 				<>
-					<a href="/contacts/archive/file" hx-boost="false">
+					<a
+						href="/contacts/archive/file"
+						hx-boost="false"
+						x-init="$el.click()"
+					>
 						Archive Ready! Click here to download. &downarrow;
 					</a>
 					<button type="button" hx-delete="/contacts/archive">
