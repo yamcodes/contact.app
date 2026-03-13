@@ -43,6 +43,19 @@ This branch (`spring`) uses [Spring Boot](https://spring.io/projects/spring-boot
 open http://localhost:8080
 ```
 
+## IntelliJ IDEA
+
+1. **Open** — **File → Open**, select `pom.xml`, choose **"Open as Project"**
+2. **Java 25 SDK** — **File → Project Structure → SDKs**, add Java 25 if missing (IntelliJ can download it)
+3. **Lombok** — install the [Lombok plugin](https://plugins.jetbrains.com/plugin/6317-lombok) via **Settings → Plugins**, then enable annotation processing under **Settings → Build, Execution, Deployment → Compiler → Annotation Processors**
+4. **Run** — use the included **Contacts** run configuration (`.run/Contacts.run.xml`) from the toolbar, or run `spring-boot:run` from the Maven tool window
+
+**Tips:**
+- Spring Boot DevTools (already included) enables hot reload — recompile with `Ctrl+F9` without restarting
+- Enable **"Build project automatically"** in settings for seamless reloads on save
+- Thymeleaf templates hot-reload without a restart
+- H2 console is available at `http://localhost:8080/h2-console`
+
 ## Scripts
 
 | Command | Description |

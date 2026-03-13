@@ -11,7 +11,7 @@
 	<groupId>codes.yam</groupId>
 	<artifactId>contacts</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Contacts App</name>
+	<name>Contacts</name>
 	<description>A Contact Management hypermedia app</description>
 	<url/>
 	<licenses>
