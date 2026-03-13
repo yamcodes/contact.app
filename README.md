@@ -1,121 +1,79 @@
 # contact.app
 
-A simple contacts app built with Bun and Hono.
+A simple contacts app built with Spring Boot and Thymeleaf.
 
 ## Branches
 
 | Branch | Summary | Description |
 |--------|---------|-------------|
 | [`main`](https://github.com/yamcodes/contact.app/tree/main) | Hypermedia-Driven Application | Server-rendered HTML using links and forms. Full page reloads. Pure hypermedia, no client-side JS. |
-| **[`htmx`](https://github.com/yamcodes/contact.app/tree/htmx)** (You're here!) | **HDA + HTMX** | **Same architecture as `main`, enhanced with HTMX for partial updates without JSON or client-side state.** |
-| [`eta`](https://github.com/yamcodes/contact.app/tree/eta) | HDA (Eta templates) | Same architecture as `main`, using string-based Eta templates instead of JSX. |
+| [`htmx`](https://github.com/yamcodes/contact.app/tree/htmx) | HDA + HTMX | Same architecture as `main`, enhanced with HTMX for partial updates without JSON or client-side state. |
+| **[`spring`](https://github.com/yamcodes/contact.app/tree/spring)** (You're here!) | **HDA + Spring Boot** | **Same architecture, rewritten in Java with Spring Boot, Thymeleaf, and htmx-spring-boot.** |
 
-There are also temporary feature branches but these are the 3 stable branches.
+There are also temporary feature branches but these are the stable branches.
 
 ## Overview
 
-This app follows the architecture from [Hypermedia Systems](https://hypermedia.systems/part/htmx/) — same ideas, different tech stack (Bun + Hono instead of Python + Flask).
+This app follows the architecture from [Hypermedia Systems](https://hypermedia.systems/part/htmx/) — same ideas, different tech stack (Spring Boot + Thymeleaf instead of Python + Flask).
 
-This branch (`htmx`) uses [htmx](https://htmx.org) for a modern hypermedia-driven experience:
-- HTML is rendered on the server
+This branch (`spring`) uses [Spring Boot](https://spring.io/projects/spring-boot) with [Thymeleaf](https://www.thymeleaf.org) and [htmx](https://htmx.org):
+- HTML is rendered on the server with Thymeleaf templates
 - htmx handles partial page updates via AJAX
 - No full page reloads for most interactions
 - No client-side JavaScript framework (just htmx attributes)
 
-Think "Web 1.0 upgraded" — server-rendered HTML with seamless partial updates.
-
-> htmx extends HTML with attributes like `hx-get`, `hx-post`, and `hx-swap` to enable dynamic behavior without writing JavaScript.
+> The `htmx-spring-boot-thymeleaf` library integrates htmx into Spring MVC controllers via `HtmxRequest`, `HtmxResponse`, and Thymeleaf dialect support.
 
 ## Features
 
 - List and search contacts (with instant filtering via htmx)
 - Add, edit, and delete contact details
-- Flash messages (cookie-based)
-- Server-rendered HTML partials
+- Server-rendered HTML with Thymeleaf
 - Partial page updates (no full reloads)
-- Hot reload for templates and CSS
-- Templates and partials for views
-- Not found page
+- H2 in-memory database with Spring Data JPA
 
 ## Quickstart
 
 ```bash
-# Install dependencies
-bun install
-
-# Start dev server (with hot reload)
-bun run dev
+# Start dev server
+./mvnw spring-boot:run
 
 # Open in browser
-open http://localhost:3000
+open http://localhost:8080
 ```
 
 ## Scripts
 
 | Command | Description |
 |---------|-------------|
-| `bun run dev` | Start dev server with hot reload |
-| `bun run start` | Start production server |
-| `bun run check` | Run linter |
-| `bun run fix` | Fix lint issues |
-| `bun run typecheck` | Check TypeScript types |
+| `./mvnw spring-boot:run` | Start dev server |
+| `./mvnw test` | Run tests |
+| `./mvnw package` | Build jar |
 
 ## Project structure
 
 ```
-├── src/
-│   ├── app.ts              # App entry point
-│   ├── router.ts           # Route definitions
-│   ├── model.ts            # Contact data model
-│   ├── middleware/
-│   │   ├── jsx.tsx         # JSX renderer (c.render)
-│   │   ├── flash.ts        # Flash messages
-│   │   └── htmx.ts         # htmx request detection
-│   ├── utils/
-│   │   ├── hmr.ts          # Hot reload setup
-│   │   └── static.ts       # Static file serving
-│   └── views/
-│       ├── layout.tsx      # Base layout
-│       └── pages/          # Page components
-├── static/
-│   └── styles.css          # Stylesheet
-└── package.json
+src/
+├── main/
+│   ├── java/codes/yam/contacts/   # Application code
+│   └── resources/
+│       ├── templates/              # Thymeleaf templates (.html)
+│       ├── static/                 # Static assets (CSS, JS)
+│       └── application.yaml        # App configuration
+└── test/
+    └── java/codes/yam/contacts/   # Tests
 ```
-
-> **Barrel files:** Allowed only in leaf directories that export multiple related modules and are consumed from the outside. Never barrel directories that contain subdirectories or sit in the middle of the dependency graph.
 
 ## Tech stack
 
 | Layer | Technology |
 |-------|------------|
-| Runtime | [Bun](https://bun.sh) |
-| Web Framework | [Hono](https://hono.dev) |
-| Templating | [Hono JSX](https://hono.dev/docs/guides/jsx) |
-| Hypermedia | [htmx](https://htmx.org) |
-| Styling | CSS |
-| Linting | [Biome](https://biomejs.dev) |
-
-## How it works
-
-Routes are defined with Hono and render JSX components:
-
-```tsx
-router.get("/contacts", (c) => {
-  const contacts = Contact.all();
-  return c.render(<ContactList contacts={contacts} />);
-});
-```
-
-Templates use htmx attributes for dynamic behavior:
-
-```html
-<form hx-post="/contacts/new" hx-target="#contact-list" hx-swap="beforeend">
-  <input name="name" placeholder="Name" />
-  <button type="submit">Add</button>
-</form>
-```
-
-The server returns HTML partials that htmx swaps into the page — no JSON, no client-side rendering.
+| Language | Java 25 |
+| Framework | [Spring Boot](https://spring.io/projects/spring-boot) 4.0.3 |
+| Templating | [Thymeleaf](https://www.thymeleaf.org) |
+| Hypermedia | [htmx](https://htmx.org) + [htmx-spring-boot-thymeleaf](https://github.com/wimdeblauwe/htmx-spring-boot) |
+| Database | H2 (in-memory) + Spring Data JPA |
+| Build | Maven |
 
 ## License
 
