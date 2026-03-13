@@ -8,6 +8,7 @@ A simple contacts app built with Spring Boot and Thymeleaf.
 |--------|---------|-------------|
 | [`main`](https://github.com/yamcodes/contact.app/tree/main) | Hypermedia-Driven Application | Server-rendered HTML using links and forms. Full page reloads. Pure hypermedia, no client-side JS. |
 | [`htmx`](https://github.com/yamcodes/contact.app/tree/htmx) | HDA + HTMX | Same architecture as `main`, enhanced with HTMX for partial updates without JSON or client-side state. |
+| [`eta`](https://github.com/yamcodes/contact.app/tree/eta) | HDA (Eta templates) | Same architecture as `main`, using string-based Eta templates instead of JSX. |
 | **[`spring`](https://github.com/yamcodes/contact.app/tree/spring)** (You're here!) | **HDA + Spring Boot** | **Same architecture, rewritten in Java with Spring Boot, Thymeleaf, and htmx-spring-boot.** |
 
 There are also temporary feature branches but these are the stable branches.
