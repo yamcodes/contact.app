@@ -15,6 +15,7 @@ export const Layout = ({ children, title, flash }: LayoutProps) => html`
 			<title>${title || "Contact App"}</title>
 			<link rel="stylesheet" href="/static/styles.css" />
 			<script src="/htmx.js"></script>
+			<script defer src="/alpine.js"></script>
 		</head>
 		<body hx-boost="true">
 			<main>
