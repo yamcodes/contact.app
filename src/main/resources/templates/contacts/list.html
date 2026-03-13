@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html th:replace="~{layout :: layout(~{::content})}" lang="en" xmlns:th="http://www.thymeleaf.org">
+<html layout:decorate="~{layout}" lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <body>
 <!--/*@thymesVar id="search" type="java.lang.String"*/-->
 <!--/*@thymesVar id="contacts" type="java.util.List<codes.yam.contacts.Contact>"*/-->
-<div th:fragment="content">
+<div layout:fragment="content">
     <form action="/contacts" method="get">
         <label for="search">Search contacts:</label>
         <input

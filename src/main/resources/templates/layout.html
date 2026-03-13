@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html th:fragment="layout(content)" lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
@@ -19,7 +21,7 @@
     </header>
     <!--/*@thymesVar id="flash" type="java.lang.String"*/-->
     <div class="flash" th:if="${flash}" th:text="${flash}"></div>
-    <div th:replace="${content}"></div>
+    <div layout:fragment="content"></div>
 </main>
 </body>
 </html>
