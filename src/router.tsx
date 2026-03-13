@@ -84,11 +84,20 @@ router.post("/contacts/archive", (c) => {
 	);
 });
 
-router.delete("/contacts/archive", async (c) => {
+router.delete("/contacts/archive", (c) => {
 	Archiver.reset();
 	return c.html(
 		<ArchiveUi status={Archiver.status()} progress={Archiver.progress()} />,
 	);
+});
+
+router.get("/contacts/archive/file", async (c) => {
+	if (Archiver.status() !== "Complete") {
+		return c.notFound();
+	}
+	return c.sendFile(Archiver.archiveFile(), "archive.json", {
+		asAttachment: true,
+	});
 });
 
 router.get("/contacts/:slug", (c) => {
@@ -191,15 +200,6 @@ router.get("/contacts/:slug/email", (c) => {
 	const email = c.req.query("email") || "";
 	const errors = Contact.validate({ email }, slug);
 	return c.text(errors.email || "");
-});
-
-router.get("/contacts/archive/file", async (c) => {
-	if (Archiver.status() !== "Complete") {
-		return c.notFound();
-	}
-	return c.sendFile(Archiver.archiveFile(), "archive.json", {
-		asAttachment: true,
-	});
 });
 
 export const setupRouter = (app: Hono) => {
