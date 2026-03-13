@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}" lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<body>
+<div layout:fragment="content">
+    <h2>New Contact</h2>
+    <form action="/contacts" method="post">
+        <ContactFields contact={contact}/>
+            <button type="submit">Save</button>
+    </form>
+    <p>
+        <a href="/contacts">Back</a>
+    </p>
+</div>
+</body>
+</html>
