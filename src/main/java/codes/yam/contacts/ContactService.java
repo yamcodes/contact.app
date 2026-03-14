@@ -14,9 +14,7 @@ public class ContactService {
   }
 
   public List<Contact> search(String q) {
-    return contactRepository
-        .findByFirstContainingIgnoreCaseOrLastContainingIgnoreCaseOrEmailContainingIgnoreCase(
-            q, q, q);
+    return contactRepository.search(q);
   }
 
   public Contact findBySlug(String slug) {
@@ -33,6 +31,11 @@ public class ContactService {
     contactRepository.delete(contact);
   }
 
+  public void deleteMany(List<String> slugs) {
+    var contacts = contactRepository.findAllBySlugIn(slugs);
+    contactRepository.deleteAll(contacts);
+  }
+
   public Contact update(String slug, Contact updated) {
     var contact = findBySlug(slug);
     contact.setFirst(updated.getFirst());
@@ -46,16 +49,6 @@ public class ContactService {
   // TODO: This is fragile - throws NullPointException if first or last is null.
   private String generateSlug(Contact contact) {
     return contact.getFirst().toLowerCase() + "-" + contact.getLast().toLowerCase();
-  }
-
-  /**
-   * Check if an email exists.
-   *
-   * @param email - the email to check
-   * @return true or false
-   */
-  public boolean isEmailTaken(String email) {
-    return contactRepository.findByEmail(email).isPresent();
   }
 
   /**

@@ -2,6 +2,7 @@ package codes.yam.contacts;
 
 import jakarta.validation.Valid;
 import java.net.URI;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -67,6 +68,12 @@ public class ContactController {
   public ResponseEntity<Void> deleteContact(@PathVariable String slug) {
     contactService.delete(slug);
     // TODO: extract seeOther helper if this pattern repeats
+    return ResponseEntity.status(HttpStatus.SEE_OTHER).location(URI.create("/contacts")).build();
+  }
+
+  @DeleteMapping
+  public ResponseEntity<Void> deleteManyContacts(@RequestParam List<String> slugs) {
+    contactService.deleteMany(slugs);
     return ResponseEntity.status(HttpStatus.SEE_OTHER).location(URI.create("/contacts")).build();
   }
 
