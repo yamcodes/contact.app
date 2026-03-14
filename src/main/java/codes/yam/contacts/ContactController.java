@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class ContactController {
   private final ContactService contactService;
+  private final jakarta.validation.Validator validator;
 
   @GetMapping
   public String contacts(@RequestParam(required = false) String q, Model model) {
@@ -72,7 +73,10 @@ public class ContactController {
   @GetMapping("/{slug}/email")
   @ResponseBody
   public String validateEmail(@PathVariable String slug, @RequestParam String email) {
-    return contactService.isEmailTaken(email, slug) ? "Email already taken" : "";
+    var violations = validator.validateValue(Contact.class, "email", email);
+    if (!violations.isEmpty()) return violations.iterator().next().getMessage();
+    if (contactService.isEmailTaken(email, slug)) return "Email already taken";
+    return "";
   }
 
   @ExceptionHandler(ContactNotFoundException.class)
