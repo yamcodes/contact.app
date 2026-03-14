@@ -56,26 +56,22 @@ public class ContactController {
   public String updateContact(
       @PathVariable String slug,
       @Valid @ModelAttribute Contact contact,
-      BindingResult result,
-      RedirectAttributes redirectAttributes) {
+      BindingResult result) {
     if (result.hasErrors()) {
       return "contacts/edit";
     }
     var updated = contactService.update(slug, contact);
-    redirectAttributes.addFlashAttribute("flash", "Contact updated successfully.");
     return "redirect:/contacts/" + updated.getSlug();
   }
 
   @PostMapping("/contacts")
   public String createContact(
       @Valid @ModelAttribute Contact contact,
-      BindingResult result,
-      RedirectAttributes redirectAttributes) {
+      BindingResult result) {
     if (result.hasErrors()) {
       return "contacts/new";
     }
     contactService.save(contact);
-    redirectAttributes.addFlashAttribute("flash", "Contact created successfully.");
     return "redirect:/contacts";
   }
 
