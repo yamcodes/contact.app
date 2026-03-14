@@ -13,6 +13,10 @@ public class ContactService {
     return contactRepository.findAll();
   }
 
+  public List<Contact> search(String q) {
+    return contactRepository.findByFirstContainingIgnoreCaseOrLastContainingIgnoreCaseOrEmailContainingIgnoreCase(q, q, q);
+  }
+
   public Contact findBySlug(String slug) {
     return contactRepository.findBySlug(slug);
   }
@@ -20,6 +24,12 @@ public class ContactService {
   public void save(Contact contact) {
     contact.setSlug(contact.getFirst().toLowerCase() + "-" + contact.getLast().toLowerCase());
     contactRepository.save(contact);
+  }
+
+  public void delete(String slug) {
+    var contact = contactRepository.findBySlug(slug);
+    if (contact == null) throw new ContactNotFoundException();
+    contactRepository.delete(contact);
   }
 
   public Contact update(String slug, Contact updated) {

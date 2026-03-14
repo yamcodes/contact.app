@@ -2,15 +2,16 @@ package codes.yam.contacts;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -25,8 +26,11 @@ public class ContactController {
   }
 
   @GetMapping("/contacts")
-  public String contacts(Model model) {
-    model.addAttribute("contacts", contactService.findAll());
+  public String contacts(@RequestParam(required = false) String q, Model model) {
+    var contacts =
+        (q != null && !q.isBlank()) ? contactService.search(q) : contactService.findAll();
+    model.addAttribute("contacts", contacts);
+    model.addAttribute("search", q);
     return "contacts/list";
   }
 
@@ -76,6 +80,13 @@ public class ContactController {
     }
     contactService.save(contact);
     redirectAttributes.addFlashAttribute("flash", "Contact created successfully.");
+    return "redirect:/contacts";
+  }
+
+  @PostMapping("/contacts/{slug}/delete")
+  public String deleteContact(@PathVariable String slug, RedirectAttributes redirectAttributes) {
+    contactService.delete(slug);
+    redirectAttributes.addFlashAttribute("flash", "Contact deleted.");
     return "redirect:/contacts";
   }
 
