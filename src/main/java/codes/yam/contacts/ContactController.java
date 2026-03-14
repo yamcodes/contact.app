@@ -2,7 +2,9 @@ package codes.yam.contacts;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import java.net.URI;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -76,9 +78,9 @@ public class ContactController {
   }
 
   @DeleteMapping("/contacts/{slug}")
-  @ResponseStatus(HttpStatus.NO_CONTENT)
-  public void deleteContact(@PathVariable String slug) {
+  public ResponseEntity<Void> deleteContact(@PathVariable String slug) {
     contactService.delete(slug);
+    return ResponseEntity.status(HttpStatus.SEE_OTHER).location(URI.create("/contacts")).build();
   }
 
   @ExceptionHandler(ContactNotFoundException.class)
