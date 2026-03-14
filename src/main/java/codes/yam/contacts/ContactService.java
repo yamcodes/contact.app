@@ -16,4 +16,9 @@ public class ContactService {
   public Contact findBySlug(String slug) {
     return contactRepository.findBySlug(slug);
   }
+
+  public void save(Contact contact) {
+    contact.setSlug(contact.getFirst().toLowerCase() + "-" + contact.getLast().toLowerCase());
+    contactRepository.save(contact);
+  }
 }

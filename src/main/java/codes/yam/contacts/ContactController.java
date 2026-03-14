@@ -17,7 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 @RequiredArgsConstructor
 public class ContactController {
-  private final ContactRepository contactRepository;
+  private final ContactService contactService;
 
   @GetMapping("/")
   public String index() {
@@ -26,13 +26,13 @@ public class ContactController {
 
   @GetMapping("/contacts")
   public String contacts(Model model) {
-    model.addAttribute("contacts", contactRepository.findAll());
+    model.addAttribute("contacts", contactService.findAll());
     return "contacts/list";
   }
 
   @GetMapping("/contacts/{slug}")
   public String viewContact(@PathVariable String slug, Model model) {
-    var contact = contactRepository.findBySlug(slug);
+    var contact = contactService.findBySlug(slug);
     if (contact == null) throw new ContactNotFoundException();
     model.addAttribute("contact", contact);
     return "contacts/view";
@@ -52,8 +52,7 @@ public class ContactController {
     if (result.hasErrors()) {
       return "contacts/new";
     }
-    contact.setSlug(contact.getFirst().toLowerCase() + "-" + contact.getLast().toLowerCase());
-    contactRepository.save(contact);
+    contactService.save(contact);
     redirectAttributes.addFlashAttribute("flash", "Contact created successfully.");
     return "redirect:/contacts";
   }
