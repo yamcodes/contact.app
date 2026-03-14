@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <body>
-<div th:fragment="contact-fields" th:object="${contact}">
-    <!--/*@thymesVar id="contact" type="codes.yam.contacts.Contact"*/-->
+<!--/*@thymesVar id="contact" type="codes.yam.contacts.Contact"*/-->
+<div th:fragment="contact-fields(contact)">
     <label for="first">First</label>
     <input id="first" name="first" th:value="${contact.first}" type="text"/>
     <span th:if="${#fields.hasErrors('first')}" th:text="${#fields.errors('first')[0]}"></span>
