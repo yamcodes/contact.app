@@ -1,22 +1,14 @@
 package codes.yam.contacts;
 
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import java.net.URI;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/contacts")
@@ -53,9 +45,7 @@ public class ContactController {
 
   @PostMapping("/{slug}/edit")
   public String updateContact(
-      @PathVariable String slug,
-      @Valid @ModelAttribute Contact contact,
-      BindingResult result) {
+      @PathVariable String slug, @Valid @ModelAttribute Contact contact, BindingResult result) {
     if (result.hasErrors()) {
       return "contacts/edit";
     }
@@ -64,9 +54,7 @@ public class ContactController {
   }
 
   @PostMapping
-  public String createContact(
-      @Valid @ModelAttribute Contact contact,
-      BindingResult result) {
+  public String createContact(@Valid @ModelAttribute Contact contact, BindingResult result) {
     if (result.hasErrors()) {
       return "contacts/new";
     }
@@ -79,6 +67,12 @@ public class ContactController {
     contactService.delete(slug);
     // TODO: extract seeOther helper if this pattern repeats
     return ResponseEntity.status(HttpStatus.SEE_OTHER).location(URI.create("/contacts")).build();
+  }
+
+  @GetMapping("/{slug}/email")
+  @ResponseBody
+  public String validateEmail(@PathVariable String slug, @RequestParam String email) {
+    return contactService.isEmailTaken(email, slug) ? "Email already taken" : "";
   }
 
   @ExceptionHandler(ContactNotFoundException.class)
