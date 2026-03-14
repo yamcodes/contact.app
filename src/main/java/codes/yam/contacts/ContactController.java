@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequiredArgsConstructor
@@ -79,11 +79,10 @@ public class ContactController {
     return "redirect:/contacts";
   }
 
-  @PostMapping("/contacts/{slug}/delete")
-  public String deleteContact(@PathVariable String slug, RedirectAttributes redirectAttributes) {
+  @DeleteMapping("/contacts/{slug}")
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  public void deleteContact(@PathVariable String slug) {
     contactService.delete(slug);
-    redirectAttributes.addFlashAttribute("flash", "Contact deleted.");
-    return "redirect:/contacts";
   }
 
   @ExceptionHandler(ContactNotFoundException.class)
