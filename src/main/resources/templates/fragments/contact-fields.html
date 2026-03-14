@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <body>
 <!--/*@thymesVar id="contact" type="codes.yam.contacts.Contact"*/-->
-<div th:fragment="contact-fields(contact)" th:object="${contact}">
+<div th:fragment="contact-fields" th:object="${contact}">
     <label for="first">First</label>
     <input id="first" name="first" th:value="*{first}" type="text"/>
     <span th:if="${#fields.hasErrors('first')}" th:errors="*{first}"></span>
