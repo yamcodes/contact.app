@@ -1,5 +1,6 @@
 package codes.yam.contacts;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -7,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface ContactRepository extends JpaRepository<Contact, UUID> {
   Contact findBySlug(String slug);
 
-  List<Contact> findAllBySlugIn(List<String> slugs);
+  List<Contact> findAllBySlugIn(Collection<String> slugs);
 
   List<Contact>
       findByFirstContainingIgnoreCaseOrLastContainingIgnoreCaseOrEmailContainingIgnoreCase(
