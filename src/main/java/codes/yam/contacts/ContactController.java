@@ -44,6 +44,28 @@ public class ContactController {
     return "contacts/new";
   }
 
+  @GetMapping("/contacts/{slug}/edit")
+  public String editContact(@PathVariable String slug, Model model) {
+    var contact = contactService.findBySlug(slug);
+    if (contact == null) throw new ContactNotFoundException();
+    model.addAttribute("contact", contact);
+    return "contacts/edit";
+  }
+
+  @PostMapping("/contacts/{slug}/edit")
+  public String updateContact(
+      @PathVariable String slug,
+      @Valid @ModelAttribute Contact contact,
+      BindingResult result,
+      RedirectAttributes redirectAttributes) {
+    if (result.hasErrors()) {
+      return "contacts/edit";
+    }
+    contactService.update(slug, contact);
+    redirectAttributes.addFlashAttribute("flash", "Contact updated successfully.");
+    return "redirect:/contacts/" + slug;
+  }
+
   @PostMapping("/contacts")
   public String createContact(
       @Valid @ModelAttribute Contact contact,

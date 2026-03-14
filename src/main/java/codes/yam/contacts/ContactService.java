@@ -21,4 +21,15 @@ public class ContactService {
     contact.setSlug(contact.getFirst().toLowerCase() + "-" + contact.getLast().toLowerCase());
     contactRepository.save(contact);
   }
+
+  public void update(String slug, Contact updated) {
+    var contact = contactRepository.findBySlug(slug);
+    if (contact == null) throw new ContactNotFoundException();
+    contact.setFirst(updated.getFirst());
+    contact.setLast(updated.getLast());
+    contact.setEmail(updated.getEmail());
+    contact.setPhone(updated.getPhone());
+    contact.setSlug(updated.getFirst().toLowerCase() + "-" + updated.getLast().toLowerCase());
+    contactRepository.save(contact);
+  }
 }
