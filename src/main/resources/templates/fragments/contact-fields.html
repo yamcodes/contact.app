@@ -1,23 +1,30 @@
+<!--suppress HtmlFormInputWithoutLabel, XmlInvalidId -->
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <body>
 <!--/*@thymesVar id="contact" type="codes.yam.contacts.Contact"*/-->
-<div th:fragment="contact-fields" th:object="${contact}">
-    <label for="first">First</label>
-    <input id="first" name="first" th:value="*{first}" type="text"/>
-    <span th:if="${#fields.hasErrors('first')}" th:errors="*{first}"></span>
-
-    <label for="last">Last</label>
-    <input id="last" name="last" th:value="*{last}" type="text"/>
-    <span th:if="${#fields.hasErrors('last')}" th:errors="*{last}"></span>
-
-    <label for="phone">Phone</label>
-    <input id="phone" name="phone" th:value="*{phone}" type="text"/>
-    <span th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></span>
-
-    <label for="email">Email</label>
-    <input id="email" name="email" th:value="*{email}" type="email"/>
-    <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
-</div>
+<fieldset th:fragment="contact-fields" th:object="${contact}">
+    <legend>Contact Values</legend>
+    <p>
+        <label for="email">Email</label>
+        <input placeholder="Email" th:field="*{email}" type="email"/>
+        <span class="error" th:errors="*{email}" th:if="${#fields.hasErrors('email')}"></span>
+    </p>
+    <p>
+        <label for="first">First Name</label>
+        <input placeholder="First Name" th:field="*{first}" type="text"/>
+        <span class="error" th:errors="*{first}" th:if="${#fields.hasErrors('first')}"></span>
+    </p>
+    <p>
+        <label for="last">Last Name</label>
+        <input placeholder="Last Name" th:field="*{last}" type="text"/>
+        <span class="error" th:errors="*{last}" th:if="${#fields.hasErrors('last')}"></span>
+    </p>
+    <p>
+        <label for="phone">Phone</label>
+        <input placeholder="Phone" th:field="*{phone}" type="tel"/>
+        <span class="error" th:errors="*{phone}" th:if="${#fields.hasErrors('phone')}"></span>
+    </p>
+</fieldset>
 </body>
 </html>
