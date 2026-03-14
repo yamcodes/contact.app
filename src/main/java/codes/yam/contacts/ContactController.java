@@ -61,9 +61,9 @@ public class ContactController {
     if (result.hasErrors()) {
       return "contacts/edit";
     }
-    contactService.update(slug, contact);
+    var updated = contactService.update(slug, contact);
     redirectAttributes.addFlashAttribute("flash", "Contact updated successfully.");
-    return "redirect:/contacts/" + slug;
+    return "redirect:/contacts/" + updated.getSlug();
   }
 
   @PostMapping("/contacts")

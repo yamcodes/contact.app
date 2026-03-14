@@ -22,7 +22,7 @@ public class ContactService {
     contactRepository.save(contact);
   }
 
-  public void update(String slug, Contact updated) {
+  public Contact update(String slug, Contact updated) {
     var contact = contactRepository.findBySlug(slug);
     if (contact == null) throw new ContactNotFoundException();
     contact.setFirst(updated.getFirst());
@@ -30,6 +30,6 @@ public class ContactService {
     contact.setEmail(updated.getEmail());
     contact.setPhone(updated.getPhone());
     contact.setSlug(updated.getFirst().toLowerCase() + "-" + updated.getLast().toLowerCase());
-    contactRepository.save(contact);
+    return contactRepository.save(contact);
   }
 }
