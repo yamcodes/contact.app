@@ -34,14 +34,18 @@
       </thead>
       <tbody th:insert="~{fragments/contact-list-rows :: rows}"></tbody>
     </table>
-    <button hx-confirm="Are you sure you want to delete the selected contacts?"
-            hx-delete="/contacts"
-            hx-target="body"
-            type="button">Delete Selected
+    <button
+      hx-confirm="Are you sure you want to delete the selected contacts?"
+      hx-delete="/contacts"
+      hx-target="body"
+      type="button"
+    >
+      Delete Selected
     </button>
   </form>
   <p>
     <a href="/contacts/new">Add New Contact</a>
+    <span th:text="'(' + ${contacts.size()} + ' total contacts)'"></span>
   </p>
 </div>
 </body>
