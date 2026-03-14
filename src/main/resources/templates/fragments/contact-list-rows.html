@@ -4,32 +4,30 @@
 <body>
 <th:block th:fragment="rows">
   <!--/*@thymesVar id="contacts" type="java.util.List<codes.yam.contacts.Contact>"*/-->
-  <th:block th:each="contact : ${contacts}" th:object="${contact}">
-    <tr>
-      <td>
-        <input
-          name="selected_contact_slugs"
-          th:value="*{slug}"
-          type="checkbox"
-        />
-      </td>
-      <td th:text="*{first}"></td>
-      <td th:text="*{last}"></td>
-      <td th:text="*{phone}"></td>
-      <td th:text="*{email}"></td>
-      <td>
-        <a th:href="@{/contacts/{slug}/edit(slug=*{slug})}">Edit</a>
-        <a th:href="@{/contacts/{slug}(slug=*{slug})}">View</a>
-        <a
-          href="#"
-          hx-confirm="Are you sure you want to delete this contact?"
-          hx-swap="outerHTML swap:1s"
-          hx-target="closest tr"
-          th:attr="hx-delete=@{/contacts/{slug}(slug=*{slug})}"
-        >Delete</a>
-      </td>
-    </tr>
-  </th:block>
+  <tr th:each="contact : ${contacts}" th:object="${contact}">
+    <td>
+      <input
+        name="selected_contact_slugs"
+        th:value="*{slug}"
+        type="checkbox"
+      />
+    </td>
+    <td th:text="*{first}"></td>
+    <td th:text="*{last}"></td>
+    <td th:text="*{phone}"></td>
+    <td th:text="*{email}"></td>
+    <td>
+      <a th:href="@{/contacts/{slug}/edit(slug=*{slug})}">Edit</a>
+      <a th:href="@{/contacts/{slug}(slug=*{slug})}">View</a>
+      <a
+        href="#"
+        hx-confirm="Are you sure you want to delete this contact?"
+        hx-swap="outerHTML swap:1s"
+        hx-target="closest tr"
+        th:attr="hx-delete=@{/contacts/{slug}(slug=*{slug})}"
+      >Delete</a>
+    </td>
+  </tr>
 </th:block>
 </body>
 </html>

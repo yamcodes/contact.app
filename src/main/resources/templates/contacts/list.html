@@ -32,7 +32,7 @@
         <th></th>
       </tr>
       </thead>
-      <th:block th:replace="~{fragments/contact-list-rows :: rows}"></th:block>
+      <tbody th:insert="~{fragments/contact-list-rows :: rows}"></tbody>
     </table>
     <button hx-confirm="Are you sure you want to delete the selected contacts?"
             hx-delete="/contacts"
