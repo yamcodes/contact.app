@@ -18,11 +18,13 @@ public class ContactService {
   }
 
   public Contact findBySlug(String slug) {
-    return contactRepository.findBySlug(slug);
+    var contact = contactRepository.findBySlug(slug);
+    if (contact == null) throw new ContactNotFoundException();
+    return contact;
   }
 
   public void save(Contact contact) {
-    contact.setSlug(contact.getFirst().toLowerCase() + "-" + contact.getLast().toLowerCase());
+    contact.setSlug(generateSlug(contact));
     contactRepository.save(contact);
   }
 
@@ -39,7 +41,11 @@ public class ContactService {
     contact.setLast(updated.getLast());
     contact.setEmail(updated.getEmail());
     contact.setPhone(updated.getPhone());
-    contact.setSlug(updated.getFirst().toLowerCase() + "-" + updated.getLast().toLowerCase());
+    contact.setSlug(generateSlug(updated));
     return contactRepository.save(contact);
+  }
+
+  private String generateSlug(Contact contact) {
+    return contact.getFirst().toLowerCase() + "-" + contact.getLast().toLowerCase();
   }
 }

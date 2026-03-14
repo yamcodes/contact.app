@@ -36,9 +36,7 @@ public class ContactController {
 
   @GetMapping("/contacts/{slug}")
   public String viewContact(@PathVariable String slug, Model model) {
-    var contact = contactService.findBySlug(slug);
-    if (contact == null) throw new ContactNotFoundException();
-    model.addAttribute("contact", contact);
+    model.addAttribute("contact", contactService.findBySlug(slug));
     return "contacts/view";
   }
 
@@ -50,9 +48,7 @@ public class ContactController {
 
   @GetMapping("/contacts/{slug}/edit")
   public String editContact(@PathVariable String slug, Model model) {
-    var contact = contactService.findBySlug(slug);
-    if (contact == null) throw new ContactNotFoundException();
-    model.addAttribute("contact", contact);
+    model.addAttribute("contact", contactService.findBySlug(slug));
     return "contacts/edit";
   }
 
