@@ -1,26 +1,25 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <!--/*@thymesVar id="title" type="java.lang.String"*/-->
-    <title th:text="${title} ?: 'Contacts'">Contacts</title>
-    <link href="/static/styles.css" rel="stylesheet"/>
-    <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.8/dist/htmx.min.js"></script>
+  <meta charset="UTF-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <!--/*@thymesVar id="title" type="java.lang.String"*/-->
+  <title th:text="${title} ?: 'Contacts'">Contacts</title>
+  <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.8/dist/htmx.min.js"></script>
 </head>
 <body>
 <main>
-    <header>
-        <h1>
-            <a href="/">
-                <span class="all-caps">contact.app</span>
-            </a>
-            <span class="sub-title">A Demo Contacts Application</span>
-        </h1>
-    </header>
-    <div layout:fragment="content"></div>
+  <header>
+    <h1>
+      <a href="/">
+        <span class="all-caps">contact.app</span>
+      </a>
+      <span class="sub-title">A Demo Contacts Application</span>
+    </h1>
+  </header>
+  <div layout:fragment="content"></div>
 </main>
 </body>
 </html>

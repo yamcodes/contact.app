@@ -72,8 +72,9 @@ public class ContactController {
   }
 
   @DeleteMapping
-  public ResponseEntity<Void> deleteManyContacts(@RequestParam List<String> slugs) {
-    contactService.deleteMany(slugs);
+  public ResponseEntity<Void> deleteManyContacts(
+      @RequestParam List<String> selected_contact_slugs) {
+    contactService.deleteMany(selected_contact_slugs);
     return ResponseEntity.status(HttpStatus.SEE_OTHER).location(URI.create("/contacts")).build();
   }
 

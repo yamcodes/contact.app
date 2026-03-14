@@ -1,0 +1,48 @@
+<!--suppress HtmlFormInputWithoutLabel, XmlInvalidId -->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<th:block>
+  <!--/*@thymesVar id="contacts" type="java.util.List<codes.yam.contacts.Contact>"*/-->
+  <th:block th:each="contact : ${contacts}" th:object="${contact}">
+    <tr>
+      <td>
+        <input
+          name="selected_contact_slugs"
+          th:value="*{slug}"
+          type="checkbox"
+        />
+      </td>
+      <td th:text="*{first}"></td>
+      <td th:text="*{last}"></td>
+      <td th:text="*{phone}"></td>
+      <td th:text="*{email}"></td>
+      <td>
+        <a th:href="@{/contacts/{slug}/edit(slug=*{slug})}">Edit</a>
+        <a th:href="@{/contacts/{slug}(slug=*{slug})}">View</a>
+        <a
+          href="#"
+          hx-confirm="Are you sure you want to delete this contact?"
+          hx-swap="outerHTML swap:1s"
+          hx-target="closest tr"
+          th:attr="hx-delete=@{/contacts/{slug}(slug=*{slug})}"
+        >Delete</a>
+      </td>
+    </tr>
+  </th:block>
+  <th:block th:if="${contacts.size() >= 10}">
+    <tr>
+      <td colspan="5" style="text-align: center">
+                <span
+                  hx-select="tbody > tr"
+                  hx-swap="outerHTML"
+                  hx-target="closest tr"
+                  hx-trigger="revealed"
+                  th:attr="hx-get=@{/contacts(page=${page + 1})}"
+                >Loading More...</span>
+      </td>
+    </tr>
+  </th:block>
+</th:block>
+</body>
+</html>
