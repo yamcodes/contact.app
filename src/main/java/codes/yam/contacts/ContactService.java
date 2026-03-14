@@ -14,13 +14,13 @@ public class ContactService {
   }
 
   public List<Contact> search(String q) {
-    return contactRepository.findByFirstContainingIgnoreCaseOrLastContainingIgnoreCaseOrEmailContainingIgnoreCase(q, q, q);
+    return contactRepository
+        .findByFirstContainingIgnoreCaseOrLastContainingIgnoreCaseOrEmailContainingIgnoreCase(
+            q, q, q);
   }
 
   public Contact findBySlug(String slug) {
-    var contact = contactRepository.findBySlug(slug);
-    if (contact == null) throw new ContactNotFoundException();
-    return contact;
+    return contactRepository.findBySlug(slug).orElseThrow(ContactNotFoundException::new);
   }
 
   public void save(Contact contact) {
@@ -29,14 +29,12 @@ public class ContactService {
   }
 
   public void delete(String slug) {
-    var contact = contactRepository.findBySlug(slug);
-    if (contact == null) throw new ContactNotFoundException();
+    var contact = findBySlug(slug);
     contactRepository.delete(contact);
   }
 
   public Contact update(String slug, Contact updated) {
-    var contact = contactRepository.findBySlug(slug);
-    if (contact == null) throw new ContactNotFoundException();
+    var contact = findBySlug(slug);
     contact.setFirst(updated.getFirst());
     contact.setLast(updated.getLast());
     contact.setEmail(updated.getEmail());
@@ -45,7 +43,32 @@ public class ContactService {
     return contactRepository.save(contact);
   }
 
+  // TODO: This is fragile - throws NullPointException if first or last is null.
   private String generateSlug(Contact contact) {
     return contact.getFirst().toLowerCase() + "-" + contact.getLast().toLowerCase();
+  }
+
+  /**
+   * Check if an email exists.
+   *
+   * @param email - the email to check
+   * @return true or false
+   */
+  public boolean isEmailTaken(String email) {
+    return contactRepository.findByEmail(email).isPresent();
+  }
+
+  /**
+   * Check if an email exists (for other slugs than the supplied slug).
+   *
+   * @param email - the email to check
+   * @param excludeSlug - the slug to exclude from the check
+   * @return true or false
+   */
+  public boolean isEmailTaken(String email, String excludeSlug) {
+    return contactRepository
+        .findByEmail(email)
+        .map(contact -> !contact.getSlug().equals(excludeSlug))
+        .orElse(false);
   }
 }

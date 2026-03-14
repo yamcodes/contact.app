@@ -5,26 +5,39 @@
 <!--/*@thymesVar id="contact" type="codes.yam.contacts.Contact"*/-->
 <fieldset th:fragment="contact-fields" th:object="${contact}">
     <legend>Contact Values</legend>
-    <p>
+    <div>
         <label for="email">Email</label>
-        <input placeholder="Email" th:field="*{email}" type="email"/>
-        <span class="error" th:errors="*{email}" th:if="${#fields.hasErrors('email')}"></span>
-    </p>
-    <p>
+        <input hx-target="next div" hx-trigger="change, keyup delay:200ms changed" placeholder="Email"
+               th:attr="hx-get=@{/contacts/{slug}/email(slug=${contact.slug})}"
+               th:field="*{email}"
+               type="email"/>
+        <div>
+            <span class="error" th:errors="*{email}"></span>
+        </div>
+    </div>
+    <div>
         <label for="first">First Name</label>
-        <input placeholder="First Name" th:field="*{first}" type="text"/>
-        <span class="error" th:errors="*{first}" th:if="${#fields.hasErrors('first')}"></span>
-    </p>
-    <p>
+        <input placeholder="First Name"
+               th:field="*{first}"
+               type="text"/>
+        <div>
+            <span class="error" th:errors="*{first}"></span>
+        </div>
+    </div>
+    <div>
         <label for="last">Last Name</label>
         <input placeholder="Last Name" th:field="*{last}" type="text"/>
-        <span class="error" th:errors="*{last}" th:if="${#fields.hasErrors('last')}"></span>
-    </p>
-    <p>
+        <div>
+            <span class="error" th:errors="*{last}"></span>
+        </div>
+    </div>
+    <div>
         <label for="phone">Phone</label>
         <input placeholder="Phone" th:field="*{phone}" type="tel"/>
-        <span class="error" th:errors="*{phone}" th:if="${#fields.hasErrors('phone')}"></span>
-    </p>
+        <div>
+            <span class="error" th:errors="*{phone}"></span>
+        </div>
+    </div>
 </fieldset>
 </body>
 </html>
