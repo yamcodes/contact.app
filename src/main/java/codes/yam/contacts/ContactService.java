@@ -14,7 +14,9 @@ public class ContactService {
   }
 
   public List<Contact> search(String q) {
-    return contactRepository.findByFirstContainingIgnoreCaseOrLastContainingIgnoreCaseOrEmailContainingIgnoreCase(q, q, q);
+    return contactRepository
+        .findByFirstContainingIgnoreCaseOrLastContainingIgnoreCaseOrEmailContainingIgnoreCase(
+            q, q, q);
   }
 
   public Contact findBySlug(String slug) {
@@ -32,6 +34,11 @@ public class ContactService {
     var contact = contactRepository.findBySlug(slug);
     if (contact == null) throw new ContactNotFoundException();
     contactRepository.delete(contact);
+  }
+
+  public void deleteMany(List<String> slugs) {
+    var contacts = contactRepository.findAllBySlugIn(slugs);
+    contactRepository.deleteAll(contacts);
   }
 
   public Contact update(String slug, Contact updated) {

@@ -7,6 +7,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface ContactRepository extends JpaRepository<Contact, UUID> {
   Contact findBySlug(String slug);
 
-  List<Contact> findByFirstContainingIgnoreCaseOrLastContainingIgnoreCaseOrEmailContainingIgnoreCase(
-      String first, String last, String email);
+  List<Contact> findAllBySlugIn(List<String> slugs);
+
+  List<Contact>
+      findByFirstContainingIgnoreCaseOrLastContainingIgnoreCaseOrEmailContainingIgnoreCase(
+          String first, String last, String email);
 }
