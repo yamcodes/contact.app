@@ -9,26 +9,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
+@RequestMapping("/contacts")
 @RequiredArgsConstructor
 public class ContactController {
   private final ContactService contactService;
+  private final jakarta.validation.Validator validator;
 
-  @GetMapping("/")
-  public String index() {
-    return "redirect:/contacts";
-  }
-
-  @GetMapping("/contacts")
+  @GetMapping
   public String contacts(@RequestParam(required = false) String q, Model model) {
     var contacts =
         (q != null && !q.isBlank()) ? contactService.search(q) : contactService.findAll();
@@ -37,25 +27,25 @@ public class ContactController {
     return "contacts/list";
   }
 
-  @GetMapping("/contacts/{slug}")
+  @GetMapping("/{slug}")
   public String viewContact(@PathVariable String slug, Model model) {
     model.addAttribute("contact", contactService.findBySlug(slug));
     return "contacts/view";
   }
 
-  @GetMapping("/contacts/new")
+  @GetMapping("/new")
   public String newContact(Model model) {
     model.addAttribute("contact", new Contact());
     return "contacts/new";
   }
 
-  @GetMapping("/contacts/{slug}/edit")
+  @GetMapping("/{slug}/edit")
   public String editContact(@PathVariable String slug, Model model) {
     model.addAttribute("contact", contactService.findBySlug(slug));
     return "contacts/edit";
   }
 
-  @PostMapping("/contacts/{slug}/edit")
+  @PostMapping("/{slug}/edit")
   public String updateContact(
       @PathVariable String slug, @Valid @ModelAttribute Contact contact, BindingResult result) {
     if (result.hasErrors()) {
@@ -65,7 +55,7 @@ public class ContactController {
     return "redirect:/contacts/" + updated.getSlug();
   }
 
-  @PostMapping("/contacts")
+  @PostMapping
   public String createContact(@Valid @ModelAttribute Contact contact, BindingResult result) {
     if (result.hasErrors()) {
       return "contacts/new";
@@ -74,18 +64,30 @@ public class ContactController {
     return "redirect:/contacts";
   }
 
-  @DeleteMapping("/contacts/{slug}")
+  @DeleteMapping("/{slug}")
   public ResponseEntity<Void> deleteContact(@PathVariable String slug) {
     contactService.delete(slug);
     // TODO: extract seeOther helper if this pattern repeats
     return ResponseEntity.status(HttpStatus.SEE_OTHER).location(URI.create("/contacts")).build();
   }
 
-  @DeleteMapping("/contacts")
+  @DeleteMapping
   public ResponseEntity<Void> deleteManyContacts(@RequestParam List<String> slugs) {
     contactService.deleteMany(slugs);
-    // Not sure about this return...
     return ResponseEntity.status(HttpStatus.SEE_OTHER).location(URI.create("/contacts")).build();
+  }
+
+  @GetMapping("/{slug}/email")
+  @ResponseBody
+  public String validateEmail(@PathVariable String slug, @RequestParam String email) {
+    var violations = validator.validateValue(Contact.class, "email", email);
+    if (!violations.isEmpty()) {
+      return violations.iterator().next().getMessage();
+    }
+    if (contactService.isEmailTaken(email, slug)) {
+      return "Email already taken";
+    }
+    return "";
   }
 
   @ExceptionHandler(ContactNotFoundException.class)
