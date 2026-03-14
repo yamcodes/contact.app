@@ -80,6 +80,7 @@ public class ContactController {
   @DeleteMapping("/contacts/{slug}")
   public ResponseEntity<Void> deleteContact(@PathVariable String slug) {
     contactService.delete(slug);
+    // TODO: extract seeOther helper if this pattern repeats
     return ResponseEntity.status(HttpStatus.SEE_OTHER).location(URI.create("/contacts")).build();
   }
 
