@@ -19,11 +19,15 @@ public class ContactController {
   private final jakarta.validation.Validator validator;
 
   @GetMapping
-  public String contacts(@RequestParam(required = false) String q, Model model) {
+  public String contacts(
+      @RequestParam(required = false) String q,
+      @RequestParam(defaultValue = "0") int page,
+      Model model) {
     var contacts =
         (q != null && !q.isBlank()) ? contactService.search(q) : contactService.findAll();
     model.addAttribute("contacts", contacts);
     model.addAttribute("search", q);
+    model.addAttribute("page", page);
     return "contacts/list";
   }
 

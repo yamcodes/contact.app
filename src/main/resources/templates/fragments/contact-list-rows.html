@@ -33,13 +33,14 @@
   <th:block th:if="${contacts.size() >= 10}">
     <tr>
       <td colspan="5" style="text-align: center">
-                <span
-                  hx-select="tbody > tr"
-                  hx-swap="outerHTML"
-                  hx-target="closest tr"
-                  hx-trigger="revealed"
-                  th:attr="hx-get=@{/contacts(page=${page + 1})}"
-                >Loading More...</span>
+        <!--/*@thymesVar id="page" type="java.lang.Integer"*/-->
+        <span
+          hx-select="tbody > tr"
+          hx-swap="outerHTML"
+          hx-target="closest tr"
+          hx-trigger="revealed"
+          th:attr="hx-get=@{/contacts(page=${page + 1})}"
+        >Loading More...</span>
       </td>
     </tr>
   </th:block>
