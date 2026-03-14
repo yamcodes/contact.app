@@ -74,8 +74,12 @@ public class ContactController {
   @ResponseBody
   public String validateEmail(@PathVariable String slug, @RequestParam String email) {
     var violations = validator.validateValue(Contact.class, "email", email);
-    if (!violations.isEmpty()) return violations.iterator().next().getMessage();
-    if (contactService.isEmailTaken(email, slug)) return "Email already taken";
+    if (!violations.isEmpty()) {
+      return violations.iterator().next().getMessage();
+    }
+    if (contactService.isEmailTaken(email, slug)) {
+      return "Email already taken";
+    }
     return "";
   }
 
