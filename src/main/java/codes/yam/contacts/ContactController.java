@@ -73,11 +73,11 @@ public class ContactController {
 
   @DeleteMapping
   public ResponseEntity<Void> deleteManyContacts(
-      @RequestParam(required = false) List<String> selected_contact_slugs) {
-    if (selected_contact_slugs == null || selected_contact_slugs.isEmpty()) {
-      return ResponseEntity.noContent().build();
+      @RequestParam(name = "selected_contact_slugs", required = false)
+          List<String> selectedContactSlugs) {
+    if (selectedContactSlugs != null && !selectedContactSlugs.isEmpty()) {
+      contactService.deleteMany(selectedContactSlugs);
     }
-    contactService.deleteMany(selected_contact_slugs);
     return ResponseEntity.status(HttpStatus.SEE_OTHER).location(URI.create("/contacts")).build();
   }
 
