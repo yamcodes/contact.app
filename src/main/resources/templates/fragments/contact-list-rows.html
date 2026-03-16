@@ -2,14 +2,15 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <body>
-<th:block th:fragment="rows">
+<th:block th:fragment="rows(contacts)">
   <!--/*@thymesVar id="contacts" type="java.util.List<codes.yam.contacts.Contact>"*/-->
+  <!--/*@thymesVar id="contact" type="codes.yam.contacts.Contact"*/-->
   <tr th:each="contact : ${contacts}" th:object="${contact}">
     <td>
       <input
         name="selected_contact_slugs"
-        th:value="*{slug}"
         th:attr="aria-label=*{first} + ' ' + *{last}"
+        th:value="*{slug}"
         type="checkbox"
       />
     </td>

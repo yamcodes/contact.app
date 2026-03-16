@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="~{layout}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+<body>
+<!--/*@thymesVar id="search" type="java.lang.String"*/-->
+<!--/*@thymesVar id="contactPage" type="org.springframework.data.domain.Page<codes.yam.contacts.Contact>"*/-->
+<div layout:fragment="content">
+  <form action="/contacts" method="get">
+    <label for="search">Search contacts:</label>
+    <input
+      id="search" name="q"
+      placeholder="Search contacts..."
+      th:value="${search}"
+      type="search"
+    />
+    <button type="submit">Search</button>
+  </form>
+
+  <p th:unless="${#strings.isEmpty(search)}">Results for "<span th:text="${search}"></span>":</p>
+
+  <p th:if="${contactPage.content.isEmpty()}">No contacts found.</p>
+  <form th:unless="${contactPage.content.isEmpty()}"
+        th:attr="hx-delete=@{/contacts}"
+        hx-target="body"
+        hx-push-url="true">
+    <table>
+      <thead>
+      <tr>
+        <th></th>
+        <th>First</th>
+        <th>Last</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody th:replace="~{fragments/contact-list-rows::rows(contacts=${contactPage.content})}">
+      </tbody>
+    </table>
+    <button type="submit">Delete Selected</button>
+  </form>
+  <div th:if="${contactPage.totalPages > 1}">
+    <a th:href="@{/contacts(page=${contactPage.number - 1}, q=${search}, sort='last,asc', size=${contactPage.size})}"
+       th:if="${!contactPage.isFirst()}">Previous</a>
+    <span th:text="${contactPage.number + 1} + ' / ' + ${contactPage.totalPages}"></span>
+    <a th:href="@{/contacts(page=${contactPage.number + 1}, q=${search}, sort='last,asc', size=${contactPage.size})}"
+       th:if="${!contactPage.isLast()}">Next</a>
+  </div>
+  <p>
+    <a th:href="@{/contacts/new}">Add New Contact</a>
+  </p>
+</div>
+</body>
+</html>

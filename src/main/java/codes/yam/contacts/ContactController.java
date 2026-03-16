@@ -4,6 +4,8 @@ import jakarta.validation.Valid;
 import java.net.URI;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -19,12 +21,13 @@ public class ContactController {
   private final jakarta.validation.Validator validator;
 
   @GetMapping
-  public String contacts(@RequestParam(required = false) String q, Model model) {
-    var contacts =
-        (q != null && !q.isBlank()) ? contactService.search(q) : contactService.findAll();
-    model.addAttribute("contacts", contacts);
+  public String contacts(
+      @RequestParam(required = false) String q,
+      @PageableDefault(sort = "last") Pageable pageable,
+      Model model) {
+    model.addAttribute("contactPage", contactService.list(q, pageable));
     model.addAttribute("search", q);
-    return "contacts/list";
+    return "contacts/index";
   }
 
   @GetMapping("/{slug}")
@@ -86,10 +89,10 @@ public class ContactController {
   public String validateEmail(@PathVariable String slug, @RequestParam String email) {
     var violations = validator.validateValue(Contact.class, "email", email);
     if (!violations.isEmpty()) {
-      return violations.iterator().next().getMessage();
+      return "<span class=\"error\">" + violations.iterator().next().getMessage() + "</span>";
     }
     if (contactService.isEmailTaken(email, slug)) {
-      return "Email already taken";
+      return "<span class=\"error\">Email already taken</span>";
     }
     return "";
   }

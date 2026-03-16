@@ -2,6 +2,8 @@ package codes.yam.contacts;
 
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -9,12 +11,11 @@ import org.springframework.stereotype.Service;
 public class ContactService {
   private final ContactRepository contactRepository;
 
-  public List<Contact> findAll() {
-    return contactRepository.findAll();
-  }
-
-  public List<Contact> search(String q) {
-    return contactRepository.search(q);
+  public Page<Contact> list(String q, Pageable pageable) {
+    if (q != null && !q.isBlank()) {
+      return contactRepository.search(q, pageable);
+    }
+    return contactRepository.findAll(pageable);
   }
 
   public Contact findBySlug(String slug) {
@@ -33,7 +34,7 @@ public class ContactService {
 
   public void deleteMany(List<String> slugs) {
     var contacts = contactRepository.findAllBySlugIn(slugs);
-    contactRepository.deleteAll(contacts);
+    contactRepository.deleteAllInBatch(contacts);
   }
 
   public Contact update(String slug, Contact updated) {
@@ -46,9 +47,9 @@ public class ContactService {
     return contactRepository.save(contact);
   }
 
-  // TODO: This is fragile - throws NullPointException if first or last is null.
   private String generateSlug(Contact contact) {
-    return contact.getFirst().toLowerCase() + "-" + contact.getLast().toLowerCase();
+    return (contact.getFirst().toLowerCase() + "-" + contact.getLast().toLowerCase())
+        .replaceAll("[^a-z0-9-]", "");
   }
 
   /**
