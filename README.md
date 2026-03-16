@@ -6,10 +6,10 @@ A simple contacts app built with Bun and Hono.
 
 | Branch | Summary | Description |
 |--------|---------|-------------|
-| [`main`](https://github.com/yamcodes/contact.app/tree/main) | Hypermedia-Driven Application | Server-rendered HTML using links and forms. Full page reloads. Pure hypermedia, no client-side JS. |
-| **[`htmx`](https://github.com/yamcodes/contact.app/tree/htmx)** (You're here!) | **HDA + HTMX** | **Same architecture as `main`, enhanced with HTMX for partial updates without JSON or client-side state.** |
-| [`eta`](https://github.com/yamcodes/contact.app/tree/eta) | HDA (Eta templates) | Same architecture as `main`, using string-based Eta templates instead of JSX. |
-| [`spring`](https://github.com/yamcodes/contact.app/tree/spring) | HDA + Spring Boot | Same architecture, rewritten in Java with Spring Boot, Thymeleaf, and htmx-spring-boot. |
+| [`hono-web1`](https://github.com/yamcodes/contact.app/tree/hono-web1) | Hypermedia-Driven Application | Server-rendered HTML using links and forms. Full page reloads. Pure hypermedia, no client-side JS. |
+| **[`hono`](https://github.com/yamcodes/contact.app/tree/hono)** (You're here!) | **HDA + HTMX** | **Same architecture as `hono-web1`, enhanced with HTMX for partial updates without JSON or client-side state.** |
+| [`hono-eta`](https://github.com/yamcodes/contact.app/tree/hono-eta) | HDA (Eta templates) | Same architecture as `hono-web1`, using string-based Eta templates instead of JSX. |
+| [`main`](https://github.com/yamcodes/contact.app/tree/main) | HDA + Spring Boot | Same architecture, rewritten in Java with Spring Boot, Thymeleaf, and htmx-spring-boot. |
 
 There are also temporary feature branches but these are the stable branches.
 
@@ -17,7 +17,7 @@ There are also temporary feature branches but these are the stable branches.
 
 This app follows the architecture from [Hypermedia Systems](https://hypermedia.systems/part/htmx/) — same ideas, different tech stack (Bun + Hono instead of Python + Flask).
 
-This branch (`htmx`) uses [htmx](https://htmx.org) for a modern hypermedia-driven experience:
+This branch (`hono`) uses [htmx](https://htmx.org) for a modern hypermedia-driven experience:
 - HTML is rendered on the server
 - htmx handles partial page updates via AJAX
 - No full page reloads for most interactions
