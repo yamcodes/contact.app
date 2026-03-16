@@ -41,10 +41,10 @@
     <button type="submit">Delete Selected</button>
   </form>
   <div th:if="${contactPage.totalPages > 1}">
-    <a th:href="@{/contacts(page=${contactPage.number - 1}, q=${search}, sort='last,asc')}"
+    <a th:href="@{/contacts(page=${contactPage.number - 1}, q=${search}, sort='last,asc', size=${contactPage.size})}"
        th:if="${!contactPage.isFirst()}">Previous</a>
     <span th:text="${contactPage.number + 1} + ' / ' + ${contactPage.totalPages}"></span>
-    <a th:href="@{/contacts(page=${contactPage.number + 1}, q=${search}, sort='last,asc')}"
+    <a th:href="@{/contacts(page=${contactPage.number + 1}, q=${search}, sort='last,asc', size=${contactPage.size})}"
        th:if="${!contactPage.isLast()}">Next</a>
   </div>
   <p>
