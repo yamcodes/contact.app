@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -15,9 +17,10 @@ public interface ContactRepository extends JpaRepository<Contact, UUID> {
 
   List<Contact> findAllBySlugIn(Collection<String> slugs);
 
-  @Query("SELECT c FROM Contact c WHERE " +
-         "LOWER(c.first) LIKE LOWER(CONCAT('%', :q, '%')) OR " +
-         "LOWER(c.last)  LIKE LOWER(CONCAT('%', :q, '%')) OR " +
-         "LOWER(c.email) LIKE LOWER(CONCAT('%', :q, '%'))")
-  List<Contact> search(@Param("q") String q);
+  @Query(
+      "SELECT c FROM Contact c WHERE "
+          + "LOWER(c.first) LIKE LOWER(CONCAT('%', :q, '%')) OR "
+          + "LOWER(c.last)  LIKE LOWER(CONCAT('%', :q, '%')) OR "
+          + "LOWER(c.email) LIKE LOWER(CONCAT('%', :q, '%'))")
+  Page<Contact> search(@Param("q") String q, Pageable pageable);
 }
