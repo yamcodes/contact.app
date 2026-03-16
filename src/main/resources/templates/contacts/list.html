@@ -1,51 +1,52 @@
 <!DOCTYPE html>
-<html layout:decorate="~{layout}" lang="en"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html lang="en" layout:decorate="~{layout}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
 <body>
 <!--/*@thymesVar id="search" type="java.lang.String"*/-->
 <!--/*@thymesVar id="contacts" type="java.util.List<codes.yam.contacts.Contact>"*/-->
 <div layout:fragment="content">
-    <form action="/contacts" method="get">
-        <label for="search">Search contacts:</label>
-        <input
-                id="search" name="q"
-                placeholder="Search contacts..."
-                th:value="${search}"
-                type="search"
-        />
-        <button type="submit">Search</button>
-    </form>
+  <form action="/contacts" method="get">
+    <label for="search">Search contacts:</label>
+    <input
+      id="search" name="q"
+      placeholder="Search contacts..."
+      th:value="${search}"
+      type="search"
+    />
+    <button type="submit">Search</button>
+  </form>
 
-    <p th:if="${search}">Results for "<span th:text="${search}"></span>":</p>
+  <p th:if="${search}">Results for "<span th:text="${search}"></span>":</p>
 
-    <p th:if="${contacts.isEmpty()}">No contacts found.</p>
-    <table th:unless="${contacts.isEmpty()}">
-        <thead>
-        <tr>
-            <th>First</th>
-            <th>Last</th>
-            <th>Phone</th>
-            <th>Email</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="contact : ${contacts}">
-            <td th:text="${contact.first}"></td>
-            <td th:text="${contact.last}"></td>
-            <td th:text="${contact.phone}"></td>
-            <td th:text="${contact.email}"></td>
-            <td>
-                <a th:href="@{/contacts/{slug}/edit(slug=${contact.slug})}">Edit</a>
-                <a th:href="@{/contacts/{slug}(slug=${contact.slug})}">View</a>
-            </td>
-        </tr>
-        </tbody>
+  <p th:if="${contacts.isEmpty()}">No contacts found.</p>
+  <form th:unless="${contacts.isEmpty()}">
+    <table>
+      <thead>
+      <tr>
+        <th></th>
+        <th>First</th>
+        <th>Last</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody th:insert="~{fragments/contact-list-rows :: rows}"></tbody>
     </table>
-    <p>
-        <a href="/contacts/new">Add New Contact</a>
-    </p>
+    <button
+      hx-confirm="Are you sure you want to delete the selected contacts?"
+      hx-delete="/contacts"
+      hx-target="body"
+      type="button"
+    >
+      Delete Selected
+    </button>
+  </form>
+  <p>
+    <a href="/contacts/new">Add New Contact</a>
+    <span th:text="'(' + ${contacts.size()} + ' total contacts)'"></span>
+  </p>
 </div>
 </body>
 </html>

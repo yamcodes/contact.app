@@ -18,16 +18,11 @@ public class Contact {
 
   private String slug;
 
-  @NotBlank
-  private String first;
+  @NotBlank private String first;
 
-  @NotBlank
-  private String last;
+  @NotBlank private String last;
 
-  @NotBlank
-  @Email
-  private String email;
+  @NotBlank @Email private String email;
 
-  @NotBlank
-  private String phone;
+  @NotBlank private String phone;
 }

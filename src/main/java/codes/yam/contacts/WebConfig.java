@@ -18,10 +18,10 @@ public class WebConfig implements WebMvcConfigurer {
 
   @Bean
   public FilterRegistrationBean<UrlHandlerFilter> trailingSlashFilter() {
-    UrlHandlerFilter filter = UrlHandlerFilter
-        .trailingSlashHandler("/**")
-        .redirect(HttpStatus.PERMANENT_REDIRECT)
-        .build();
+    UrlHandlerFilter filter =
+        UrlHandlerFilter.trailingSlashHandler("/**")
+            .redirect(HttpStatus.PERMANENT_REDIRECT)
+            .build();
     return new FilterRegistrationBean<>(filter);
   }
 }

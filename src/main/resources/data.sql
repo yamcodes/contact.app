@@ -1,3 +1,21 @@
-INSERT INTO contact (id, slug, first, last, email, phone) VALUES
-('550e8400-e29b-41d4-a716-446655440000', 'john-doe', 'John', 'Doe', 'john@example.com', '555-1234'),
-('550e8400-e29b-41d4-a716-446655440001', 'jane-doe', 'Jane', 'Doe', 'jane@example.com', '555-5678');
+INSERT INTO contact (id, slug, first, last, email, phone)
+VALUES ('550e8400-e29b-41d4-a716-446655440000', 'john-doe', 'John', 'Doe', 'john@example.com', '555-1234'),
+       ('550e8400-e29b-41d4-a716-446655440001', 'jane-doe', 'Jane', 'Doe', 'jane@example.com', '555-5678'),
+       ('550e8400-e29b-41d4-a716-446655440002', 'alice-smith', 'Alice', 'Smith', 'alice@example.com', '555-2001'),
+       ('550e8400-e29b-41d4-a716-446655440003', 'bob-johnson', 'Bob', 'Johnson', 'bob@example.com', '555-2002'),
+       ('550e8400-e29b-41d4-a716-446655440004', 'carol-williams', 'Carol', 'Williams', 'carol@example.com', '555-2003'),
+       ('550e8400-e29b-41d4-a716-446655440005', 'dave-brown', 'Dave', 'Brown', 'dave@example.com', '555-2004'),
+       ('550e8400-e29b-41d4-a716-446655440006', 'eve-jones', 'Eve', 'Jones', 'eve@example.com', '555-2005'),
+       ('550e8400-e29b-41d4-a716-446655440007', 'frank-garcia', 'Frank', 'Garcia', 'frank@example.com', '555-2006'),
+       ('550e8400-e29b-41d4-a716-446655440008', 'grace-martinez', 'Grace', 'Martinez', 'grace@example.com', '555-2007'),
+       ('550e8400-e29b-41d4-a716-446655440009', 'henry-davis', 'Henry', 'Davis', 'henry@example.com', '555-2008'),
+       ('550e8400-e29b-41d4-a716-44665544000a', 'iris-miller', 'Iris', 'Miller', 'iris@example.com', '555-2009'),
+       ('550e8400-e29b-41d4-a716-44665544000b', 'jack-wilson', 'Jack', 'Wilson', 'jack@example.com', '555-2010'),
+       ('550e8400-e29b-41d4-a716-44665544000c', 'karen-moore', 'Karen', 'Moore', 'karen@example.com', '555-2011'),
+       ('550e8400-e29b-41d4-a716-44665544000d', 'leo-taylor', 'Leo', 'Taylor', 'leo@example.com', '555-2012'),
+       ('550e8400-e29b-41d4-a716-44665544000e', 'mia-anderson', 'Mia', 'Anderson', 'mia@example.com', '555-2013'),
+       ('550e8400-e29b-41d4-a716-44665544000f', 'nick-thomas', 'Nick', 'Thomas', 'nick@example.com', '555-2014'),
+       ('550e8400-e29b-41d4-a716-446655440010', 'olivia-jackson', 'Olivia', 'Jackson', 'olivia@example.com', '555-2015'),
+       ('550e8400-e29b-41d4-a716-446655440011', 'paul-white', 'Paul', 'White', 'paul@example.com', '555-2016'),
+       ('550e8400-e29b-41d4-a716-446655440012', 'quinn-harris', 'Quinn', 'Harris', 'quinn@example.com', '555-2017'),
+       ('550e8400-e29b-41d4-a716-446655440013', 'rachel-clark', 'Rachel', 'Clark', 'rachel@example.com', '555-2018');

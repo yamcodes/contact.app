@@ -15,9 +15,10 @@ public interface ContactRepository extends JpaRepository<Contact, UUID> {
 
   List<Contact> findAllBySlugIn(Collection<String> slugs);
 
-  @Query("SELECT c FROM Contact c WHERE " +
-         "LOWER(c.first) LIKE LOWER(CONCAT('%', :q, '%')) OR " +
-         "LOWER(c.last)  LIKE LOWER(CONCAT('%', :q, '%')) OR " +
-         "LOWER(c.email) LIKE LOWER(CONCAT('%', :q, '%'))")
+  @Query(
+      "SELECT c FROM Contact c WHERE "
+          + "LOWER(c.first) LIKE LOWER(CONCAT('%', :q, '%')) OR "
+          + "LOWER(c.last)  LIKE LOWER(CONCAT('%', :q, '%')) OR "
+          + "LOWER(c.email) LIKE LOWER(CONCAT('%', :q, '%'))")
   List<Contact> search(@Param("q") String q);
 }
