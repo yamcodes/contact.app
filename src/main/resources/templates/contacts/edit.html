@@ -3,26 +3,26 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Edit Contact</title>
+  <title>Edit Contact</title>
 </head>
 <body>
 <!--/*@thymesVar id="contact" type="codes.yam.contacts.Contact"*/-->
 <div layout:fragment="content">
-    <h2>Edit Contact</h2>
-    <form method="post" th:action="@{/contacts/{slug}/edit(slug=${contact.slug})}">
-        <th:block th:replace="~{fragments/contact-fields::contact-fields}"></th:block>
-        <button type="submit">Save</button>
-    </form>
-    <button
-            hx-confirm="Are you sure you want to delete this contact?"
-            th:attr="hx-delete=@{/contacts/{slug}(slug=${contact.slug})}"
-            hx-push-url="true"
-            hx-target="body">
-        Delete Contact
-    </button>
-    <p>
-        <a href="/contacts">Back</a>
-    </p>
+  <h2>Edit Contact</h2>
+  <form method="post" th:action="@{/contacts/{slug}/edit(slug=${contact.slug})}">
+    <th:block th:replace="~{fragments/contact-fields::contact-fields}"></th:block>
+    <button type="submit">Save</button>
+  </form>
+  <button
+    hx-confirm="Are you sure you want to delete this contact?"
+    hx-push-url="true"
+    hx-target="body"
+    th:attr="hx-delete=@{/contacts/{slug}(slug=${contact.slug})}">
+    Delete Contact
+  </button>
+  <p>
+    <a href="/contacts">Back</a>
+  </p>
 </div>
 </body>
 </html>

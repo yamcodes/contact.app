@@ -4,40 +4,40 @@
 <body>
 <!--/*@thymesVar id="contact" type="codes.yam.contacts.Contact"*/-->
 <fieldset th:fragment="contact-fields" th:object="${contact}">
-    <legend>Contact Values</legend>
+  <legend>Contact Values</legend>
+  <div>
+    <label for="email">Email</label>
+    <input hx-target="next div" hx-trigger="change, keyup delay:200ms changed" placeholder="Email"
+           th:attr="${contact.slug != null} ? 'hx-get='+@{/contacts/{slug}/email(slug=${contact.slug})}"
+           th:field="*{email}"
+           type="email"/>
     <div>
-        <label for="email">Email</label>
-        <input hx-target="next div" hx-trigger="change, keyup delay:200ms changed" placeholder="Email"
-               th:attr="hx-get=@{/contacts/{slug}/email(slug=${contact.slug})}"
-               th:field="*{email}"
-               type="email"/>
-        <div>
-            <span class="error" th:errors="*{email}"></span>
-        </div>
+      <span class="error" th:errors="*{email}"></span>
     </div>
+  </div>
+  <div>
+    <label for="first">First Name</label>
+    <input placeholder="First Name"
+           th:field="*{first}"
+           type="text"/>
     <div>
-        <label for="first">First Name</label>
-        <input placeholder="First Name"
-               th:field="*{first}"
-               type="text"/>
-        <div>
-            <span class="error" th:errors="*{first}"></span>
-        </div>
+      <span class="error" th:errors="*{first}"></span>
     </div>
+  </div>
+  <div>
+    <label for="last">Last Name</label>
+    <input placeholder="Last Name" th:field="*{last}" type="text"/>
     <div>
-        <label for="last">Last Name</label>
-        <input placeholder="Last Name" th:field="*{last}" type="text"/>
-        <div>
-            <span class="error" th:errors="*{last}"></span>
-        </div>
+      <span class="error" th:errors="*{last}"></span>
     </div>
+  </div>
+  <div>
+    <label for="phone">Phone</label>
+    <input placeholder="Phone" th:field="*{phone}" type="tel"/>
     <div>
-        <label for="phone">Phone</label>
-        <input placeholder="Phone" th:field="*{phone}" type="tel"/>
-        <div>
-            <span class="error" th:errors="*{phone}"></span>
-        </div>
+      <span class="error" th:errors="*{phone}"></span>
     </div>
+  </div>
 </fieldset>
 </body>
 </html>
