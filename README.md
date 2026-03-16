@@ -6,9 +6,9 @@ A simple contacts app built with Bun and Hono.
 
 | Branch | Summary | Description |
 |--------|---------|-------------|
-| [`main`](https://github.com/yamcodes/contact.app/tree/main) | Hypermedia-Driven Application | Server-rendered HTML using links and forms. Full page reloads. Pure hypermedia, no client-side JS. |
-| [`htmx`](https://github.com/yamcodes/contact.app/tree/htmx) | HDA + HTMX | Same architecture as `main`, enhanced with HTMX for partial updates without JSON or client-side state. |
-| **[`eta`](https://github.com/yamcodes/contact.app/tree/eta)** (You're here!) | **HDA (Eta templates)** | **Same architecture as `main`, using string-based Eta templates instead of JSX.** |
+| [`hono-web1`](https://github.com/yamcodes/contact.app/tree/hono-web1) | Hypermedia-Driven Application | Server-rendered HTML using links and forms. Full page reloads. Pure hypermedia, no client-side JS. |
+| [`hono`](https://github.com/yamcodes/contact.app/tree/hono) | HDA + HTMX | Same architecture as `hono-web1`, enhanced with HTMX for partial updates without JSON or client-side state. |
+| **[`hono-eta`](https://github.com/yamcodes/contact.app/tree/hono-eta)** (You're here!) | **HDA (Eta templates)** | **Same architecture as `hono-web1`, using string-based Eta templates instead of JSX.** |
 
 There are also temporary feature branches but these are the 3 stable branches.
 
