@@ -6,10 +6,10 @@ A simple contacts app built with Bun and Hono.
 
 | Branch | Summary | Description |
 |--------|---------|-------------|
-| **[`main`](https://github.com/yamcodes/contact.app/tree/main)** (You're here!) | **Hypermedia-Driven Application** | **Server-rendered HTML using links and forms. Full page reloads. Pure hypermedia, no client-side JS.** |
-| [`htmx`](https://github.com/yamcodes/contact.app/tree/htmx) | HDA + HTMX | Same architecture as `main`, enhanced with HTMX for partial updates without JSON or client-side state. |
-| [`eta`](https://github.com/yamcodes/contact.app/tree/eta) | HDA (Eta templates) | Same architecture as `main`, using string-based Eta templates instead of JSX. |
-| [`spring`](https://github.com/yamcodes/contact.app/tree/spring) | HDA + Spring Boot | Same architecture, rewritten in Java with Spring Boot, Thymeleaf, and htmx-spring-boot. |
+| **[`hono-web1`](https://github.com/yamcodes/contact.app/tree/hono-web1)** (You're here!) | **Hypermedia-Driven Application** | **Server-rendered HTML using links and forms. Full page reloads. Pure hypermedia, no client-side JS.** |
+| [`hono`](https://github.com/yamcodes/contact.app/tree/hono) | HDA + HTMX | Same architecture as `hono-web1`, enhanced with HTMX for partial updates without JSON or client-side state. |
+| [`hono-eta`](https://github.com/yamcodes/contact.app/tree/hono-eta) | HDA (Eta templates) | Same architecture as `hono-web1`, using string-based Eta templates instead of JSX. |
+| [`main`](https://github.com/yamcodes/contact.app/tree/main) | HDA + Spring Boot | Same architecture, rewritten in Java with Spring Boot, Thymeleaf, and htmx-spring-boot. |
 
 There are also temporary feature branches but these are the stable branches.
 
@@ -17,7 +17,7 @@ There are also temporary feature branches but these are the stable branches.
 
 This app follows the architecture from [Hypermedia Systems](https://hypermedia.systems/part/htmx/) — same ideas, different tech stack (Bun + Hono instead of Python + Flask).
 
-This branch (`main`) uses classic Web 1.0 patterns:
+This branch (`hono-web1`) uses classic Web 1.0 patterns:
 - HTML is rendered on the server using Hono JSX
 - Full page reloads for all navigation
 - Standard HTML form submissions
@@ -25,7 +25,7 @@ This branch (`main`) uses classic Web 1.0 patterns:
 
 Think "Web 1.0" — pure server-rendered HTML with traditional request/response cycles.
 
-> Check out the [`htmx`](https://github.com/yamcodes/contact.app/tree/htmx) branch for the htmx-enhanced version with partial page updates.
+> Check out the [`hono`](https://github.com/yamcodes/contact.app/tree/hono) branch for the htmx-enhanced version with partial page updates.
 
 ## Features
 
