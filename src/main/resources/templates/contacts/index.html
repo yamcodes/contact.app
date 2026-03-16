@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" layout:decorate="~{layout}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+<body>
+<!--/*@thymesVar id="search" type="java.lang.String"*/-->
+<!--/*@thymesVar id="page" type="org.springframework.data.domain.Page<codes.yam.contacts.Contact>"*/-->
+<div layout:fragment="content">
+  <form action="/contacts" method="get">
+    <label for="search">Search contacts:</label>
+    <input
+      id="search" name="q"
+      placeholder="Search contacts..."
+      th:value="${search}"
+      type="search"
+    />
+    <button type="submit">Search</button>
+  </form>
+
+  <p th:unless="${#strings.isEmpty(search)}">Results for "<span th:text="${search}"></span>":</p>
+
+  <p th:if="${page.content.isEmpty()}">No contacts found.</p>
+  <table th:unless="${page.content.isEmpty()}">
+    <thead>
+    <tr>
+      <th>First</th>
+      <th>Last</th>
+      <th>Phone</th>
+      <th>Email</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="contact : ${page.content}">
+      <td th:text="${contact.first}"></td>
+      <td th:text="${contact.last}"></td>
+      <td th:text="${contact.phone}"></td>
+      <td th:text="${contact.email}"></td>
+      <td>
+        <a th:href="@{/contacts/{slug}/edit(slug=${contact.slug})}">Edit</a>
+        <a th:href="@{/contacts/{slug}(slug=${contact.slug})}">View</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div th:if="${page.totalPages > 1}">
+    <a th:href="@{/contacts(page=${page.number}, q=${search})}" th:if="${!page.first}">Previous</a>
+    <span th:text="${page.number + 1} + ' / ' + ${page.totalPages}"></span>
+    <a th:href="@{/contacts(page=${page.number + 2}, q=${search})}" th:if="${!page.last}">Next</a>
+  </div>
+  <p>
+    <a href="/contacts/new">Add New Contact</a>
+  </p>
+</div>
+</body>
+</html>
