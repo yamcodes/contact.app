@@ -8,7 +8,7 @@
   <div>
     <label for="email">Email</label>
     <input hx-target="next div" hx-trigger="change, keyup delay:200ms changed" placeholder="Email"
-           th:attr="${contact.slug != null} ? 'hx-get='+@{/contacts/{slug}/email(slug=${contact.slug})}"
+           th:attr="hx-get=${contact.slug != null} ? '/contacts/' + ${contact.slug} + '/email' : null"
            th:field="*{email}"
            type="email"/>
     <div>
