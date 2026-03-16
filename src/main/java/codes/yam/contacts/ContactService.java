@@ -33,7 +33,7 @@ public class ContactService {
 
   public void deleteMany(List<String> slugs) {
     var contacts = contactRepository.findAllBySlugIn(slugs);
-    contactRepository.deleteAll(contacts);
+    contactRepository.deleteAllInBatch(contacts);
   }
 
   public Contact update(String slug, Contact updated) {
