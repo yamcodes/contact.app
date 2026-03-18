@@ -80,9 +80,9 @@
 
     <!-- Bulk actions + pagination row -->
     <div class="mt-3 flex items-center justify-between">
-      <button type="submit" class="btn btn-error btn-outline btn-sm gap-1.5" x-bind:disabled="selected === 0" x-text="`Delete ${selected} contacts`">
+      <button type="submit" class="btn btn-error btn-outline btn-sm gap-1.5" x-bind:disabled="selected === 0">
         <i data-lucide="trash-2" class="w-3 h-3"></i>
-        Delete Selected
+        <span>Delete Selected (<span x-text="selected"></span>)</span>
       </button>
 
       <div th:if="${contactPage.totalPages > 1}" class="flex items-center gap-1">
