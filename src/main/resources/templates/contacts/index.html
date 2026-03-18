@@ -27,10 +27,11 @@
   <form action="/contacts" method="get" class="mb-4">
     <div class="flex gap-2">
       <div class="relative flex-1 max-w-sm">
-        <svg class="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg class="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 pointer-events-none" width="14" height="14" viewBox="0 0 14 14" fill="none">
           <circle cx="6" cy="6" r="4.25" stroke="currentColor" stroke-width="1.5"/>
           <path d="M9.5 9.5L13 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
         </svg>
+        <label for="search" class="sr-only">Search contacts</label>
         <input
           id="search" name="q"
           placeholder="Search contacts..."
@@ -39,7 +40,6 @@
           class="w-full h-9 pl-9 pr-3 text-sm bg-white border border-zinc-200 rounded-md focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent placeholder:text-zinc-400"
         />
       </div>
-      <button type="submit" class="btn btn-outline btn-sm">Search</button>
       <a th:if="${!#strings.isEmpty(search)}" th:href="@{/contacts}" class="btn btn-ghost btn-sm">Clear</a>
     </div>
     <p th:unless="${#strings.isEmpty(search)}"
