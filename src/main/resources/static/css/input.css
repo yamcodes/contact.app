@@ -71,11 +71,12 @@
 /* Unlayered — beats all @layer styles */
 .btn {
   text-shadow: none;
+  box-shadow: none;
 }
 .btn:active:not(.btn-active) {
   translate: 0 0;
   transition: none;
-  box-shadow: none;
+  --btn-bg: var(--btn-color, var(--color-base-200));
 }
 .checkbox,
 .checkbox::before {
