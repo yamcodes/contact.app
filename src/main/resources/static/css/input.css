@@ -1,3 +1,69 @@
 @import "tailwindcss";
 @source "../../templates";
+
 @plugin "daisyui";
+
+/* noinspection CssUnknownProperty */
+@plugin "daisyui/theme" {
+  name: "shadcn";
+  default: true;
+  color-scheme: light;
+
+  /* Surfaces */
+  --color-base-100: oklch(100% 0 0);
+  --color-base-200: oklch(97.8% 0 0);
+  --color-base-300: oklch(94.5% 0 0);
+  --color-base-content: oklch(14.1% 0 0);
+
+  /* Primary — zinc-900 */
+  --color-primary: oklch(14.1% 0 0);
+  --color-primary-content: oklch(100% 0 0);
+
+  /* Secondary — zinc-100 */
+  --color-secondary: oklch(94.5% 0 0);
+  --color-secondary-content: oklch(20.5% 0 0);
+
+  /* Accent — same as primary */
+  --color-accent: oklch(14.1% 0 0);
+  --color-accent-content: oklch(100% 0 0);
+
+  /* Neutral */
+  --color-neutral: oklch(27.4% 0 0);
+  --color-neutral-content: oklch(100% 0 0);
+
+  /* States */
+  --color-error: oklch(57.7% 0.245 27.3);
+  --color-error-content: oklch(100% 0 0);
+  --color-warning: oklch(76.9% 0.188 70.1);
+  --color-warning-content: oklch(14.1% 0 0);
+  --color-success: oklch(64.8% 0.15 160);
+  --color-success-content: oklch(100% 0 0);
+  --color-info: oklch(60% 0.12 230);
+  --color-info-content: oklch(100% 0 0);
+
+  /* Shape — matches shadcn's rounded-md */
+  --radius-selector: 0.375rem;
+  --radius-field: 0.375rem;
+  --radius-box: 0.5rem;
+
+  /* Flat — no depth/emboss effects */
+  --depth: 0;
+  --noise: 0;
+
+  --border: 1px;
+
+  /* Button — match shadcn sizing and weight */
+  --size-field: 0.225rem;  /* × 10 = 2.25rem = h-9, shadcn default */
+  --fontsize: 0.875rem;
+}
+
+@layer base {
+  body { font-family: Geist, sans-serif; }
+}
+
+@layer components {
+  .btn {
+    font-weight: 500;
+    letter-spacing: 0;
+  }
+}

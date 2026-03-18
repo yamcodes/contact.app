@@ -2,10 +2,7 @@ spring:
   application:
     name: Contacts
   thymeleaf:
-    cache: false
-  devtools:
-    livereload:
-      enabled: true
+    cache: true
   h2:
     console:
       enabled: true

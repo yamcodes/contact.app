@@ -6,9 +6,20 @@
 </head>
 <body>
 <div layout:fragment="content">
-  <h2>Something went wrong</h2>
-  <p>An unexpected error occurred. Please try again later.</p>
-  <a href="/contacts">Back to contacts</a>
+  <div class="max-w-md mx-auto mt-16 text-center">
+    <div class="w-12 h-12 bg-zinc-100 rounded-full flex items-center justify-center mx-auto mb-4">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="10" cy="10" r="8.25" stroke="#71717a" stroke-width="1.5"/>
+        <path d="M10 6.5v4M10 13.5v.01" stroke="#71717a" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <h1 class="text-lg font-semibold text-zinc-900 mb-1">Something went wrong</h1>
+    <p class="text-sm text-zinc-500 mb-6">An unexpected error occurred. Please try again later.</p>
+    <a th:href="@{/contacts}"
+       class="inline-flex items-center gap-1.5 h-9 px-4 text-sm font-medium bg-zinc-900 text-white rounded-md hover:bg-zinc-800 transition-colors">
+      Back to contacts
+    </a>
+  </div>
 </div>
 </body>
 </html>

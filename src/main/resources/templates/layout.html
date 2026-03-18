@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"
+<html lang="en" data-theme="shadcn"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -7,21 +7,35 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
   <!--/*@thymesVar id="title" type="java.lang.String"*/-->
   <title th:text="${title} ?: 'Contacts'">Contacts</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" th:href="@{/css/output.css}"/>
   <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.8/dist/htmx.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.15.8/dist/cdn.min.js" defer></script>
 </head>
-<body>
-<main>
-  <header>
-    <h1>
-      <a href="/">
-        <span class="all-caps">contact.app</span>
-      </a>
-      <span class="sub-title">A Demo Contacts Application</span>
-    </h1>
-  </header>
+<body class="bg-zinc-50 min-h-screen text-zinc-900 antialiased">
+
+<header class="sticky top-0 z-50 bg-white border-b border-zinc-200">
+  <div class="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
+    <a th:href="@{/contacts}" class="flex items-center gap-2.5 group">
+      <div class="w-6 h-6 bg-zinc-900 rounded flex items-center justify-center">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="7" cy="4.5" r="2.5" fill="white"/>
+          <path d="M2 11.5C2 9.015 4.239 7 7 7s5 2.015 5 4.5" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <span class="text-sm font-semibold tracking-tight text-zinc-900">Contacts</span>
+    </a>
+    <nav class="flex items-center gap-1">
+      <a th:href="@{/contacts}" class="text-sm text-zinc-500 hover:text-zinc-900 px-3 py-1.5 rounded-md hover:bg-zinc-100 transition-colors">Contacts</a>
+    </nav>
+  </div>
+</header>
+
+<main class="max-w-5xl mx-auto px-6 py-8">
   <div layout:fragment="content"></div>
 </main>
+
 </body>
 </html>

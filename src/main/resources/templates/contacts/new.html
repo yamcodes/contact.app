@@ -7,14 +7,28 @@
 </head>
 <body>
 <div layout:fragment="content">
-  <h2>New Contact</h2>
-  <form action="/contacts" method="post">
-    <th:block th:replace="~{fragments/contact-fields::contact-fields}"></th:block>
-    <button type="submit">Save</button>
-  </form>
-  <p>
-    <a href="/contacts">Back</a>
-  </p>
+  <div class="max-w-xl">
+
+    <div class="mb-6">
+      <a th:href="@{/contacts}" class="inline-flex items-center gap-1.5 text-sm text-zinc-500 hover:text-zinc-900 transition-colors mb-4">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 11L5 7l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Back to contacts
+      </a>
+      <h1 class="text-xl font-semibold text-zinc-900">New Contact</h1>
+      <p class="text-sm text-zinc-500 mt-0.5">Add a new contact to your list.</p>
+    </div>
+
+    <div class="bg-white border border-zinc-200 rounded-lg p-6">
+      <form th:action="@{/contacts}" method="post">
+        <th:block th:replace="~{fragments/contact-fields::contact-fields}"></th:block>
+        <div class="mt-6 flex items-center gap-3">
+          <button type="submit" class="btn btn-primary btn-sm">Save Contact</button>
+          <a th:href="@{/contacts}" class="btn btn-ghost btn-sm">Cancel</a>
+        </div>
+      </form>
+    </div>
+
+  </div>
 </div>
 </body>
 </html>

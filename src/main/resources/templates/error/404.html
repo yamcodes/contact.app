@@ -6,9 +6,15 @@
 </head>
 <body>
 <div layout:fragment="content">
-  <h2>Page Not Found</h2>
-  <p>The page you were looking for doesn't exist.</p>
-  <a href="/contacts">Back to contacts</a>
+  <div class="max-w-md mx-auto mt-16 text-center">
+    <p class="text-7xl font-bold text-zinc-100 mb-2 select-none">404</p>
+    <h1 class="text-lg font-semibold text-zinc-900 mb-1">Page not found</h1>
+    <p class="text-sm text-zinc-500 mb-6">The page you were looking for doesn't exist.</p>
+    <a th:href="@{/contacts}"
+       class="inline-flex items-center gap-1.5 h-9 px-4 text-sm font-medium bg-zinc-900 text-white rounded-md hover:bg-zinc-800 transition-colors">
+      Back to contacts
+    </a>
+  </div>
 </div>
 </body>
 </html>
