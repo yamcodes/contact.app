@@ -53,3 +53,8 @@ buildNumber.properties
 ### Project ###
 contacts.zip
 contacts.json
+
+### Frontend ###
+bun/
+node_modules/
+src/main/resources/static/css/output.css

@@ -1,0 +1,13 @@
+{
+  "name": "contacts",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build:css": "tailwindcss -i src/main/resources/static/css/input.css -o src/main/resources/static/css/output.css --minify",
+    "watch:css": "tailwindcss -i src/main/resources/static/css/input.css -o src/main/resources/static/css/output.css --watch"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.0.0",
+    "daisyui": "^5.0.0"
+  }
+}
