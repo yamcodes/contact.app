@@ -27,9 +27,9 @@
         hx-target="body"
         hx-push-url="true"
         hx-confirm="Delete selected contacts? This cannot be undone." x-data="{ selected: 0 }" x-init="selected = $el.querySelectorAll('input[name=selected_contact_slugs]:checked').length">
-    <div class="bg-white border border-zinc-200 rounded-lg overflow-y-auto max-h-[calc(100vh-7rem)]">
-      <table class="table">
-        <thead class="sticky top-0 z-10 bg-white">
+    <div class="bg-white border border-zinc-200 rounded-lg overflow-hidden">
+      <table class="table contacts-table">
+        <thead>
           <tr x-bind:class="selected > 0 ? 'thead-selected' : ''">
             <th class="w-10"><!-- TODO: select-all checkbox --></th>
             <th colspan="3">

@@ -68,6 +68,19 @@
   }
 }
 
+/* Scrollable tbody with fixed thead */
+.contacts-table thead,
+.contacts-table tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+.contacts-table tbody {
+  display: block;
+  overflow-y: auto;
+  max-height: calc(100vh - 8rem);
+}
+
 /* Table header selected state */
 .thead-selected {
   background-color: oklch(47.3% 0.217 264.4); /* blue-600 */
