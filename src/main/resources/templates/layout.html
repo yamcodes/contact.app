@@ -38,7 +38,7 @@
 
 <script>
   lucide.createIcons();
-  document.addEventListener('htmx:afterSettle', (e) => lucide.createIcons({ nodes: [e.detail.elt] }));
+  document.addEventListener('htmx:afterSettle', (e) => lucide.createIcons({ root: e.detail.elt }));
 </script>
 </body>
 </html>
