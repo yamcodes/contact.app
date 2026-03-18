@@ -24,7 +24,7 @@ public class ContactController {
   @GetMapping
   public String contacts(
       @RequestParam(required = false) String q,
-      @PageableDefault(sort = "last") Pageable pageable,
+      @PageableDefault(sort = "last", size = 15) Pageable pageable,
       Model model) {
     model.addAttribute("contactPage", contactService.list(q, pageable));
     model.addAttribute("search", q);

@@ -68,6 +68,18 @@
   }
 }
 
+/* Table header selected state */
+.thead-selected {
+  background-color: oklch(47.3% 0.217 264.4); /* blue-600 */
+}
+.thead-selected,
+.thead-selected * {
+  color: white;
+}
+.thead-selected .btn-ghost:hover {
+  background-color: oklch(55% 0.217 264.4);
+}
+
 /* Unlayered — beats all @layer styles */
 .btn {
   text-shadow: none;
