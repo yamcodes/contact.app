@@ -10,14 +10,14 @@
 
   <!-- Empty state -->
   <div th:if="${contactPage.content.isEmpty()}"
-       class="bg-white border border-zinc-200 rounded-lg py-16 text-center">
-    <div class="w-10 h-10 bg-zinc-100 rounded-full flex items-center justify-center mx-auto mb-3">
-      <i data-lucide="user-round" class="w-[18px] h-[18px] text-zinc-400"></i>
+       class="bg-base-100 border border-base-300 rounded-lg py-16 text-center">
+    <div class="w-10 h-10 bg-base-200 rounded-full flex items-center justify-center mx-auto mb-3">
+      <i data-lucide="user-round" class="w-[18px] h-[18px] text-base-content/40"></i>
     </div>
-    <p class="text-sm font-medium text-zinc-900">No contacts found</p>
-    <p class="text-sm text-zinc-500 mt-1">
+    <p class="text-sm font-medium text-base-content">No contacts found</p>
+    <p class="text-sm text-base-content/50 mt-1">
       <span th:if="${!#strings.isEmpty(search)}">Try a different search term or </span>
-      <a th:href="@{/contacts/new}" class="text-zinc-900 underline underline-offset-2">add your first contact</a>
+      <a th:href="@{/contacts/new}" class="text-base-content underline underline-offset-2">add your first contact</a>
     </p>
   </div>
 
@@ -27,7 +27,7 @@
         hx-target="body"
         hx-push-url="true"
         hx-confirm="Delete selected contacts? This cannot be undone." x-data="{ selected: 0 }" x-init="selected = $el.querySelectorAll('input[name=selected_contact_slugs]:checked').length">
-    <div class="bg-white border border-zinc-200 rounded-lg overflow-hidden">
+    <div class="bg-base-100 border border-base-300 rounded-lg overflow-hidden">
       <table class="table contacts-table">
         <thead>
           <tr x-bind:class="selected > 0 ? 'thead-selected' : ''">
@@ -41,7 +41,7 @@
                 <div class="flex items-center gap-1">
                   <!-- TODO: refresh icon -->
                   <div class="flex items-center gap-1">
-                    <span class="px-1 text-xs text-zinc-500"
+                    <span class="px-1 text-xs text-base-content/50"
                           th:text="${contactPage.number * contactPage.size + 1} + '–' + ${contactPage.isLast() ? contactPage.totalElements : (contactPage.number + 1) * contactPage.size} + ' of ' + ${#numbers.formatInteger(contactPage.totalElements, 0, 'COMMA')}"></span>
                     <a th:href="@{/contacts(page=${contactPage.number - 1}, q=${search}, sort=${sort}, size=${contactPage.size})}"
                        th:classappend="${contactPage.isFirst()} ? 'opacity-30 pointer-events-none' : ''"
