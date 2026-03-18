@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="shadcn"
+      x-data="{ dark: $persist(false) }"
+      x-bind:data-theme="dark ? 'shadcn-dark' : 'shadcn'"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -12,8 +14,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
   <link rel="icon" type="image/svg+xml" th:href="@{/favicon.svg}"/>
   <link rel="stylesheet" th:href="@{/css/output.css}"/>
+  <script>if (localStorage.getItem('_x_dark') === 'true') document.documentElement.setAttribute('data-theme', 'shadcn-dark');</script>
   <script src="https://unpkg.com/lucide@0.577.0/dist/umd/lucide.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.8/dist/htmx.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@alpinejs/persist@3.15.8/dist/cdn.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.15.8/dist/cdn.min.js" defer></script>
 </head>
 <body class="bg-base-200 min-h-screen text-base-content antialiased">
@@ -42,7 +46,7 @@
       New Contact
     </a>
     <label class="swap swap-rotate btn btn-ghost btn-sm btn-square">
-      <input type="checkbox" class="theme-controller" value="shadcn-dark"/>
+      <input type="checkbox" x-model="dark"/>
       <i data-lucide="sun" class="swap-off w-4 h-4"></i>
       <i data-lucide="moon" class="swap-on w-4 h-4"></i>
     </label>

@@ -120,7 +120,7 @@
 .contacts-table tbody {
   display: block;
   overflow-y: auto;
-  max-height: calc(100vh - 10rem);
+  max-height: calc(100vh - 11rem);
 }
 .contacts-table th:nth-child(1),
 .contacts-table td:nth-child(1) { width: 2.5rem; }
