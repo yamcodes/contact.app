@@ -7,7 +7,7 @@
   <tr th:each="contact : ${contacts}" th:object="${contact}"
       class="hover:bg-base-300 cursor-pointer"
       th:onclick="|window.location='@{/contacts/{slug}(slug=*{slug})}'|">
-    <th onclick="event.stopPropagation()">
+    <th @click.stop>
       <label>
         <!--suppress JSUnresolvedReference it's fine -->
         <input
@@ -31,7 +31,7 @@
       </div>
     </td>
     <td class="font-mono text-xs text-zinc-500" th:text="*{phone}"></td>
-    <td onclick="event.stopPropagation()">
+    <td @click.stop>
       <div class="flex items-center justify-end gap-1">
         <a th:href="@{/contacts/{slug}/edit(slug=*{slug})}" class="btn btn-ghost btn-xs">Edit</a>
         <button type="button"
