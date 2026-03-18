@@ -7,6 +7,9 @@ spring:
   devtools:
     livereload:
       enabled: true
+    restart:
+      additional-paths: src/main/resources/templates/
+      exclude: "**/*.html"
   web:
     resources:
       static-locations:
