@@ -62,7 +62,7 @@
         th:attr="hx-delete=@{/contacts}"
         hx-target="body"
         hx-push-url="true"
-        hx-confirm="Delete selected contacts? This cannot be undone.">
+        hx-confirm="Delete selected contacts? This cannot be undone." x-data="{ selected: 0 }">
     <div class="bg-white border border-zinc-200 rounded-lg overflow-hidden">
       <table class="table">
         <thead>
@@ -80,7 +80,7 @@
 
     <!-- Bulk actions + pagination row -->
     <div class="mt-3 flex items-center justify-between">
-      <button type="submit" class="btn btn-error btn-outline btn-sm gap-1.5">
+      <button type="submit" class="btn btn-error btn-outline btn-sm gap-1.5" x-bind:disabled="selected === 0" x-text="`Delete ${selected} contacts`">
         <i data-lucide="trash-2" class="w-3 h-3"></i>
         Delete Selected
       </button>

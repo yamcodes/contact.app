@@ -9,12 +9,14 @@
       th:onclick="|window.location='@{/contacts/{slug}(slug=*{slug})}'|">
     <th onclick="event.stopPropagation()">
       <label>
+        <!--suppress JSUnresolvedReference it's fine -->
         <input
           name="selected_contact_slugs"
           th:attr="aria-label=*{first} + ' ' + *{last}"
           th:value="*{slug}"
           type="checkbox"
           class="checkbox checkbox-sm"
+          @change="selected += $event.target.checked ? 1 : -1"
         />
       </label>
     </th>
