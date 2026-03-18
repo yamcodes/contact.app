@@ -12,7 +12,7 @@
 
     <div class="mb-6">
       <a th:href="@{/contacts}" class="inline-flex items-center gap-1.5 text-sm text-zinc-500 hover:text-zinc-900 transition-colors mb-4">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 11L5 7l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <i data-lucide="chevron-left" class="w-3.5 h-3.5"></i>
         Back to contacts
       </a>
       <h1 class="text-xl font-semibold text-zinc-900"
@@ -39,7 +39,7 @@
         hx-target="body"
         th:attr="hx-delete=@{/contacts/{slug}(slug=${contact.slug})}"
         class="btn btn-error btn-outline btn-sm gap-1.5">
-        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1.5 3h9M4.5 3V1.5h3V3M10.5 3l-.75 7.5h-7.5L1.5 3" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <i data-lucide="trash-2" class="w-3 h-3"></i>
         Delete Contact
       </button>
     </div>

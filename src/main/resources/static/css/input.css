@@ -67,3 +67,21 @@
     letter-spacing: 0;
   }
 }
+
+/* Unlayered — beats all @layer styles */
+.btn:active:not(.btn-active) {
+  translate: 0 0;
+  transition: none;
+  box-shadow: none;
+  text-shadow: none;
+}
+.checkbox,
+.checkbox::before {
+  transition: none;
+  animation: none;
+}
+.checkbox:checked {
+  background-color: oklch(55% 0.2 260);
+  border-color: oklch(55% 0.2 260);
+  color: white;
+}
