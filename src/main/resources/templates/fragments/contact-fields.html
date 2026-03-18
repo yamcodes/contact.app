@@ -20,14 +20,14 @@
 
     <fieldset class="fieldset">
       <legend class="fieldset-legend">Email</legend>
-      <input hx-target="next p" hx-trigger="change, keyup delay:200ms changed"
+      <input hx-target="#email-error" hx-trigger="change, keyup delay:200ms changed"
              placeholder="Email"
              th:with="validateUrl=@{/contacts/{slug}/email(slug=${contact.slug})}"
              th:attr="hx-get=${contact.slug != null} ? ${validateUrl} : null"
              th:field="*{email}"
              type="email"
              class="input input-bordered w-full"/>
-      <p class="fieldset-label text-error" th:errors="*{email}"></p>
+      <p id="email-error" class="fieldset-label text-error" th:errors="*{email}"></p>
     </fieldset>
 
     <fieldset class="fieldset">

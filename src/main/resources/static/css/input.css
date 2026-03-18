@@ -57,6 +57,10 @@
   --fontsize: 0.875rem;
 }
 
+@layer base {
+  body { font-family: 'Geist', sans-serif; }
+}
+
 @layer components {
   .btn {
     font-weight: 500;

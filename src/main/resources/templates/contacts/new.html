@@ -19,7 +19,7 @@
     </div>
 
     <div class="bg-white border border-zinc-200 rounded-lg p-6">
-      <form action="/contacts" method="post">
+      <form th:action="@{/contacts}" method="post">
         <th:block th:replace="~{fragments/contact-fields::contact-fields}"></th:block>
         <div class="mt-6 flex items-center gap-3">
           <button type="submit" class="btn btn-primary btn-sm">Save Contact</button>

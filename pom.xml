@@ -127,7 +127,7 @@
                         <goals><goal>bun</goal></goals>
                         <phase>initialize</phase>
                         <configuration>
-                            <arguments>install</arguments>
+                            <arguments>install --frozen-lockfile</arguments>
                         </configuration>
                     </execution>
                     <execution>
