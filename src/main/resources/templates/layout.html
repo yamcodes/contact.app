@@ -19,16 +19,28 @@
 <body class="bg-zinc-50 min-h-screen text-zinc-900 antialiased">
 
 <header class="sticky top-0 z-50 bg-white border-b border-zinc-200">
-  <div class="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
-    <a th:href="@{/contacts}" class="flex items-center gap-2.5 group">
+  <div class="max-w-5xl mx-auto px-6 h-14 flex items-center gap-4">
+    <a th:href="@{/contacts}" class="flex items-center gap-2.5 shrink-0">
       <div class="w-6 h-6 bg-zinc-900 rounded flex items-center justify-center">
         <i data-lucide="contact-round" class="w-3.5 h-3.5 text-white"></i>
       </div>
       <span class="text-sm font-semibold tracking-tight text-zinc-900">Contacts</span>
     </a>
-    <nav class="flex items-center gap-1">
-      <a th:href="@{/contacts}" class="text-sm text-zinc-500 hover:text-zinc-900 px-3 py-1.5 rounded-md hover:bg-zinc-100 transition-colors">Contacts</a>
-    </nav>
+    <form th:action="@{/contacts}" method="get" class="flex-1 max-w-sm">
+      <div class="relative">
+        <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-zinc-400 pointer-events-none"></i>
+        <label for="nav-search" class="sr-only">Search contacts</label>
+        <input id="nav-search" name="q"
+               th:placeholder="${contactPage != null ? 'Search ' + contactPage.totalElements + ' contacts...' : 'Search contacts...'}"
+               th:value="${search} ?: ''"
+               type="search"
+               class="w-full h-8 pl-9 pr-3 text-sm bg-zinc-50 border border-zinc-200 rounded-md focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent placeholder:text-zinc-400"/>
+      </div>
+    </form>
+    <a th:href="@{/contacts/new}" class="btn btn-primary btn-sm gap-1.5 shrink-0 ml-auto">
+      <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+      New Contact
+    </a>
   </div>
 </header>
 

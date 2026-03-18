@@ -8,42 +8,6 @@
 <!--/*@thymesVar id="contactPage" type="org.springframework.data.domain.Page<codes.yam.contacts.Contact>"*/-->
 <div layout:fragment="content">
 
-  <!-- Page header -->
-  <div class="flex items-center justify-between mb-6">
-    <div>
-      <h1 class="text-xl font-semibold text-zinc-900">Contacts</h1>
-      <p class="text-sm text-zinc-500 mt-0.5"
-         th:text="${contactPage.totalElements} + ' total'">0 total</p>
-    </div>
-    <a th:href="@{/contacts/new}"
-       class="btn btn-primary btn-sm gap-1.5">
-      <i data-lucide="plus" class="w-3.5 h-3.5"></i>
-      New Contact
-    </a>
-  </div>
-
-  <!-- Search -->
-  <form th:action="@{/contacts}" method="get" class="mb-4">
-    <div class="flex gap-2">
-      <div class="relative flex-1 max-w-sm">
-        <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-zinc-400 pointer-events-none"></i>
-        <label for="search" class="sr-only">Search contacts</label>
-        <input
-          id="search" name="q"
-          placeholder="Search contacts..."
-          th:value="${search}"
-          type="search"
-          class="w-full h-9 pl-9 pr-3 text-sm bg-white border border-zinc-200 rounded-md focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-transparent placeholder:text-zinc-400"
-        />
-      </div>
-      <a th:if="${!#strings.isEmpty(search)}" th:href="@{/contacts}" class="btn btn-ghost btn-sm">Clear</a>
-    </div>
-    <p th:unless="${#strings.isEmpty(search)}"
-       class="mt-2 text-sm text-zinc-500">
-      Results for "<span class="text-zinc-900 font-medium" th:text="${search}"></span>"
-    </p>
-  </form>
-
   <!-- Empty state -->
   <div th:if="${contactPage.content.isEmpty()}"
        class="bg-white border border-zinc-200 rounded-lg py-16 text-center">
@@ -70,7 +34,7 @@
             <th class="w-10"><!-- TODO: select-all checkbox --></th>
             <th colspan="3">
               <div class="flex items-center justify-between">
-                <button type="submit" class="btn btn-ghost btn-xs text-error gap-1"
+                <button type="submit" class="btn btn-ghost btn-xs gap-1"
                         x-bind:disabled="selected === 0"
                         x-bind:class="selected === 0 ? 'opacity-30 cursor-not-allowed' : ''">
                   <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
