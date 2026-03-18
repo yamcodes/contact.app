@@ -58,7 +58,7 @@
 }
 
 @layer base {
-  body { font-family: 'Geist', sans-serif; }
+  body { font-family: Geist, sans-serif; }
 }
 
 @layer components {

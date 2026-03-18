@@ -3,6 +3,7 @@ package codes.yam.contacts;
 import jakarta.validation.Valid;
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -27,6 +28,9 @@ public class ContactController {
       Model model) {
     model.addAttribute("contactPage", contactService.list(q, pageable));
     model.addAttribute("search", q);
+    model.addAttribute("sort", pageable.getSort().stream()
+        .map(o -> o.getProperty() + "," + o.getDirection().name().toLowerCase())
+        .collect(Collectors.joining(",")));
     return "contacts/index";
   }
 
@@ -70,7 +74,6 @@ public class ContactController {
   @DeleteMapping("/{slug}")
   public ResponseEntity<Void> deleteContact(@PathVariable String slug) {
     contactService.delete(slug);
-    // TODO: extract seeOther helper if this pattern repeats
     return ResponseEntity.status(HttpStatus.SEE_OTHER).location(URI.create("/contacts")).build();
   }
 
