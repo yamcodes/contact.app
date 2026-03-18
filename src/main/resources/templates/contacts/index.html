@@ -70,15 +70,15 @@
         hx-target="body"
         hx-push-url="true">
     <div class="bg-white border border-zinc-200 rounded-lg overflow-hidden">
-      <table class="w-full text-sm">
+      <table class="table">
         <thead>
-          <tr class="border-b border-zinc-100">
-            <th class="w-10 px-4 py-3 text-left"></th>
-            <th class="px-4 py-3 text-left text-xs font-medium text-zinc-500 uppercase tracking-wide">First</th>
-            <th class="px-4 py-3 text-left text-xs font-medium text-zinc-500 uppercase tracking-wide">Last</th>
-            <th class="px-4 py-3 text-left text-xs font-medium text-zinc-500 uppercase tracking-wide">Phone</th>
-            <th class="px-4 py-3 text-left text-xs font-medium text-zinc-500 uppercase tracking-wide">Email</th>
-            <th class="px-4 py-3 text-right text-xs font-medium text-zinc-500 uppercase tracking-wide">Actions</th>
+          <tr>
+            <th class="w-10"></th>
+            <th>First</th>
+            <th>Last</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th class="text-right">Actions</th>
           </tr>
         </thead>
         <tbody th:replace="~{fragments/contact-list-rows::rows(contacts=${contactPage.content})}">
@@ -113,7 +113,6 @@
       </div>
     </div>
   </form>
-
 </div>
 </body>
 </html>
