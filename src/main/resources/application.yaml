@@ -6,6 +6,15 @@ spring:
   devtools:
     livereload:
       enabled: true
+  web:
+    resources:
+      static-locations:
+        - file:src/main/resources/static/
+        - classpath:/static/
+      cache:
+        period: 0
+      chain:
+        cache: false
   h2:
     console:
       enabled: true
