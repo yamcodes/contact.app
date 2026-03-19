@@ -17,7 +17,7 @@
 | **Explicit**         | Fragment declares its dependencies in the signature      |
 | **Portable**         | Works regardless of what's in the model                  |
 | **Self-documenting** | You know what it needs just by looking at it             |
-| **IDE support**      | Broken — IntelliJ can't resolve types on fragment params |
+| **IDE support**      | Broken - IntelliJ can't resolve types on fragment params |
 
 ---
 
@@ -33,18 +33,18 @@
 <div th:insert="~{fragments/contact-fields :: contact-fields}"></div>
 ```
 
-|                       |                                                           |
-|-----------------------|-----------------------------------------------------------|
+|                       |                                                                             |
+|-----------------------|-----------------------------------------------------------------------------|
 | **Implicit**          | Fragment depends on `contact` being in the model, declared via `@thymesVar` |
-| **Coupled**           | Only works in contexts where the model has `contact`      |
-| **Simpler call site** | No arguments to pass                                      |
-| **IDE support**       | Works — `@thymesVar` resolves model attributes correctly  |
+| **Coupled**           | Only works in contexts where the model has `contact`                        |
+| **Simpler call site** | No arguments to pass                                                        |
+| **IDE support**       | Works - `@thymesVar` resolves model attributes correctly                    |
 
 ---
 
 ## layout:insert (Dialect-specific)
 
-A third pattern from the Layout Dialect itself. The calling template defines content inline using `layout:fragment`, and the reusable template exposes slots for it. Best for passing **HTML content** (not data) into a component — think modals, cards, panels.
+A third pattern from the Layout Dialect itself. The calling template defines content inline using `layout:fragment`, and the reusable template exposes slots for it. Best for passing **HTML content** (not data) into a component - think modals, cards, panels.
 
 ```html
 <!-- reusable modal template -->
@@ -61,11 +61,11 @@ A third pattern from the Layout Dialect itself. The calling template defines con
 </div>
 ```
 
-|  |  |
-|---|---|
+|                      |                                                                  |
+|----------------------|------------------------------------------------------------------|
 | **For HTML content** | Caller defines the body, reusable template defines the structure |
-| **Not for data** | Doesn't solve passing a Java object to a fragment |
-| **Dialect-only** | `layout:insert` is not standard Thymeleaf |
+| **Not for data**     | Doesn't solve passing a Java object to a fragment                |
+| **Dialect-only**     | `layout:insert` is not standard Thymeleaf                        |
 
 ---
 
@@ -77,4 +77,4 @@ A third pattern from the Layout Dialect itself. The calling template defines con
 | Fragment tightly coupled to one model attribute          | Model-access  |
 | IDE squiggles are a dealbreaker                          | Model-access  |
 
-**This app:** model-access — `@thymesVar` serves as the contract, `*{}` keeps the template concise.
+**This app:** model-access - `@thymesVar` serves as the contract, `*{}` keeps the template concise.

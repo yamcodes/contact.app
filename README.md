@@ -1,29 +1,17 @@
 # Contacts
 
-A simple contacts app built with Spring Boot and Thymeleaf.
+![Cover](assets/cover.png)
 
-## Branches
-
-| Branch                                                                             | Summary                       | Description                                                                                            |
-|------------------------------------------------------------------------------------|-------------------------------|--------------------------------------------------------------------------------------------------------|
-| [`hono-web1`](https://github.com/yamcodes/contact.app/tree/hono-web1)              | Hypermedia-Driven Application | Server-rendered HTML using links and forms. Full page reloads. Pure hypermedia, no client-side JS.     |
-| [`hono`](https://github.com/yamcodes/contact.app/tree/hono)                        | HDA + HTMX                    | Same architecture as `hono-web1`, enhanced with HTMX for partial updates without JSON or client-side state. |
-| [`hono-eta`](https://github.com/yamcodes/contact.app/tree/hono-eta)                | HDA (Eta templates)           | Same architecture as `hono-web1`, using string-based Eta templates instead of JSX.                     |
-| **[`main`](https://github.com/yamcodes/contact.app/tree/main)** (You're here!)     | **HDA + Spring Boot**         | **Same architecture, rewritten in Java with Spring Boot, Thymeleaf, and htmx-spring-boot.**            |
-
-There are also temporary feature branches, but these are the stable branches.
+A contact management app built with Spring Boot, Thymeleaf, and htmx.
 
 ## Overview
 
-This app follows the architecture from [Hypermedia Systems](https://hypermedia.systems/part/htmx/) — same ideas, different tech stack (Spring Boot + Thymeleaf instead of Python and Flask).
+This app follows the architecture from [Hypermedia Systems](https://hypermedia.systems/part/htmx/) - same ideas, different tech stack (Spring Boot + Thymeleaf instead of Python and Flask).
 
-This branch (`main`) uses [Spring Boot](https://spring.io/projects/spring-boot) with [Thymeleaf](https://www.thymeleaf.org) and [htmx](https://htmx.org):
 - HTML is rendered on the server with Thymeleaf templates
-- htmx handles partial page updates via AJAX
+- htmx handles partial page updates via AJAX via [`htmx-spring-boot-thymeleaf`](https://github.com/wimdeblauwe/htmx-spring-boot)
 - No full page reloads for most interactions
 - No client-side JavaScript framework (just htmx attributes)
-
-> The `htmx-spring-boot-thymeleaf` library integrates htmx into Spring MVC controllers via `HtmxRequest`, `HtmxResponse`, and Thymeleaf dialect support.
 
 ## Features
 
@@ -33,7 +21,9 @@ This branch (`main`) uses [Spring Boot](https://spring.io/projects/spring-boot) 
 - Partial page updates (no full reloads)
 - H2 in-memory database with Spring Data JPA
 
-## Quickstart
+## Development
+
+### Quickstart
 
 ```bash
 # Start dev server
@@ -43,31 +33,31 @@ This branch (`main`) uses [Spring Boot](https://spring.io/projects/spring-boot) 
 open http://localhost:8080
 ```
 
-## VS Code
+### VS Code
 
-1. **Install extensions** — open the Extensions panel, search `@recommended`, and install all workspace recommendations (Java Extension Pack, Spring Boot Extension Pack, Lombok, htmx attributes)
-2. **Java 25 SDK** — VS Code will prompt to download a JDK if none is found; select Java 25 (if you have multiple JDKs, point `java.jdt.ls.java.home` in user settings to your Java 25 installation)
-3. **Run** — use the **Run** task via `Ctrl+Shift+P → Tasks: Run Task → Run`, or press `Ctrl+Shift+P → Spring Boot Dashboard: Run` from the Spring Boot extension
+1. **Install extensions** - open the Extensions panel, search `@recommended`, and install all workspace recommendations (Java Extension Pack, Spring Boot Extension Pack, Lombok, htmx attributes)
+2. **Java 25 SDK** - VS Code will prompt to download a JDK if none is found; select Java 25 (if you have multiple JDKs, point `java.jdt.ls.java.home` in user settings to your Java 25 installation)
+3. **Run** - use the **Run** task via `Ctrl+Shift+P → Tasks: Run Task → Run`, or press `Ctrl+Shift+P → Spring Boot Dashboard: Run` from the Spring Boot extension
 
 **Tips:**
-- Spring Boot DevTools (already included) enables hot reload — save a file and changes apply automatically
+- Spring Boot DevTools (already included) enables hot reload - save a file and changes apply automatically
 - Thymeleaf templates hot-reload without a restart
 - H2 console is available at `http://localhost:8080/h2-console`
 
-## IntelliJ IDEA
+### IntelliJ IDEA
 
-1. **Open** — **File → Open**, select `pom.xml`, choose **"Open as Project"**
-2. **Java 25 SDK** — **File → Project Structure → SDKs**, add Java 25 if missing (IntelliJ can download it)
-3. **Lombok** — install the [Lombok plugin](https://plugins.jetbrains.com/plugin/6317-lombok) via **Settings → Plugins**, then enable annotation processing under **Settings → Build, Execution, Deployment → Compiler → Annotation Processors**
-4. **Run** — use the included **Contacts** run configuration (`.run/Contacts.run.xml`) from the toolbar, or run `spring-boot:run` from the Maven tool window
+1. **Open** - **File → Open**, select `pom.xml`, choose **"Open as Project"**
+2. **Java 25 SDK** - **File → Project Structure → SDKs**, add Java 25 if missing (IntelliJ can download it)
+3. **Lombok** - install the [Lombok plugin](https://plugins.jetbrains.com/plugin/6317-lombok) via **Settings → Plugins**, then enable annotation processing under **Settings → Build, Execution, Deployment → Compiler → Annotation Processors**
+4. **Run** - use the included **Contacts** run configuration (`.run/Contacts.run.xml`) from the toolbar, or run `spring-boot:run` from the Maven tool window
 
 **Tips:**
-- Spring Boot DevTools (already included) enables hot reload — recompile with `Ctrl+F9` without restarting
+- Spring Boot DevTools (already included) enables hot reload - recompile with `Ctrl+F9` without restarting
 - Enable **"Build project automatically"** in settings for seamless reloads on save
 - Thymeleaf templates hot-reload without a restart
 - H2 console is available at `http://localhost:8080/h2-console`
 
-## Scripts
+### Scripts
 
 | Command                  | Description      |
 |--------------------------|------------------|
@@ -138,6 +128,17 @@ src/
 | Hypermedia | [htmx](https://htmx.org) + [htmx-spring-boot-thymeleaf](https://github.com/wimdeblauwe/htmx-spring-boot) |
 | Database   | H2 (in-memory) + Spring Data JPA                                                                         |
 | Build      | Maven                                                                                                    |
+
+## Branches
+
+This repo tracks the evolution of the app across different stacks - earlier branches used [Hono](https://hono.dev/) (a TypeScript web framework), while `main` is the current Spring Boot implementation.
+
+| Branch                                                                             | Summary                       | Description                                                                                            |
+|------------------------------------------------------------------------------------|-------------------------------|--------------------------------------------------------------------------------------------------------|
+| [`hono-web1`](https://github.com/yamcodes/contact.app/tree/hono-web1)              | Hypermedia-Driven Application | Server-rendered HTML using links and forms. Full page reloads. Pure hypermedia, no client-side JS.     |
+| [`hono`](https://github.com/yamcodes/contact.app/tree/hono)                        | HDA + HTMX                    | Same architecture as `hono-web1`, enhanced with HTMX for partial updates without JSON or client-side state. |
+| [`hono-eta`](https://github.com/yamcodes/contact.app/tree/hono-eta)                | HDA (Eta templates)           | Same architecture as `hono-web1`, using string-based Eta templates instead of JSX.                     |
+| **[`main`](https://github.com/yamcodes/contact.app/tree/main)** (You're here!)     | **HDA + Spring Boot**         | **Same architecture, rewritten in Java with Spring Boot, Thymeleaf, and htmx-spring-boot.**            |
 
 ## License
 

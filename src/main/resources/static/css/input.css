@@ -57,15 +57,15 @@
   --color-base-300: oklch(94.5% 0 0);
   --color-base-content: oklch(14.1% 0 0);
 
-  /* Primary — zinc-900 */
+  /* Primary - zinc-900 */
   --color-primary: oklch(14.1% 0 0);
   --color-primary-content: oklch(100% 0 0);
 
-  /* Secondary — zinc-100 */
+  /* Secondary - zinc-100 */
   --color-secondary: oklch(94.5% 0 0);
   --color-secondary-content: oklch(20.5% 0 0);
 
-  /* Accent — same as primary */
+  /* Accent - same as primary */
   --color-accent: oklch(14.1% 0 0);
   --color-accent-content: oklch(100% 0 0);
 
@@ -83,18 +83,18 @@
   --color-info: oklch(60% 0.12 230);
   --color-info-content: oklch(100% 0 0);
 
-  /* Shape — matches shadcn's rounded-md */
+  /* Shape - matches shadcn's rounded-md */
   --radius-selector: 0.375rem;
   --radius-field: 0.375rem;
   --radius-box: 0.5rem;
 
-  /* Flat — no depth/emboss effects */
+  /* Flat - no depth/emboss effects */
   --depth: 0;
   --noise: 0;
 
   --border: 1px;
 
-  /* Button — match shadcn sizing and weight */
+  /* Button - match shadcn sizing and weight */
   --size-field: 0.225rem;  /* × 10 = 2.25rem = h-9, shadcn default */
   --fontsize: 0.875rem;
 }
@@ -139,7 +139,7 @@
   background-color: oklch(55% 0.217 264.4);
 }
 
-/* Unlayered — beats all @layer styles */
+/* Unlayered - beats all @layer styles */
 .btn {
   text-shadow: none;
   box-shadow: none;
