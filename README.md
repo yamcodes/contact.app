@@ -1,5 +1,7 @@
 # Contacts
 
+[![GitHub](https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white)](https://github.com/yamcodes/contact.app)
+
 ![Cover](assets/cover.png)
 
 A contact management app built with Spring Boot, Thymeleaf, and htmx.

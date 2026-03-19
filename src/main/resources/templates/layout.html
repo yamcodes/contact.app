@@ -30,18 +30,23 @@
       </div>
       <span class="text-sm font-semibold tracking-tight text-base-content">Contacts</span>
     </a>
-    <form th:action="@{/contacts}" method="get" class="flex-1 max-w-sm">
+    <div class="flex-1"></div>
+    <form th:action="@{/contacts}" method="get" class="w-48">
+      <!--/*@thymesVar id="contactPage" type="org.springframework.data.domain.Page<codes.yam.contacts.Contact>"*/-->
+
+      <!--/*@thymesVar id="search" type="java.lang.String"*/-->
       <div class="relative">
-        <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-base-content/40 pointer-events-none"></i>
+        <i data-lucide="search"
+           class="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-base-content/40 pointer-events-none"></i>
         <label for="nav-search" class="sr-only">Search contacts</label>
         <input id="nav-search" name="q"
-               th:placeholder="${contactPage != null ? 'Search ' + contactPage.totalElements + ' contacts...' : 'Search contacts...'}"
+               th:placeholder="${contactPage != null ? 'Search ' + contactPage.totalElements + ' contacts' : 'Search contacts'}"
                th:value="${search} ?: ''"
                type="search"
                class="w-full h-8 pl-9 pr-3 text-sm bg-base-200 border border-base-300 rounded-md focus:outline-none focus:ring-2 focus:ring-base-content focus:border-transparent placeholder:text-base-content/40"/>
       </div>
     </form>
-    <a th:href="@{/contacts/new}" class="btn btn-primary btn-sm gap-1.5 shrink-0 ml-auto">
+    <a th:href="@{/contacts/new}" class="btn btn-primary btn-sm gap-1.5 shrink-0">
       <i data-lucide="plus" class="w-3.5 h-3.5"></i>
       New contact
     </a>
@@ -50,6 +55,11 @@
       <i data-lucide="sun" class="swap-off w-4 h-4"></i>
       <i data-lucide="moon" class="swap-on w-4 h-4"></i>
     </label>
+    <a href="https://github.com/yamcodes/contact.app" target="_blank" rel="noopener noreferrer"
+       class="btn btn-ghost btn-sm btn-square shrink-0" aria-label="GitHub">
+      <img th:src="@{/img/github.svg}" alt="GitHub" class="w-4 h-4"
+           :class="dark ? 'invert' : ''"/>
+    </a>
   </div>
 </header>
 
@@ -58,8 +68,9 @@
 </main>
 
 <script>
-  lucide.createIcons();
-  document.addEventListener('htmx:afterSettle', (e) => lucide.createIcons({ root: e.detail.elt }));
+    lucide.createIcons();
+    //noinspection JSUnresolvedVariable
+    document.addEventListener('htmx:afterSettle', (e) => lucide.createIcons({root: e.detail.elt}));
 </script>
 </body>
 </html>
