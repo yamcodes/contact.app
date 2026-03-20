@@ -1,56 +1,70 @@
-<!DOCTYPE html>
-<html lang="en" layout:decorate="~{layout}"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:th="http://www.thymeleaf.org">
-<body>
-<!--/*@thymesVar id="search" type="java.lang.String"*/-->
-<!--/*@thymesVar id="sort" type="java.lang.String"*/-->
-<!--/*@thymesVar id="contactPage" type="org.springframework.data.domain.Page<codes.yam.contacts.Contact>"*/-->
-<div layout:fragment="content">
-
-  <!-- Table -->
-  <form
+<!doctype html>
+<html
+  lang="en"
+  layout:decorate="~{layout}"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  xmlns:th="http://www.thymeleaf.org"
+>
+  <body>
+    <!--/*@thymesVar id="search" type="java.lang.String"*/-->
+    <!--/*@thymesVar id="sort" type="java.lang.String"*/-->
+    <!--/*@thymesVar id="contactPage" type="org.springframework.data.domain.Page<codes.yam.contacts.Contact>"*/-->
+    <div layout:fragment="content">
+      <!-- Table -->
+      <form
         th:attr="hx-delete=@{/contacts}"
         hx-target="body"
         hx-push-url="true"
-        hx-confirm="Delete selected contacts? This cannot be undone." x-data="{ selected: 0 }" x-init="selected = $el.querySelectorAll('input[name=selected_contact_slugs]:checked').length">
-    <div class="bg-base-100 border border-base-300 rounded-lg overflow-hidden">
-      <table class="table contacts-table">
-        <thead>
-          <tr x-bind:class="selected > 0 ? 'thead-selected' : ''">
-            <th class="w-10"><!-- TODO: select-all checkbox --></th>
-            <th colspan="3">
-              <div class="flex items-center justify-between">
-                <button type="submit" class="btn btn-ghost btn-xs gap-1" x-bind:class="selected === 0 ? 'invisible' : ''">
-                  <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
-                  <span>Delete (<span x-text="selected"></span>)</span>
-                </button>
-                <div class="flex items-center gap-1">
-                  <!-- TODO: refresh icon -->
-                  <div class="flex items-center gap-1">
-                    <span class="px-1 text-xs text-base-content/50"
-                          th:text="${contactPage.number * contactPage.size + 1} + '–' + ${contactPage.isLast() ? contactPage.totalElements : (contactPage.number + 1) * contactPage.size} + ' of ' + ${#numbers.formatInteger(contactPage.totalElements, 0, 'COMMA')}"></span>
-                    <a th:href="@{/contacts(page=${contactPage.number - 1}, q=${search}, sort=${sort}, size=${contactPage.size})}"
-                       th:classappend="${contactPage.isFirst()} ? 'opacity-30 pointer-events-none' : ''"
-                       class="btn btn-ghost btn-xs">
-                      <i data-lucide="chevron-left" class="w-3.5 h-3.5"></i>
-                    </a>
-                    <a th:href="@{/contacts(page=${contactPage.number + 1}, q=${search}, sort=${sort}, size=${contactPage.size})}"
-                       th:classappend="${contactPage.isLast()} ? 'opacity-30 pointer-events-none' : ''"
-                       class="btn btn-ghost btn-xs">
-                      <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
-                    </a>
+        hx-confirm="Delete selected contacts? This cannot be undone."
+        x-data="{ selected: 0 }"
+        x-init="selected = $el.querySelectorAll('input[name=selected_contact_slugs]:checked').length"
+      >
+        <div class="bg-base-100 border-base-300 overflow-hidden rounded-lg border">
+          <table class="contacts-table table">
+            <thead>
+              <tr x-bind:class="selected > 0 ? 'thead-selected' : ''">
+                <th class="w-10"><!-- TODO: select-all checkbox --></th>
+                <th colspan="3">
+                  <div class="flex items-center justify-between">
+                    <button
+                      type="submit"
+                      class="btn btn-ghost btn-xs gap-1"
+                      x-bind:class="selected === 0 ? 'invisible' : ''"
+                    >
+                      <i data-lucide="trash-2" class="h-3.5 w-3.5"></i>
+                      <span>Delete (<span x-text="selected"></span>)</span>
+                    </button>
+                    <div class="flex items-center gap-1">
+                      <!-- TODO: refresh icon -->
+                      <div class="flex items-center gap-1">
+                        <span
+                          class="text-base-content/50 px-1 text-xs"
+                          th:text="${contactPage.number * contactPage.size + 1} + '–' + ${contactPage.isLast() ? contactPage.totalElements : (contactPage.number + 1) * contactPage.size} + ' of ' + ${#numbers.formatInteger(contactPage.totalElements, 0, 'COMMA')}"
+                        ></span>
+                        <a
+                          th:href="@{/contacts(page=${contactPage.number - 1}, q=${search}, sort=${sort}, size=${contactPage.size})}"
+                          th:classappend="${contactPage.isFirst()} ? 'opacity-30 pointer-events-none' : ''"
+                          class="btn btn-ghost btn-xs"
+                        >
+                          <i data-lucide="chevron-left" class="h-3.5 w-3.5"></i>
+                        </a>
+                        <a
+                          th:href="@{/contacts(page=${contactPage.number + 1}, q=${search}, sort=${sort}, size=${contactPage.size})}"
+                          th:classappend="${contactPage.isLast()} ? 'opacity-30 pointer-events-none' : ''"
+                          class="btn btn-ghost btn-xs"
+                        >
+                          <i data-lucide="chevron-right" class="h-3.5 w-3.5"></i>
+                        </a>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-            </th>
-          </tr>
-        </thead>
-        <tbody th:replace="~{fragments/contact-list-rows::rows(contacts=${contactPage.content})}">
-        </tbody>
-      </table>
+                </th>
+              </tr>
+            </thead>
+            <tbody th:replace="~{fragments/contact-list-rows::rows(contacts=${contactPage.content})}"></tbody>
+          </table>
+        </div>
+      </form>
     </div>
-  </form>
-</div>
-</body>
+  </body>
 </html>

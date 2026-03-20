@@ -1,79 +1,96 @@
-<!DOCTYPE html>
-<html lang="en" data-theme="shadcn"
-      x-data="{ dark: $persist(false) }"
-      x-bind:data-theme="dark ? 'shadcn-dark' : 'shadcn'"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <!--/*@thymesVar id="title" type="java.lang.String"*/-->
-  <title th:text="${title} ?: 'Contacts'">Contacts</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-  <link rel="icon" type="image/svg+xml" th:href="@{/favicon.svg}"/>
-  <link rel="stylesheet" th:href="@{/css/output.css}"/>
-  <script>if (localStorage.getItem('_x_dark') === 'true') document.documentElement.setAttribute('data-theme', 'shadcn-dark');</script>
-  <script src="https://unpkg.com/lucide@0.577.0/dist/umd/lucide.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.8/dist/htmx.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@alpinejs/persist@3.15.8/dist/cdn.min.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.15.8/dist/cdn.min.js" defer></script>
-</head>
-<body class="bg-base-200 min-h-screen text-base-content antialiased">
+<!doctype html>
+<html
+  lang="en"
+  data-theme="shadcn"
+  x-data="{ dark: $persist(false) }"
+  x-bind:data-theme="dark ? 'shadcn-dark' : 'shadcn'"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  xmlns:th="http://www.thymeleaf.org"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <!--/*@thymesVar id="title" type="java.lang.String"*/-->
+    <title th:text="${title} ?: 'Contacts'">Contacts</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/svg+xml" th:href="@{/favicon.svg}" />
+    <link rel="stylesheet" th:href="@{/css/output.css}" />
+    <script>
+      if (localStorage.getItem("_x_dark") === "true")
+        document.documentElement.setAttribute("data-theme", "shadcn-dark");
+    </script>
+    <script src="https://unpkg.com/lucide@0.577.0/dist/umd/lucide.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.8/dist/htmx.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@alpinejs/persist@3.15.8/dist/cdn.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.15.8/dist/cdn.min.js" defer></script>
+  </head>
+  <body class="bg-base-200 text-base-content min-h-screen antialiased">
+    <header class="bg-base-100 border-base-300 sticky top-0 z-50 border-b">
+      <div class="mx-auto flex h-14 max-w-5xl items-center gap-4 px-6">
+        <a th:href="@{/contacts}" class="flex shrink-0 items-center gap-2.5">
+          <div class="bg-base-content flex h-6 w-6 items-center justify-center rounded">
+            <i data-lucide="contact-round" class="text-base-100 h-3.5 w-3.5"></i>
+          </div>
+          <span class="text-base-content text-sm font-semibold tracking-tight">Contacts</span>
+        </a>
+        <div class="flex-1"></div>
+        <form th:action="@{/contacts}" method="get" class="w-48">
+          <!--/*@thymesVar id="contactPage" type="org.springframework.data.domain.Page<codes.yam.contacts.Contact>"*/-->
 
-<header class="sticky top-0 z-50 bg-base-100 border-b border-base-300">
-  <div class="max-w-5xl mx-auto px-6 h-14 flex items-center gap-4">
-    <a th:href="@{/contacts}" class="flex items-center gap-2.5 shrink-0">
-      <div class="w-6 h-6 bg-base-content rounded flex items-center justify-center">
-        <i data-lucide="contact-round" class="w-3.5 h-3.5 text-base-100"></i>
+          <!--/*@thymesVar id="search" type="java.lang.String"*/-->
+          <div class="relative">
+            <i
+              data-lucide="search"
+              class="text-base-content/40 pointer-events-none absolute top-1/2 left-3 h-3.5 w-3.5 -translate-y-1/2"
+            ></i>
+            <label for="nav-search" class="sr-only">Search contacts</label>
+            <input
+              id="nav-search"
+              name="q"
+              th:placeholder="${contactPage != null ? 'Search ' + contactPage.totalElements + ' contacts' : 'Search contacts'}"
+              th:value="${search} ?: ''"
+              th:attr="hx-get=@{/contacts}"
+              hx-trigger="search, keyup delay:200ms changed"
+              type="search"
+              hx-target="tbody"
+              class="bg-base-200 border-base-300 focus:ring-base-content placeholder:text-base-content/40 h-8 w-full rounded-md border pr-3 pl-9 text-sm focus:border-transparent focus:ring-2 focus:outline-none"
+            />
+          </div>
+        </form>
+        <a th:href="@{/contacts/new}" class="btn btn-primary btn-sm shrink-0 gap-1.5">
+          <i data-lucide="plus" class="h-3.5 w-3.5"></i>
+          New contact
+        </a>
+        <label class="swap swap-rotate btn btn-ghost btn-sm btn-square">
+          <input type="checkbox" x-model="dark" />
+          <i data-lucide="sun" class="swap-off h-4 w-4"></i>
+          <i data-lucide="moon" class="swap-on h-4 w-4"></i>
+        </label>
+        <a
+          href="https://github.com/yamcodes/contact.app"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-ghost btn-sm btn-square shrink-0"
+          aria-label="GitHub"
+        >
+          <img th:src="@{/img/github.svg}" alt="GitHub" class="h-4 w-4" :class="dark ? 'invert' : ''" />
+        </a>
       </div>
-      <span class="text-sm font-semibold tracking-tight text-base-content">Contacts</span>
-    </a>
-    <div class="flex-1"></div>
-    <form th:action="@{/contacts}" method="get" class="w-48">
-      <!--/*@thymesVar id="contactPage" type="org.springframework.data.domain.Page<codes.yam.contacts.Contact>"*/-->
+    </header>
 
-      <!--/*@thymesVar id="search" type="java.lang.String"*/-->
-      <div class="relative">
-        <i data-lucide="search"
-           class="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-base-content/40 pointer-events-none"></i>
-        <label for="nav-search" class="sr-only">Search contacts</label>
-        <input id="nav-search" name="q"
-               th:placeholder="${contactPage != null ? 'Search ' + contactPage.totalElements + ' contacts' : 'Search contacts'}"
-               th:value="${search} ?: ''"
-               th:attr="hx-get=@{/contacts}"
-               hx-trigger="search, keyup delay:200ms changed"
-               type="search"
-               hx-target="tbody"
-               class="w-full h-8 pl-9 pr-3 text-sm bg-base-200 border border-base-300 rounded-md focus:outline-none focus:ring-2 focus:ring-base-content focus:border-transparent placeholder:text-base-content/40"/>
-      </div>
-    </form>
-    <a th:href="@{/contacts/new}" class="btn btn-primary btn-sm gap-1.5 shrink-0">
-      <i data-lucide="plus" class="w-3.5 h-3.5"></i>
-      New contact
-    </a>
-    <label class="swap swap-rotate btn btn-ghost btn-sm btn-square">
-      <input type="checkbox" x-model="dark"/>
-      <i data-lucide="sun" class="swap-off w-4 h-4"></i>
-      <i data-lucide="moon" class="swap-on w-4 h-4"></i>
-    </label>
-    <a href="https://github.com/yamcodes/contact.app" target="_blank" rel="noopener noreferrer"
-       class="btn btn-ghost btn-sm btn-square shrink-0" aria-label="GitHub">
-      <img th:src="@{/img/github.svg}" alt="GitHub" class="w-4 h-4"
-           :class="dark ? 'invert' : ''"/>
-    </a>
-  </div>
-</header>
+    <main class="mx-auto max-w-5xl px-6 py-8">
+      <div layout:fragment="content"></div>
+    </main>
 
-<main class="max-w-5xl mx-auto px-6 py-8">
-  <div layout:fragment="content"></div>
-</main>
-
-<script>
-    lucide.createIcons();
-    //noinspection JSUnresolvedVariable
-    document.addEventListener('htmx:afterSettle', (e) => lucide.createIcons({root: e.detail.elt}));
-</script>
-</body>
+    <script>
+      lucide.createIcons();
+      //noinspection JSUnresolvedVariable
+      document.addEventListener("htmx:afterSettle", (e) => lucide.createIcons({ root: e.detail.elt }));
+    </script>
+  </body>
 </html>

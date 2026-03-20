@@ -1,42 +1,43 @@
 <!--suppress HtmlFormInputWithoutLabel, XmlInvalidId -->
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<body>
-<!--/*@thymesVar id="contact" type="codes.yam.contacts.Contact"*/-->
-<fieldset th:fragment="contact-fields" th:object="${contact}" class="contents">
-  <div class="grid grid-cols-2 gap-4">
+  <body>
+    <!--/*@thymesVar id="contact" type="codes.yam.contacts.Contact"*/-->
+    <fieldset th:fragment="contact-fields" th:object="${contact}" class="contents">
+      <div class="grid grid-cols-2 gap-4">
+        <fieldset class="fieldset">
+          <legend class="fieldset-legend">First Name</legend>
+          <input placeholder="First Name" th:field="*{first}" type="text" class="input input-bordered w-full" />
+          <p class="fieldset-label text-error" th:errors="*{first}"></p>
+        </fieldset>
 
-    <fieldset class="fieldset">
-      <legend class="fieldset-legend">First Name</legend>
-      <input placeholder="First Name" th:field="*{first}" type="text" class="input input-bordered w-full"/>
-      <p class="fieldset-label text-error" th:errors="*{first}"></p>
+        <fieldset class="fieldset">
+          <legend class="fieldset-legend">Last Name</legend>
+          <input placeholder="Last Name" th:field="*{last}" type="text" class="input input-bordered w-full" />
+          <p class="fieldset-label text-error" th:errors="*{last}"></p>
+        </fieldset>
+
+        <fieldset class="fieldset">
+          <legend class="fieldset-legend">Email</legend>
+          <input
+            hx-target="#email-error"
+            hx-trigger="change, keyup delay:200ms changed"
+            placeholder="Email"
+            th:with="validateUrl=@{/contacts/{slug}/email(slug=${contact.slug})}"
+            th:attr="hx-get=${contact.slug != null} ? ${validateUrl} : null"
+            th:field="*{email}"
+            type="email"
+            class="input input-bordered w-full"
+          />
+          <p id="email-error" class="fieldset-label text-error" th:errors="*{email}"></p>
+        </fieldset>
+
+        <fieldset class="fieldset">
+          <legend class="fieldset-legend">Phone</legend>
+          <input placeholder="Phone" th:field="*{phone}" type="tel" class="input input-bordered w-full" />
+          <p class="fieldset-label text-error" th:errors="*{phone}"></p>
+        </fieldset>
+      </div>
     </fieldset>
-
-    <fieldset class="fieldset">
-      <legend class="fieldset-legend">Last Name</legend>
-      <input placeholder="Last Name" th:field="*{last}" type="text" class="input input-bordered w-full"/>
-      <p class="fieldset-label text-error" th:errors="*{last}"></p>
-    </fieldset>
-
-    <fieldset class="fieldset">
-      <legend class="fieldset-legend">Email</legend>
-      <input hx-target="#email-error" hx-trigger="change, keyup delay:200ms changed"
-             placeholder="Email"
-             th:with="validateUrl=@{/contacts/{slug}/email(slug=${contact.slug})}"
-             th:attr="hx-get=${contact.slug != null} ? ${validateUrl} : null"
-             th:field="*{email}"
-             type="email"
-             class="input input-bordered w-full"/>
-      <p id="email-error" class="fieldset-label text-error" th:errors="*{email}"></p>
-    </fieldset>
-
-    <fieldset class="fieldset">
-      <legend class="fieldset-legend">Phone</legend>
-      <input placeholder="Phone" th:field="*{phone}" type="tel" class="input input-bordered w-full"/>
-      <p class="fieldset-label text-error" th:errors="*{phone}"></p>
-    </fieldset>
-
-  </div>
-</fieldset>
-</body>
+  </body>
 </html>

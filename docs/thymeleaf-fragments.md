@@ -4,8 +4,9 @@
 
 ```html
 <!-- fragment -->
+<!--suppress HtmlUnknownAttribute -->
 <div th:fragment="contact-fields(contact)" th:object="${contact}">
-    <input th:value="*{first}" .../>
+  <input th:value="*{first}" ... />
 </div>
 
 <!-- usage -->
@@ -13,7 +14,7 @@
 ```
 
 |                      |                                                          |
-|----------------------|----------------------------------------------------------|
+| -------------------- | -------------------------------------------------------- |
 | **Explicit**         | Fragment declares its dependencies in the signature      |
 | **Portable**         | Works regardless of what's in the model                  |
 | **Self-documenting** | You know what it needs just by looking at it             |
@@ -23,10 +24,13 @@
 
 ## Model-Access Fragment
 
+<!-- noinspection HtmlUnknownAttribute -->
+
 ```html
 <!-- fragment -->
+<!--suppress HtmlUnknownAttribute -->
 <div th:fragment="contact-fields">
-    <input th:value="${contact.first}" .../>
+  <input th:value="${contact.first}" ... />
 </div>
 
 <!-- usage -->
@@ -34,7 +38,7 @@
 ```
 
 |                       |                                                                             |
-|-----------------------|-----------------------------------------------------------------------------|
+| --------------------- | --------------------------------------------------------------------------- |
 | **Implicit**          | Fragment depends on `contact` being in the model, declared via `@thymesVar` |
 | **Coupled**           | Only works in contexts where the model has `contact`                        |
 | **Simpler call site** | No arguments to pass                                                        |
@@ -45,6 +49,8 @@
 ## layout:insert (Dialect-specific)
 
 A third pattern from the Layout Dialect itself. The calling template defines content inline using `layout:fragment`, and the reusable template exposes slots for it. Best for passing **HTML content** (not data) into a component - think modals, cards, panels.
+
+<!-- noinspection HtmlUnknownAttribute -->
 
 ```html
 <!-- reusable modal template -->
@@ -62,7 +68,7 @@ A third pattern from the Layout Dialect itself. The calling template defines con
 ```
 
 |                      |                                                                  |
-|----------------------|------------------------------------------------------------------|
+| -------------------- | ---------------------------------------------------------------- |
 | **For HTML content** | Caller defines the body, reusable template defines the structure |
 | **Not for data**     | Doesn't solve passing a Java object to a fragment                |
 | **Dialect-only**     | `layout:insert` is not standard Thymeleaf                        |
@@ -72,7 +78,7 @@ A third pattern from the Layout Dialect itself. The calling template defines con
 ## When to use which
 
 | Scenario                                                 | Approach      |
-|----------------------------------------------------------|---------------|
+| -------------------------------------------------------- | ------------- |
 | Fragment used in many places with different object names | Parameterized |
 | Fragment tightly coupled to one model attribute          | Model-access  |
 | IDE squiggles are a dealbreaker                          | Model-access  |

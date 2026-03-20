@@ -32,11 +32,15 @@ public class ContactController {
     model.addAttribute("contactPage", page);
     model.addAttribute("contacts", page.getContent());
     model.addAttribute("search", q);
-    model.addAttribute("sort", pageable.getSort().stream()
-        .map(o -> o.getProperty() + "," + o.getDirection().name().toLowerCase())
-        .collect(Collectors.joining(",")));
-    if ("nav-search".equals(htmxRequest.getTriggerId())) //noinspection SpringMVCViewInspection
+    model.addAttribute(
+        "sort",
+        pageable.getSort().stream()
+            .map(o -> o.getProperty() + "," + o.getDirection().name().toLowerCase())
+            .collect(Collectors.joining(",")));
+    if ("nav-search".equals(htmxRequest.getTriggerId())) {
+      //noinspection SpringMVCViewInspection
       return "fragments/contact-list-rows :: rows";
+    }
     return "contacts/index";
   }
 

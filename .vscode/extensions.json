@@ -3,6 +3,7 @@
 		"vscjava.vscode-java-pack",
 		"vmware.vscode-boot-dev-pack",
 		"vscjava.vscode-lombok",
-		"craigrbroughton.htmx-attributes"
+		"craigrbroughton.htmx-attributes",
+		"esbenp.prettier-vscode"
 	]
 }

@@ -13,13 +13,13 @@ A Contact Management hypermedia app built with Spring Boot, Thymeleaf, and htmx.
 
 ## Stack
 
-| Layer | Technology |
-|-------|------------|
-| Framework | Spring Boot (Web MVC) |
-| Templates | Thymeleaf |
+| Layer      | Technology                                |
+| ---------- | ----------------------------------------- |
+| Framework  | Spring Boot (Web MVC)                     |
+| Templates  | Thymeleaf                                 |
 | Hypermedia | htmx (`htmx-spring-boot-thymeleaf` 5.0.0) |
-| Database | H2 (in-memory) + Spring Data JPA |
-| Utilities | Lombok |
+| Database   | H2 (in-memory) + Spring Data JPA          |
+| Utilities  | Lombok                                    |
 
 ## Development Commands
 
@@ -46,6 +46,7 @@ src/
 ## htmx Integration
 
 The `htmx-spring-boot-thymeleaf` library provides:
+
 - `HtmxRequest` injectable in controllers to detect htmx requests
 - Thymeleaf dialect for htmx attributes (`hx-get`, `hx-post`, etc.)
 - `HtmxResponse` for setting response headers (`HX-Redirect`, `HX-Trigger`, etc.)
