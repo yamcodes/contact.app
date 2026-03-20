@@ -1,5 +1,6 @@
 package codes.yam.contacts;
 
+import io.github.wimdeblauwe.htmx.spring.boot.mvc.HtmxRequest;
 import jakarta.validation.Valid;
 import java.net.URI;
 import java.util.List;
@@ -25,12 +26,17 @@ public class ContactController {
   public String contacts(
       @RequestParam(required = false) String q,
       @PageableDefault(sort = "last", size = 15) Pageable pageable,
+      HtmxRequest htmxRequest,
       Model model) {
-    model.addAttribute("contactPage", contactService.list(q, pageable));
+    var page = contactService.list(q, pageable);
+    model.addAttribute("contactPage", page);
+    model.addAttribute("contacts", page.getContent());
     model.addAttribute("search", q);
     model.addAttribute("sort", pageable.getSort().stream()
         .map(o -> o.getProperty() + "," + o.getDirection().name().toLowerCase())
         .collect(Collectors.joining(",")));
+    if ("nav-search".equals(htmxRequest.getTriggerId())) //noinspection SpringMVCViewInspection
+      return "fragments/contact-list-rows :: rows";
     return "contacts/index";
   }
 
