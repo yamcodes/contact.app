@@ -55,7 +55,7 @@ open http://localhost:8080
 
 **Tips:**
 - Spring Boot DevTools (already included) enables hot reload - recompile with `Ctrl+F9` without restarting
-- Enable **"Build project automatically"** in settings for seamless reloads on save
+- Enable **"Build project automatically"** (**Settings → Build, Execution, Deployment → Compiler**) and **"Allow auto-make to start even if developed application is currently running"** (**Settings → Advanced Settings**) for seamless reloads on save
 - Thymeleaf templates hot-reload without a restart
 - H2 console is available at `http://localhost:8080/h2-console`
 

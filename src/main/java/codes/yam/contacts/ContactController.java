@@ -28,9 +28,11 @@ public class ContactController {
       Model model) {
     model.addAttribute("contactPage", contactService.list(q, pageable));
     model.addAttribute("search", q);
-    model.addAttribute("sort", pageable.getSort().stream()
-        .map(o -> o.getProperty() + "," + o.getDirection().name().toLowerCase())
-        .collect(Collectors.joining(",")));
+    model.addAttribute(
+        "sort",
+        pageable.getSort().stream()
+            .map(o -> o.getProperty() + "," + o.getDirection().name().toLowerCase())
+            .collect(Collectors.joining(",")));
     return "contacts/index";
   }
 
