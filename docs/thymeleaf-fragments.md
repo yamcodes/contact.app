@@ -2,10 +2,9 @@
 
 ## Parameterized Fragment
 
-<!-- noinspection HtmlUnknownAttribute -->
-
 ```html
 <!-- fragment -->
+<!--suppress HtmlUnknownAttribute -->
 <div th:fragment="contact-fields(contact)" th:object="${contact}">
   <input th:value="*{first}" ... />
 </div>
@@ -29,6 +28,7 @@
 
 ```html
 <!-- fragment -->
+<!--suppress HtmlUnknownAttribute -->
 <div th:fragment="contact-fields">
   <input th:value="${contact.first}" ... />
 </div>
