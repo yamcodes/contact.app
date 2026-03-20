@@ -22,4 +22,8 @@ jobs:
 
       - run: ./mvnw spotless:apply
 
+      - uses: oven-sh/setup-bun@v2
+      - run: bun install --frozen-lockfile
+      - run: bun run format
+
       - uses: autofix-ci/action@635ffb0c9798bd160680f18fd73371e355b85f27

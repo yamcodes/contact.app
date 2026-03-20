@@ -1,25 +1,28 @@
-<!DOCTYPE html>
-<html lang="en" layout:decorate="~{layout}"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<head>
-  <title>Error</title>
-</head>
-<body>
-<div layout:fragment="content">
-  <div class="max-w-md mx-auto mt-16 text-center">
-    <div class="w-12 h-12 bg-base-200 rounded-full flex items-center justify-center mx-auto mb-4">
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-base-content/40">
-        <circle cx="10" cy="10" r="8.25" stroke="currentColor" stroke-width="1.5"/>
-        <path d="M10 6.5v4M10 13.5v.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-      </svg>
+<!doctype html>
+<html lang="en" layout:decorate="~{layout}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+  <head>
+    <title>Error</title>
+  </head>
+  <body>
+    <div layout:fragment="content">
+      <div class="mx-auto mt-16 max-w-md text-center">
+        <div class="bg-base-200 mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            class="text-base-content/40"
+          >
+            <circle cx="10" cy="10" r="8.25" stroke="currentColor" stroke-width="1.5" />
+            <path d="M10 6.5v4M10 13.5v.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+          </svg>
+        </div>
+        <h1 class="text-base-content mb-1 text-lg font-semibold">Something went wrong</h1>
+        <p class="text-base-content/50 mb-6 text-sm">An unexpected error occurred. Please try again later.</p>
+        <a th:href="@{/contacts}" class="btn btn-primary btn-sm gap-1.5"> Back to contacts </a>
+      </div>
     </div>
-    <h1 class="text-lg font-semibold text-base-content mb-1">Something went wrong</h1>
-    <p class="text-sm text-base-content/50 mb-6">An unexpected error occurred. Please try again later.</p>
-    <a th:href="@{/contacts}"
-       class="btn btn-primary btn-sm gap-1.5">
-      Back to contacts
-    </a>
-  </div>
-</div>
-</body>
+  </body>
 </html>

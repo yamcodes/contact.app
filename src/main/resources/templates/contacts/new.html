@@ -1,34 +1,38 @@
-<!DOCTYPE html>
-<html lang="en" layout:decorate="~{layout}"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:th="http://www.thymeleaf.org">
-<head>
-  <title>New contact</title>
-</head>
-<body>
-<div layout:fragment="content">
-  <div class="max-w-xl">
-
-    <div class="mb-6">
-      <a th:href="@{/contacts}" class="inline-flex items-center gap-1.5 text-sm text-base-content/50 hover:text-base-content transition-colors mb-4">
-        <i data-lucide="chevron-left" class="w-3.5 h-3.5"></i>
-        Back to contacts
-      </a>
-      <h1 class="text-xl font-semibold text-base-content">New contact</h1>
-      <p class="text-sm text-base-content/50 mt-0.5">Add a new contact to your list.</p>
-    </div>
-
-    <div class="bg-base-100 border border-base-300 rounded-lg p-6">
-      <form th:action="@{/contacts}" method="post">
-        <th:block th:replace="~{fragments/contact-fields::contact-fields}"></th:block>
-        <div class="mt-6 flex items-center gap-3">
-          <button type="submit" class="btn btn-primary btn-sm">Save Contact</button>
-          <a th:href="@{/contacts}" class="btn btn-ghost btn-sm">Cancel</a>
+<!doctype html>
+<html
+  lang="en"
+  layout:decorate="~{layout}"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  xmlns:th="http://www.thymeleaf.org"
+>
+  <head>
+    <title>New contact</title>
+  </head>
+  <body>
+    <div layout:fragment="content">
+      <div class="max-w-xl">
+        <div class="mb-6">
+          <a
+            th:href="@{/contacts}"
+            class="text-base-content/50 hover:text-base-content mb-4 inline-flex items-center gap-1.5 text-sm transition-colors"
+          >
+            <i data-lucide="chevron-left" class="h-3.5 w-3.5"></i>
+            Back to contacts
+          </a>
+          <h1 class="text-base-content text-xl font-semibold">New contact</h1>
+          <p class="text-base-content/50 mt-0.5 text-sm">Add a new contact to your list.</p>
         </div>
-      </form>
-    </div>
 
-  </div>
-</div>
-</body>
+        <div class="bg-base-100 border-base-300 rounded-lg border p-6">
+          <form th:action="@{/contacts}" method="post">
+            <th:block th:replace="~{fragments/contact-fields::contact-fields}"></th:block>
+            <div class="mt-6 flex items-center gap-3">
+              <button type="submit" class="btn btn-primary btn-sm">Save Contact</button>
+              <a th:href="@{/contacts}" class="btn btn-ghost btn-sm">Cancel</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
