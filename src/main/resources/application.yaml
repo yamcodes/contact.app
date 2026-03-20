@@ -9,5 +9,5 @@ spring:
     url: jdbc:h2:mem:contacts;DB_CLOSE_DELAY=-1
   security:
     user:
-      name: ${APP_USERNAME:admin}
-      password: ${APP_PASSWORD:admin}
+      name: ${APP_USERNAME}
+      password: ${APP_PASSWORD}
