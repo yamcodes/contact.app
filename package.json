@@ -5,8 +5,8 @@
   "scripts": {
     "build:css": "tailwindcss -i src/main/resources/static/css/input.css -o src/main/resources/static/css/output.css --minify",
     "watch:css": "tailwindcss -i src/main/resources/static/css/input.css -o src/main/resources/static/css/output.css --watch",
-    "format": "prettier --write 'src/**/*.html'",
-    "format:check": "prettier --check 'src/**/*.html'"
+    "format": "prettier --write '**/*.{html,json,yaml,yml,md}'",
+    "format:check": "prettier --check '**/*.{html,json,yaml,yml,md}'"
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.0.0",

@@ -42,6 +42,7 @@ open http://localhost:8080
 3. **Run** - use the **Run** task via `Ctrl+Shift+P → Tasks: Run Task → Run`, or press `Ctrl+Shift+P → Spring Boot Dashboard: Run` from the Spring Boot extension
 
 **Tips:**
+
 - Spring Boot DevTools (already included) enables hot reload - save a file and changes apply automatically
 - Thymeleaf templates hot-reload without a restart
 - H2 console is available at `http://localhost:8080/h2-console`
@@ -54,6 +55,7 @@ open http://localhost:8080
 4. **Run** - use the included **Contacts** run configuration (`.run/Contacts.run.xml`) from the toolbar, or run `spring-boot:run` from the Maven tool window
 
 **Tips:**
+
 - Spring Boot DevTools (already included) enables hot reload - recompile with `Ctrl+F9` without restarting
 - Enable **"Build project automatically"** (**Settings → Build, Execution, Deployment → Compiler**) and **"Allow auto-make to start even if developed application is currently running"** (**Settings → Advanced Settings**) for seamless reloads on save
 - Thymeleaf templates hot-reload without a restart
@@ -62,7 +64,7 @@ open http://localhost:8080
 ### Scripts
 
 | Command                  | Description      |
-|--------------------------|------------------|
+| ------------------------ | ---------------- |
 | `./mvnw spring-boot:run` | Start dev server |
 | `./mvnw test`            | Run tests        |
 | `./mvnw package`         | Build jar        |
@@ -107,7 +109,7 @@ src/
 ### Routes
 
 | Method   | Path                     | Description                         |
-|----------|--------------------------|-------------------------------------|
+| -------- | ------------------------ | ----------------------------------- |
 | `GET`    | `/`                      | Redirect to `/contacts`             |
 | `GET`    | `/contacts`              | List contacts (search + pagination) |
 | `GET`    | `/contacts/new`          | New contact form                    |
@@ -123,7 +125,7 @@ src/
 ## Tech stack
 
 | Layer      | Technology                                                                                               |
-|------------|----------------------------------------------------------------------------------------------------------|
+| ---------- | -------------------------------------------------------------------------------------------------------- |
 | Language   | Java 25                                                                                                  |
 | Framework  | [Spring Boot](https://spring.io/projects/spring-boot) 4.0.3                                              |
 | Templating | [Thymeleaf](https://www.thymeleaf.org)                                                                   |
@@ -135,12 +137,12 @@ src/
 
 This repo tracks the evolution of the app across different stacks - earlier branches used [Hono](https://hono.dev/) (a TypeScript web framework), while `main` is the current Spring Boot implementation.
 
-| Branch                                                                             | Summary                       | Description                                                                                            |
-|------------------------------------------------------------------------------------|-------------------------------|--------------------------------------------------------------------------------------------------------|
-| [`hono-web1`](https://github.com/yamcodes/contact.app/tree/hono-web1)              | Hypermedia-Driven Application | Server-rendered HTML using links and forms. Full page reloads. Pure hypermedia, no client-side JS.     |
-| [`hono`](https://github.com/yamcodes/contact.app/tree/hono)                        | HDA + HTMX                    | Same architecture as `hono-web1`, enhanced with HTMX for partial updates without JSON or client-side state. |
-| [`hono-eta`](https://github.com/yamcodes/contact.app/tree/hono-eta)                | HDA (Eta templates)           | Same architecture as `hono-web1`, using string-based Eta templates instead of JSX.                     |
-| **[`main`](https://github.com/yamcodes/contact.app/tree/main)** (You're here!)     | **HDA + Spring Boot**         | **Same architecture, rewritten in Java with Spring Boot, Thymeleaf, and htmx-spring-boot.**            |
+| Branch                                                                         | Summary                       | Description                                                                                                 |
+| ------------------------------------------------------------------------------ | ----------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| [`hono-web1`](https://github.com/yamcodes/contact.app/tree/hono-web1)          | Hypermedia-Driven Application | Server-rendered HTML using links and forms. Full page reloads. Pure hypermedia, no client-side JS.          |
+| [`hono`](https://github.com/yamcodes/contact.app/tree/hono)                    | HDA + HTMX                    | Same architecture as `hono-web1`, enhanced with HTMX for partial updates without JSON or client-side state. |
+| [`hono-eta`](https://github.com/yamcodes/contact.app/tree/hono-eta)            | HDA (Eta templates)           | Same architecture as `hono-web1`, using string-based Eta templates instead of JSX.                          |
+| **[`main`](https://github.com/yamcodes/contact.app/tree/main)** (You're here!) | **HDA + Spring Boot**         | **Same architecture, rewritten in Java with Spring Boot, Thymeleaf, and htmx-spring-boot.**                 |
 
 ## License
 
