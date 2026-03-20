@@ -54,7 +54,10 @@
               name="q"
               th:placeholder="${contactPage != null ? 'Search ' + contactPage.totalElements + ' contacts' : 'Search contacts'}"
               th:value="${search} ?: ''"
+              th:attr="hx-get=@{/contacts}"
+              hx-trigger="search, keyup delay:200ms changed"
               type="search"
+              hx-target="tbody"
               class="bg-base-200 border-base-300 focus:ring-base-content placeholder:text-base-content/40 h-8 w-full rounded-md border pr-3 pl-9 text-sm focus:border-transparent focus:ring-2 focus:outline-none"
             />
           </div>

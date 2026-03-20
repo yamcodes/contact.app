@@ -1,7 +1,10 @@
 @import "tailwindcss";
 @source "../../templates";
 
-@plugin "daisyui";
+/* noinspection CssUnknownProperty */
+@plugin "daisyui" {
+  themes: false;
+}
 
 /* noinspection CssUnknownProperty */
 @plugin "daisyui/theme" {
