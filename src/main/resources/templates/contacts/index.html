@@ -8,21 +8,8 @@
 <!--/*@thymesVar id="contactPage" type="org.springframework.data.domain.Page<codes.yam.contacts.Contact>"*/-->
 <div layout:fragment="content">
 
-  <!-- Empty state -->
-  <div th:if="${contactPage.content.isEmpty()}"
-       class="bg-base-100 border border-base-300 rounded-lg py-16 text-center">
-    <div class="w-10 h-10 bg-base-200 rounded-full flex items-center justify-center mx-auto mb-3">
-      <i data-lucide="user-round" class="w-[18px] h-[18px] text-base-content/40"></i>
-    </div>
-    <p class="text-sm font-medium text-base-content">No contacts found</p>
-    <p class="text-sm text-base-content/50 mt-1">
-      <span th:if="${!#strings.isEmpty(search)}">Try a different search term or </span>
-      <a th:href="@{/contacts/new}" class="text-base-content underline underline-offset-2">add your first contact</a>
-    </p>
-  </div>
-
   <!-- Table -->
-  <form th:unless="${contactPage.content.isEmpty()}"
+  <form
         th:attr="hx-delete=@{/contacts}"
         hx-target="body"
         hx-push-url="true"

@@ -42,7 +42,10 @@
         <input id="nav-search" name="q"
                th:placeholder="${contactPage != null ? 'Search ' + contactPage.totalElements + ' contacts' : 'Search contacts'}"
                th:value="${search} ?: ''"
+               th:attr="hx-get=@{/contacts}"
+               hx-trigger="search, keyup delay:200ms changed"
                type="search"
+               hx-target="tbody"
                class="w-full h-8 pl-9 pr-3 text-sm bg-base-200 border border-base-300 rounded-md focus:outline-none focus:ring-2 focus:ring-base-content focus:border-transparent placeholder:text-base-content/40"/>
       </div>
     </form>
