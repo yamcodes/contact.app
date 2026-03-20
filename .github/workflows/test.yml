@@ -29,3 +29,6 @@ jobs:
           distribution: "temurin"
           cache: maven
       - run: ./mvnw -B test
+        env:
+          APP_USERNAME: ci
+          APP_PASSWORD: ci
