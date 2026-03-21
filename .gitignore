@@ -50,6 +50,9 @@ dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
 
+### Local secrets ###
+application-local.yaml
+
 ### Project ###
 contacts.zip
 contacts.json
