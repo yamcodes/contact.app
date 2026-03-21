@@ -51,7 +51,7 @@
             <input
               id="nav-search"
               name="q"
-              th:placeholder="${contactPage != null ? 'Search ' + contactPage.totalElements + ' contacts' : 'Search contacts'}"
+              placeholder="Search contacts"
               th:value="${search} ?: ''"
               th:attr="hx-get=@{/contacts}"
               hx-trigger="search, keyup delay:200ms changed"

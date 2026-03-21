@@ -47,10 +47,6 @@ public class ContactService {
     return contactRepository.save(contact);
   }
 
-  public long count() {
-    return contactRepository.count();
-  }
-
   private String generateSlug(Contact contact) {
     return (contact.getFirst().toLowerCase() + "-" + contact.getLast().toLowerCase())
         .replaceAll("[^a-z0-9-]", "");
