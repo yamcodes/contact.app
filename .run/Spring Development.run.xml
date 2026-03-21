@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Spring Development" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-    <option name="ACTIVE_PROFILES" value="dev" />
+    <option name="ACTIVE_PROFILES" value="dev,local" />
     <module name="contacts" />
     <option name="SPRING_BOOT_MAIN_CLASS" value="codes.yam.contacts.ContactsApplication" />
     <method v="2">
