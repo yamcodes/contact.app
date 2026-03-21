@@ -29,13 +29,16 @@
           <div class="flex items-center gap-3">
             <div class="relative h-8 w-8 shrink-0 [&:has(:checked)>div]:hidden [&:has(:checked)>label]:flex">
               <div
-                class="absolute inset-0 bg-base-200 text-base-content/60 flex items-center justify-center rounded-full text-xs font-semibold group-hover/row:hidden"
+                class="bg-base-200 text-base-content/60 absolute inset-0 flex items-center justify-center rounded-full text-xs font-semibold group-hover/row:hidden"
                 th:text="*{#strings.substring(first, 0, 1) + #strings.substring(last, 0, 1)}"
               >
                 AB
               </div>
               <!--suppress JSUnresolvedReference it's fine -->
-              <label class="absolute inset-0 hidden cursor-pointer items-center justify-center group-hover/row:flex" @click.stop>
+              <label
+                class="absolute inset-0 hidden cursor-pointer items-center justify-center group-hover/row:flex"
+                @click.stop
+              >
                 <input
                   name="selected_contact_slugs"
                   th:attr="aria-label=*{first} + ' ' + *{last}"
