@@ -21,53 +21,90 @@ This app follows the architecture from [Hypermedia Systems](https://hypermedia.s
 - Add, edit, and delete contact details
 - Server-rendered HTML with Thymeleaf
 - Partial page updates (no full reloads)
-- H2 in-memory database with Spring Data JPA
+- PostgreSQL + Spring Data JPA + Flyway migrations
 
 ## Development
 
-### Quickstart
+### Prerequisites
 
-```bash
-# Start dev server
-./mvnw spring-boot:run
+- Java 25
+- Docker (for local Postgres)
 
-# Open in browser
-open http://localhost:8080
+### Setup
+
+1. **Create `src/main/resources/application-local.yaml`** (gitignored — never committed):
+
+```yaml
+spring:
+  security:
+    user:
+      name: <your-username>
+      password: <your-password>
+  datasource:
+    url: jdbc:postgresql://localhost:5432/contacts
+    username: contacts
+    password: contacts
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  sql:
+    init:
+      mode: always
+  thymeleaf:
+    cache: false
+    prefix: file:src/main/resources/templates/
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      additional-paths: src/main/resources/templates/
+      additional-exclude: "**/*.html"
+  web:
+    resources:
+      static-locations:
+        - file:src/main/resources/static/
+        - classpath:/static/
+      cache:
+        period: 0
+      chain:
+        cache: false
 ```
 
-### VS Code
+2. **Start Postgres:**
 
-1. **Install extensions** - open the Extensions panel, search `@recommended`, and install all workspace recommendations (Java Extension Pack, Spring Boot Extension Pack, Lombok, htmx attributes)
-2. **Java 25 SDK** - VS Code will prompt to download a JDK if none is found; select Java 25 (if you have multiple JDKs, point `java.jdt.ls.java.home` in user settings to your Java 25 installation)
-3. **Run** - use the **Run** task via `Ctrl+Shift+P → Tasks: Run Task → Run`, or press `Ctrl+Shift+P → Spring Boot Dashboard: Run` from the Spring Boot extension
+```bash
+docker compose up -d
+```
 
-**Tips:**
+3. **Run the app:**
 
-- Spring Boot DevTools (already included) enables hot reload - save a file and changes apply automatically
-- Thymeleaf templates hot-reload without a restart
-- H2 console is available at `http://localhost:8080/h2-console`
+```bash
+./mvnw spring-boot:run -Dspring-boot.run.profiles=local
+```
 
 ### IntelliJ IDEA
 
 1. **Open** - **File → Open**, select `pom.xml`, choose **"Open as Project"**
 2. **Java 25 SDK** - **File → Project Structure → SDKs**, add Java 25 if missing (IntelliJ can download it)
 3. **Lombok** - install the [Lombok plugin](https://plugins.jetbrains.com/plugin/6317-lombok) via **Settings → Plugins**, then enable annotation processing under **Settings → Build, Execution, Deployment → Compiler → Annotation Processors**
-4. **Run** - use the included **Contacts** run configuration (`.run/Contacts.run.xml`) from the toolbar, or run `spring-boot:run` from the Maven tool window
+4. **Create `application-local.yaml`** - see [Setup](#setup) above
+5. **Run** - use the included **Development** compound run configuration from the toolbar — it starts Docker, waits for Postgres, then launches the app
 
 **Tips:**
 
 - Spring Boot DevTools (already included) enables hot reload - recompile with `Ctrl+F9` without restarting
 - Enable **"Build project automatically"** (**Settings → Build, Execution, Deployment → Compiler**) and **"Allow auto-make to start even if developed application is currently running"** (**Settings → Advanced Settings**) for seamless reloads on save
 - Thymeleaf templates hot-reload without a restart
-- H2 console is available at `http://localhost:8080/h2-console`
 
 ### Scripts
 
-| Command                  | Description      |
-| ------------------------ | ---------------- |
-| `./mvnw spring-boot:run` | Start dev server |
-| `./mvnw test`            | Run tests        |
-| `./mvnw package`         | Build jar        |
+| Command                                                       | Description              |
+| ------------------------------------------------------------- | ------------------------ |
+| `docker compose up -d`                                        | Start local Postgres     |
+| `docker compose down`                                         | Stop local Postgres      |
+| `./mvnw spring-boot:run -Dspring-boot.run.profiles=local`    | Start dev server         |
+| `./mvnw test`                                                 | Run tests                |
+| `./mvnw package`                                              | Build jar                |
 
 ## Project structure
 
@@ -81,6 +118,8 @@ src/
 │   │   ├── ContactRepository.java       # Spring Data JPA (search, pagination)
 │   │   └── ContactService.java          # Validation, slug generation, business logic
 │   └── resources/
+│       ├── db/migration/
+│       │   └── V1__init.sql             # Initial schema (Flyway)
 │       ├── templates/
 │       │   ├── layout.html              # Base layout (Thymeleaf fragment)
 │       │   ├── contacts/
@@ -97,13 +136,18 @@ src/
 │       │   ├── styles.css
 │       │   └── img/
 │       │       └── spinning-circles.svg # Loading spinner
-│       └── application.yaml
-└── test/
-    └── java/codes/yam/contacts/
-        ├── controller/
-        │   └── ContactControllerTest.java
-        └── service/
-            └── ContactServiceTest.java
+│       ├── application.yaml             # Production config (env var placeholders)
+│       ├── application-local.yaml       # Local overrides — gitignored, never committed
+│       └── data.sql                     # Seed data (local only)
+├── test/
+│   └── java/codes/yam/contacts/
+│       ├── controller/
+│       │   └── ContactControllerTest.java
+│       └── service/
+│           └── ContactServiceTest.java
+scripts/
+└── start-db.sh                          # docker compose up + wait for Postgres readiness
+docker-compose.yml                       # Local Postgres service
 ```
 
 ### Routes
@@ -130,7 +174,8 @@ src/
 | Framework  | [Spring Boot](https://spring.io/projects/spring-boot) 4.0.3                                              |
 | Templating | [Thymeleaf](https://www.thymeleaf.org)                                                                   |
 | Hypermedia | [htmx](https://htmx.org) + [htmx-spring-boot-thymeleaf](https://github.com/wimdeblauwe/htmx-spring-boot) |
-| Database   | H2 (in-memory) + Spring Data JPA                                                                         |
+| Database   | PostgreSQL + Spring Data JPA                                                                             |
+| Migrations | [Flyway](https://flywaydb.org)                                                                           |
 | Build      | Maven                                                                                                    |
 
 ## Branches

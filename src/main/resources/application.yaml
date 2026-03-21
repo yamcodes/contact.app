@@ -4,7 +4,6 @@ spring:
   thymeleaf:
     cache: true
   jpa:
-    defer-datasource-initialization: true
     hibernate:
       ddl-auto: validate
   datasource:
