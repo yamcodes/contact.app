@@ -1,11 +1,11 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Spring Development" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-    <option name="ACTIVE_PROFILES" value="dev,local" />
+    <option name="ACTIVE_PROFILES" value="local" />
     <module name="contacts" />
     <option name="SPRING_BOOT_MAIN_CLASS" value="codes.yam.contacts.ContactsApplication" />
     <method v="2">
       <option name="Make" enabled="true" />
-      <option name="ToolBeforeRunTask" enabled="true" actionId="Tool_External Tools_Docker Compose Up" />
+      <option name="ToolBeforeRunTask" enabled="true" actionId="Tool_External Tools_Docker Compose Up + Wait" />
     </method>
   </configuration>
 </component>
