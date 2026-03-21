@@ -28,4 +28,6 @@ INSERT INTO contact (id, slug, first, last, email, phone) VALUES
 ('550e8400-e29b-41d4-a716-44665544001a', 'yara-walker', 'Yara', 'Walker', 'yara.walker@example.com', '555-1025'),
 ('550e8400-e29b-41d4-a716-44665544001b', 'zane-hall', 'Zane', 'Hall', 'zane.hall@example.com', '555-1026'),
 ('550e8400-e29b-41d4-a716-44665544001c', 'amber-allen', 'Amber', 'Allen', 'amber.allen@example.com', '555-1027'),
-('550e8400-e29b-41d4-a716-44665544001d', 'brian-young', 'Brian', 'Young', 'brian.young@example.com', '555-1028');
+('550e8400-e29b-41d4-a716-44665544001d', 'brian-young', 'Brian', 'Young', 'brian.young@example.com', '555-1028')
+ON CONFLICT (id) DO NOTHING;
+Cannot resolve configuration property 'spring.flyway.enabled'
