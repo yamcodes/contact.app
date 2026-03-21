@@ -3,10 +3,10 @@
   lang="en"
   data-theme="shadcn"
   x-data="{ dark: $persist(false) }"
-  x-bind:data-theme="dark ? 'shadcn-dark' : 'shadcn'"
+  :data-theme="dark ? 'shadcn-dark' : 'shadcn'"
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
   xmlns:th="http://www.thymeleaf.org"
->
+  xmlns:x-bind="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="UTF-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
@@ -56,6 +56,7 @@
               th:value="${search} ?: ''"
               th:attr="hx-get=@{/contacts}"
               hx-trigger="search, keyup delay:200ms changed"
+              hx-push-url="true"
               type="search"
               hx-target="tbody"
               class="bg-base-200 border-base-300 focus:ring-base-content placeholder:text-base-content/40 h-8 w-full rounded-md border pr-3 pl-9 text-sm focus:border-transparent focus:ring-2 focus:outline-none"

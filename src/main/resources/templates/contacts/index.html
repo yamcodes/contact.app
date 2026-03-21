@@ -22,14 +22,14 @@
         <div class="bg-base-100 border-base-300 overflow-hidden rounded-lg border">
           <table class="contacts-table table">
             <thead>
-              <tr x-bind:class="selected > 0 ? 'thead-selected' : ''">
+              <tr :class="selected > 0 ? 'thead-selected' : ''">
                 <th class="w-10"><!-- TODO: select-all checkbox --></th>
                 <th colspan="3">
                   <div class="flex items-center justify-between">
                     <button
                       type="submit"
                       class="btn btn-ghost btn-xs gap-1"
-                      x-bind:class="selected === 0 ? 'invisible' : ''"
+                      :class="selected === 0 ? 'invisible' : ''"
                     >
                       <i data-lucide="trash-2" class="h-3.5 w-3.5"></i>
                       <span>Delete (<span x-text="selected"></span>)</span>
