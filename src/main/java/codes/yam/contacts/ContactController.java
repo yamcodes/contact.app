@@ -113,7 +113,7 @@ public class ContactController {
   @GetMapping("/count")
   @ResponseBody
   public String count() {
-    return "(%d total contacts)".formatted(contactService.count());
+    return "(%d total Contacts)".formatted(contactService.count());
   }
 
   @ExceptionHandler(ContactNotFoundException.class)
