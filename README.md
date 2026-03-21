@@ -73,7 +73,7 @@ spring:
 2. **Start Postgres:**
 
 ```bash
-docker compose up -d
+./scripts/start-db.sh
 ```
 
 3. **Run the app:**
@@ -100,7 +100,7 @@ docker compose up -d
 
 | Command                                                   | Description          |
 | --------------------------------------------------------- | -------------------- |
-| `docker compose up -d`                                    | Start local Postgres |
+| `./scripts/start-db.sh`                                   | Start local Postgres |
 | `docker compose down`                                     | Stop local Postgres  |
 | `./mvnw spring-boot:run -Dspring-boot.run.profiles=local` | Start dev server     |
 | `./mvnw test`                                             | Run tests            |
