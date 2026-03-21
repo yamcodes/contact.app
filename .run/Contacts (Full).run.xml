@@ -1,7 +1,0 @@
-<component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Contacts (Full)" type="CompoundRunConfigurationType">
-    <toRun name="Contacts" type="SpringBootApplicationConfigurationType" />
-    <toRun name="Watch CSS" type="js.build_tools.npm" />
-    <method v="2" />
-  </configuration>
-</component>

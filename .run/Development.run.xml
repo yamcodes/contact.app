@@ -1,0 +1,7 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Development" type="CompoundRunConfigurationType">
+    <toRun name="Watch CSS" type="js.build_tools.npm" />
+    <toRun name="Spring Development" type="SpringBootApplicationConfigurationType" />
+    <method v="2" />
+  </configuration>
+</component>
