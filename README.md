@@ -98,13 +98,13 @@ docker compose up -d
 
 ### Scripts
 
-| Command                                                       | Description              |
-| ------------------------------------------------------------- | ------------------------ |
-| `docker compose up -d`                                        | Start local Postgres     |
-| `docker compose down`                                         | Stop local Postgres      |
-| `./mvnw spring-boot:run -Dspring-boot.run.profiles=local`    | Start dev server         |
-| `./mvnw test`                                                 | Run tests                |
-| `./mvnw package`                                              | Build jar                |
+| Command                                                   | Description          |
+| --------------------------------------------------------- | -------------------- |
+| `docker compose up -d`                                    | Start local Postgres |
+| `docker compose down`                                     | Stop local Postgres  |
+| `./mvnw spring-boot:run -Dspring-boot.run.profiles=local` | Start dev server     |
+| `./mvnw test`                                             | Run tests            |
+| `./mvnw package`                                          | Build jar            |
 
 ## Project structure
 
