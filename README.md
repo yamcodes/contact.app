@@ -32,7 +32,7 @@ This app follows the architecture from [Hypermedia Systems](https://hypermedia.s
 
 ### Setup
 
-1. **Create `src/main/resources/application-local.yaml`** (gitignored — never committed):
+1. **Create `./config/application-local.yaml`** (gitignored — never committed, lives outside the source tree):
 
 ```yaml
 spring:
@@ -87,7 +87,7 @@ spring:
 1. **Open** - **File → Open**, select `pom.xml`, choose **"Open as Project"**
 2. **Java 25 SDK** - **File → Project Structure → SDKs**, add Java 25 if missing (IntelliJ can download it)
 3. **Lombok** - install the [Lombok plugin](https://plugins.jetbrains.com/plugin/6317-lombok) via **Settings → Plugins**, then enable annotation processing under **Settings → Build, Execution, Deployment → Compiler → Annotation Processors**
-4. **Create `application-local.yaml`** - see [Setup](#setup) above
+4. **Create `./config/application-local.yaml`** - see [Setup](#setup) above
 5. **Run** - use the included **Development** compound run configuration from the toolbar — it starts Docker, waits for Postgres, then launches the app
 
 **Tips:**
@@ -119,7 +119,8 @@ src/
 │   │   └── ContactService.java          # Validation, slug generation, business logic
 │   └── resources/
 │       ├── db/migration/
-│       │   └── V1__init.sql             # Initial schema (Flyway)
+│       │   ├── V1__init.sql             # Initial schema (Flyway)
+│       │   └── V2__seed.sql             # Seed data (Flyway)
 │       ├── templates/
 │       │   ├── layout.html              # Base layout (Thymeleaf fragment)
 │       │   ├── contacts/
@@ -136,9 +137,9 @@ src/
 │       │   ├── styles.css
 │       │   └── img/
 │       │       └── spinning-circles.svg # Loading spinner
-│       ├── application.yaml             # Production config (env var placeholders)
-│       ├── application-local.yaml       # Local overrides — gitignored, never committed
-│       └── data.sql                     # Seed data (local only)
+│       └── application.yaml             # Production config (env var placeholders)
+config/
+└── application-local.yaml              # Local overrides — gitignored, never committed
 ├── test/
 │   └── java/codes/yam/contacts/
 │       ├── controller/
