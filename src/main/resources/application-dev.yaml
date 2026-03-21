@@ -3,9 +3,16 @@ spring:
     user:
       name: admin
       password: admin
-  h2:
-    console:
-      enabled: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/contacts
+    username: contacts
+    password: contacts
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+  sql:
+    init:
+      mode: always
   thymeleaf:
     cache: false
     prefix: file:src/main/resources/templates/
