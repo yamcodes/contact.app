@@ -125,10 +125,8 @@
   overflow-y: auto;
   max-height: calc(100vh - 11rem);
 }
-.contacts-table th:nth-child(1),
-.contacts-table td:nth-child(1) { width: 2.5rem; }
-.contacts-table td:nth-child(3) { width: 9rem; }
-.contacts-table td:nth-child(4) { width: 5rem; }
+.contacts-table td:nth-child(2) { width: 9rem; }
+.contacts-table td:nth-child(3) { width: 5rem; }
 
 /* Table header selected state */
 .thead-selected {
