@@ -16,10 +16,14 @@
         hx-push-url="true"
         hx-target="body"
         th:attr="hx-delete=@{/contacts}"
-        x-data="{ selected: 0, total: 0, syncSelectAll() {
-    $refs.selectAll.indeterminate = this.selected > 0 && this.selected < this.total;
-    $refs.selectAll.checked = this.selected === this.total && this.total > 0;
-  } }"
+        x-data="{
+          selected: 0,
+          total: 0,
+          syncSelectAll() {
+            $refs.selectAll.indeterminate = this.selected > 0 && this.selected < this.total;
+            $refs.selectAll.checked = this.selected === this.total && this.total > 0;
+          }
+        }"
         x-init="selected = $el.querySelectorAll('input[name=selected_contact_slugs]:checked').length; total = $el.querySelectorAll('input[name=selected_contact_slugs]').length"
       >
         <div class="bg-base-100 border-base-300 overflow-hidden rounded-lg border">
