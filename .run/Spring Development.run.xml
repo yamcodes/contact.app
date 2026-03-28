@@ -5,7 +5,7 @@
     <option name="SPRING_BOOT_MAIN_CLASS" value="codes.yam.contacts.ContactsApplication" />
     <method v="2">
       <option name="Make" enabled="true" />
-      <option name="ToolBeforeRunTask" enabled="true" actionId="Tool_External Tools_Docker Compose Up + Wait" />
+      <option name="RunConfigurationTask" enabled="true" run_configuration_name="Docker Compose Up" run_configuration_type="ShConfigurationType" />
     </method>
   </configuration>
 </component>
