@@ -155,7 +155,8 @@
   transition: none;
   animation: none;
 }
-.checkbox:checked {
+.checkbox:checked,
+.checkbox:indeterminate {
   background-color: oklch(55% 0.2 260);
   border-color: oklch(55% 0.2 260);
   color: white;

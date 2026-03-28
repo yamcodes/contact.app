@@ -12,43 +12,66 @@
     <div layout:fragment="content">
       <!-- Table -->
       <form
-        th:attr="hx-delete=@{/contacts}"
-        hx-target="body"
-        hx-push-url="true"
         hx-confirm="Delete selected contacts? This cannot be undone."
-        x-data="{ selected: 0 }"
-        x-init="selected = $el.querySelectorAll('input[name=selected_contact_slugs]:checked').length"
+        hx-push-url="true"
+        hx-target="body"
+        th:attr="hx-delete=@{/contacts}"
+        x-data="{ selected: 0, total: 0, syncSelectAll() {
+    $refs.selectAll.indeterminate = this.selected > 0 && this.selected < this.total;
+    $refs.selectAll.checked = this.selected === this.total && this.total > 0;
+  } }"
+        x-init="selected = $el.querySelectorAll('input[name=selected_contact_slugs]:checked').length; total = $el.querySelectorAll('input[name=selected_contact_slugs]').length"
       >
         <div class="bg-base-100 border-base-300 overflow-hidden rounded-lg border">
           <table class="contacts-table table">
             <thead>
-              <tr :class="selected > 0 ? 'thead-selected' : ''">
+              <tr :class="selected > 0 ? 'text-primary' : ''">
                 <th colspan="3">
                   <div class="flex items-center justify-between">
-                    <button type="submit" class="btn btn-ghost btn-xs gap-1" :class="selected === 0 ? 'invisible' : ''">
-                      <i data-lucide="trash-2" class="h-3.5 w-3.5"></i>
-                      <span>Delete (<span x-text="selected"></span>)</span>
-                    </button>
+                    <div class="pl-1.5">
+                      <label>
+                        <input
+                          @click.stop
+                          class="checkbox checkbox-sm"
+                          type="checkbox"
+                          x-effect="syncSelectAll()"
+                          x-ref="selectAll"
+                        />
+                      </label>
+                      <button
+                        :class="selected === 0 ? 'invisible' : ''"
+                        :style="selected > 0 ? 'color: oklch(47.3% 0.217 264.4)' : ''"
+                        class="btn btn-ghost btn-xs gap-1"
+                        type="submit"
+                      >
+                        <i class="h-3.5 w-3.5" data-lucide="trash-2"></i>
+                        <span>Delete (<span x-text="selected"></span>)</span>
+                      </button>
+                    </div>
                     <div class="flex items-center gap-1">
                       <!-- TODO: refresh icon -->
                       <div class="flex items-center gap-1">
                         <span
-                          class="text-base-content/50 px-1 text-xs"
+                          :class="selected > 0 ? '' : 'text-base-content/50'"
+                          :style="selected > 0 ? 'color: oklch(47.3% 0.217 264.4)' : ''"
+                          class="px-1 text-xs"
                           th:text="${contactPage.number * contactPage.size + 1} + '–' + ${contactPage.isLast() ? contactPage.totalElements : (contactPage.number + 1) * contactPage.size} + ' of ' + ${#numbers.formatInteger(contactPage.totalElements, 0, 'COMMA')}"
                         ></span>
                         <a
-                          th:href="@{/contacts(page=${contactPage.number - 1}, q=${search}, sort=${sort}, size=${contactPage.size})}"
-                          th:classappend="${contactPage.isFirst()} ? 'opacity-30 pointer-events-none' : ''"
+                          :style="selected > 0 ? 'color: oklch(47.3% 0.217 264.4)' : ''"
                           class="btn btn-ghost btn-xs"
+                          th:classappend="${contactPage.isFirst()} ? 'opacity-30 pointer-events-none' : ''"
+                          th:href="@{/contacts(page=${contactPage.number - 1}, q=${search}, sort=${sort}, size=${contactPage.size})}"
                         >
-                          <i data-lucide="chevron-left" class="h-3.5 w-3.5"></i>
+                          <i class="h-3.5 w-3.5" data-lucide="chevron-left"></i>
                         </a>
                         <a
-                          th:href="@{/contacts(page=${contactPage.number + 1}, q=${search}, sort=${sort}, size=${contactPage.size})}"
-                          th:classappend="${contactPage.isLast()} ? 'opacity-30 pointer-events-none' : ''"
+                          :style="selected > 0 ? 'color: oklch(47.3% 0.217 264.4)' : ''"
                           class="btn btn-ghost btn-xs"
+                          th:classappend="${contactPage.isLast()} ? 'opacity-30 pointer-events-none' : ''"
+                          th:href="@{/contacts(page=${contactPage.number + 1}, q=${search}, sort=${sort}, size=${contactPage.size})}"
                         >
-                          <i data-lucide="chevron-right" class="h-3.5 w-3.5"></i>
+                          <i class="h-3.5 w-3.5" data-lucide="chevron-right"></i>
                         </a>
                       </div>
                     </div>
