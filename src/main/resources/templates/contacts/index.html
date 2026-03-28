@@ -31,8 +31,17 @@
             this.$root.querySelectorAll('input[name=selected_contact_slugs]').forEach(cb => cb.checked = false);
             this.selected = 0;
           },
+          refreshCounts() {
+            this.total = this.$el.querySelectorAll('input[name=selected_contact_slugs]').length;
+            this.selected = this.$el.querySelectorAll('input[name=selected_contact_slugs]:checked').length;
+            this.syncSelectAll();
+          },
         }"
-        x-init="selected = $el.querySelectorAll('input[name=selected_contact_slugs]:checked').length; total = $el.querySelectorAll('input[name=selected_contact_slugs]').length"
+        x-init="
+          selected = $el.querySelectorAll('input[name=selected_contact_slugs]:checked').length;
+          total = $el.querySelectorAll('input[name=selected_contact_slugs]').length;
+          $el.addEventListener('htmx:afterSwap', () => refreshCounts());
+        "
       >
         <div class="bg-base-100 border-base-300 overflow-hidden rounded-lg border">
           <table class="contacts-table table">
@@ -53,7 +62,7 @@
                           />
                         </label>
                         <div class="dropdown">
-                          <button class="btn btn-ghost btn-xs px-0" tabindex="0">
+                          <button class="btn btn-ghost btn-xs px-0" tabindex="0" type="button">
                             <i class="h-3 w-3" data-lucide="chevron-down"></i>
                           </button>
                           <ul

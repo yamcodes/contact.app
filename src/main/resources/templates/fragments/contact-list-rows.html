@@ -27,7 +27,7 @@
       >
         <td>
           <div class="flex items-center gap-3">
-            <div class="relative h-8 w-8 shrink-0 [&:has(:checked)>div]:hidden [&:has(:checked)>label]:flex">
+            <div class="relative h-8 w-8 shrink-0 [&:has(:checked)>div]:hidden [&:has(:checked)>label]:opacity-100 [&:has(:checked)>label]:pointer-events-auto">
               <div
                 class="bg-base-200 text-base-content/60 absolute inset-0 flex items-center justify-center rounded-full text-xs font-semibold group-hover/row:hidden"
                 th:text="*{#strings.substring(first, 0, 1) + #strings.substring(last, 0, 1)}"
@@ -36,7 +36,7 @@
               </div>
               <!--suppress JSUnresolvedReference it's fine -->
               <label
-                class="absolute inset-0 hidden cursor-pointer items-center justify-center group-hover/row:flex"
+                class="absolute inset-0 flex opacity-0 pointer-events-none cursor-pointer items-center justify-center group-hover/row:opacity-100 group-hover/row:pointer-events-auto"
                 @click.stop
               >
                 <input
@@ -57,7 +57,7 @@
         </td>
         <td class="text-base-content/50 font-mono text-xs" th:text="*{phone}"></td>
         <td @click.stop>
-          <div class="flex items-center justify-end gap-1 opacity-0 group-hover/row:opacity-100" id="actions">
+          <div class="flex items-center justify-end gap-1 opacity-0 group-hover/row:opacity-100 actions">
             <a
               th:href="@{/contacts/{slug}/edit(slug=*{slug})}"
               th:attr="aria-label='Edit ' + *{first} + ' ' + *{last}"
