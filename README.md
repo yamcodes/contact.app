@@ -47,9 +47,6 @@ spring:
   jpa:
     hibernate:
       ddl-auto: validate
-  sql:
-    init:
-      mode: always
   thymeleaf:
     cache: false
     prefix: file:src/main/resources/templates/

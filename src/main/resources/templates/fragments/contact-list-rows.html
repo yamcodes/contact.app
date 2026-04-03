@@ -22,29 +22,34 @@
       <tr
         th:each="contact : ${contacts}"
         th:object="${contact}"
-        class="hover:bg-base-300 group cursor-pointer"
+        class="hover:bg-base-300 group/row cursor-pointer"
         th:onclick="|window.location='@{/contacts/{slug}(slug=*{slug})}'|"
       >
-        <th @click.stop>
-          <label>
-            <!--suppress JSUnresolvedReference it's fine -->
-            <input
-              name="selected_contact_slugs"
-              th:attr="aria-label=*{first} + ' ' + *{last}"
-              th:value="*{slug}"
-              type="checkbox"
-              class="checkbox checkbox-sm"
-              @change="selected += $event.target.checked ? 1 : -1"
-            />
-          </label>
-        </th>
         <td>
           <div class="flex items-center gap-3">
             <div
-              class="bg-base-200 text-base-content/60 flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-xs font-semibold"
-              th:text="*{#strings.substring(first, 0, 1) + #strings.substring(last, 0, 1)}"
+              class="relative h-8 w-8 shrink-0 [&:has(:checked)>div]:hidden [&:has(:checked)>label]:pointer-events-auto [&:has(:checked)>label]:opacity-100"
             >
-              AB
+              <div
+                class="bg-base-200 text-base-content/60 absolute inset-0 flex items-center justify-center rounded-full text-xs font-semibold group-hover/row:hidden"
+                th:text="*{#strings.substring(first, 0, 1) + #strings.substring(last, 0, 1)}"
+              >
+                AB
+              </div>
+              <!--suppress JSUnresolvedReference it's fine -->
+              <label
+                class="pointer-events-none absolute inset-0 flex cursor-pointer items-center justify-center opacity-0 group-hover/row:pointer-events-auto group-hover/row:opacity-100"
+                @click.stop
+              >
+                <input
+                  name="selected_contact_slugs"
+                  th:attr="aria-label=*{first} + ' ' + *{last}"
+                  th:value="*{slug}"
+                  type="checkbox"
+                  class="checkbox checkbox-sm"
+                  @change="selected += $event.target.checked ? 1 : -1"
+                />
+              </label>
             </div>
             <div>
               <div class="text-base-content font-medium" th:text="*{first + ' ' + last}"></div>
@@ -54,7 +59,7 @@
         </td>
         <td class="text-base-content/50 font-mono text-xs" th:text="*{phone}"></td>
         <td @click.stop>
-          <div class="flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100" id="actions">
+          <div class="actions flex items-center justify-end gap-1 opacity-0 group-hover/row:opacity-100">
             <a
               th:href="@{/contacts/{slug}/edit(slug=*{slug})}"
               th:attr="aria-label='Edit ' + *{first} + ' ' + *{last}"

@@ -125,21 +125,13 @@
   overflow-y: auto;
   max-height: calc(100vh - 11rem);
 }
-.contacts-table th:nth-child(1),
-.contacts-table td:nth-child(1) { width: 2.5rem; }
-.contacts-table td:nth-child(3) { width: 9rem; }
-.contacts-table td:nth-child(4) { width: 5rem; }
+.contacts-table td:nth-child(2) { width: 9rem; }
+.contacts-table td:nth-child(3) { width: 5rem; }
 
-/* Table header selected state */
-.thead-selected {
-  background-color: oklch(47.3% 0.217 264.4); /* blue-600 */
-}
-.thead-selected,
-.thead-selected * {
-  color: white;
-}
-.thead-selected .btn-ghost:hover {
-  background-color: oklch(55% 0.217 264.4);
+/* Selection accent colors */
+:root {
+  --color-selection: oklch(47.3% 0.217 264.4);
+  --color-selection-bold: oklch(55% 0.2 260);
 }
 
 /* Unlayered - beats all @layer styles */
@@ -157,8 +149,9 @@
   transition: none;
   animation: none;
 }
-.checkbox:checked {
-  background-color: oklch(55% 0.2 260);
-  border-color: oklch(55% 0.2 260);
+.checkbox:checked,
+.checkbox:indeterminate {
+  background-color: var(--color-selection-bold);
+  border-color: var(--color-selection-bold);
   color: white;
 }
