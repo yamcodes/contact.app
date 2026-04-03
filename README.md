@@ -1,6 +1,6 @@
 # Contacts
 
-[![GitHub](https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white)](https://github.com/yamcodes/contact.app)
+[![GitHub](https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white)](https://github.com/yamcodes/contacts)
 
 ![Cover](assets/cover.png)
 
@@ -180,12 +180,12 @@ docker-compose.yml                       # Local Postgres service
 
 This repo tracks the evolution of the app across different stacks - earlier branches used [Hono](https://hono.dev/) (a TypeScript web framework), while `main` is the current Spring Boot implementation.
 
-| Branch                                                                         | Summary                       | Description                                                                                                 |
-| ------------------------------------------------------------------------------ | ----------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| [`hono-web1`](https://github.com/yamcodes/contact.app/tree/hono-web1)          | Hypermedia-Driven Application | Server-rendered HTML using links and forms. Full page reloads. Pure hypermedia, no client-side JS.          |
-| [`hono`](https://github.com/yamcodes/contact.app/tree/hono)                    | HDA + HTMX                    | Same architecture as `hono-web1`, enhanced with HTMX for partial updates without JSON or client-side state. |
-| [`hono-eta`](https://github.com/yamcodes/contact.app/tree/hono-eta)            | HDA (Eta templates)           | Same architecture as `hono-web1`, using string-based Eta templates instead of JSX.                          |
-| **[`main`](https://github.com/yamcodes/contact.app/tree/main)** (You're here!) | **HDA + Spring Boot**         | **Same architecture, rewritten in Java with Spring Boot, Thymeleaf, and htmx-spring-boot.**                 |
+| Branch                                                                      | Summary                       | Description                                                                                                 |
+| --------------------------------------------------------------------------- | ----------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| [`hono-web1`](https://github.com/yamcodes/contacts/tree/hono-web1)          | Hypermedia-Driven Application | Server-rendered HTML using links and forms. Full page reloads. Pure hypermedia, no client-side JS.          |
+| [`hono`](https://github.com/yamcodes/contacts/tree/hono)                    | HDA + HTMX                    | Same architecture as `hono-web1`, enhanced with HTMX for partial updates without JSON or client-side state. |
+| [`hono-eta`](https://github.com/yamcodes/contacts/tree/hono-eta)            | HDA (Eta templates)           | Same architecture as `hono-web1`, using string-based Eta templates instead of JSX.                          |
+| **[`main`](https://github.com/yamcodes/contacts/tree/main)** (You're here!) | **HDA + Spring Boot**         | **Same architecture, rewritten in Java with Spring Boot, Thymeleaf, and htmx-spring-boot.**                 |
 
 ## License
 
