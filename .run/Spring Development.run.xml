@@ -4,6 +4,7 @@
     <module name="contacts" />
     <option name="SPRING_BOOT_MAIN_CLASS" value="codes.yam.contacts.ContactsApplication" />
     <method v="2">
+      <option name="RunConfigurationTask" enabled="true" run_configuration_name="Docker Compose Up" run_configuration_type="ShConfigurationType" />
       <option name="Make" enabled="true" />
     </method>
   </configuration>
