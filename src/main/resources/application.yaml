@@ -8,9 +8,9 @@ spring:
     hibernate:
       ddl-auto: validate
   datasource:
-    url: ${DATABASE_URL}
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    url: jdbc:postgresql://${PGHOST}:${PGPORT}/${PGDATABASE}
+    username: ${PGUSER}
+    password: ${PGPASSWORD}
   security:
     user:
       name: ${APP_USERNAME}
