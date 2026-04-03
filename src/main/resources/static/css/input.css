@@ -134,6 +134,11 @@
   --color-selection-bold: oklch(55% 0.2 260);
 }
 
+[data-theme="shadcn-dark"] {
+  --color-selection: oklch(65% 0.2 264.4);
+  --color-selection-bold: oklch(72% 0.2 260);
+}
+
 /* Unlayered - beats all @layer styles */
 .btn {
   text-shadow: none;
